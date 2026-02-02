@@ -1,0 +1,397 @@
+<style>
+/* =========================================================
+   THINX Report System (Dark / Analytical)
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+:root {
+    --d-accent: #10b4c8;       /* Cyan */
+    --d-bg: #020b16;           /* Navy */
+    --d-card: rgba(6, 20, 38, 0.85);
+    --d-border: rgba(148, 163, 184, 0.2);
+    --d-text: #f9fbff;
+    --d-muted: rgba(229, 243, 255, 0.7);
+    --d-success: #10c8b4;      /* Green */
+    --d-danger: #e41a1c;       /* Red */
+}
+
+body {
+    background-color: var(--d-bg);
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", "Noto Sans JP", sans-serif;
+    color: var(--d-text);
+}
+
+#thxPart1{
+    background: var(--d-bg);
+    color: var(--d-text);
+    padding: 80px 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* ヘッダーの視認性を確実化（親が白でも必ず読める） */
+#thxPart1 .thx-header { text-align: center; margin-bottom: 80px; }
+#thxPart1 .thx-sub { color: var(--d-accent); font-size: 12px; letter-spacing: 0.2em; font-weight: 700; display: block; margin-bottom: 16px; }
+#thxPart1 .thx-title { color: var(--d-text); font-size: clamp(26px, 4vw, 42px); font-weight: 800; line-height: 1.3; margin: 0 0 24px 0; }
+#thxPart1 .thx-desc { color: var(--d-muted); font-size: 15px; }
+/* ▲▲ ここまで ▲▲ */
+
+/* Cards */
+.thx-section { margin-bottom: 60px; }
+.thx-card {
+    background: var(--d-card);
+    border: 1px solid var(--d-border);
+    border-radius: 20px;
+    padding: 40px;
+}
+.thx-card-head { border-bottom: 1px solid var(--d-border); padding-bottom: 20px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end; }
+.thx-h2 { font-size: 22px; font-weight: 700; margin: 0; color: #fff; }
+.thx-badge { font-size: 12px; color: var(--d-accent); font-weight: 700; background: rgba(16, 180, 200, 0.1); padding: 6px 12px; border-radius: 4px; }
+
+/* Academic Note (Detailed) */
+.thx-note { background: #0d1620; border: 1px solid var(--d-border); border-radius: 12px; padding: 32px; margin-top: 40px; }
+.thx-formula-box { 
+    background: rgba(0,0,0,0.4); padding: 24px; border-radius: 8px; 
+    font-family: "Courier New", monospace; color: #e2e8f0; 
+    margin: 24px 0; border-left: 4px solid var(--d-accent);
+    overflow-x: auto;
+}
+.thx-formula-row { display: block; margin-bottom: 16px; font-size: 14px; }
+.thx-param-list { list-style: none; padding: 0; margin: 0; font-size: 14px; color: var(--d-muted); }
+.thx-param-list li { margin-bottom: 16px; padding-left: 16px; border-left: 2px solid var(--d-border); }
+.thx-param-list strong { color: #fff; }
+
+/* Scenario Grid */
+.thx-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+.thx-box { 
+    background: rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; 
+    border: 1px solid transparent; text-align: center;
+}
+.thx-box.main { border-color: var(--d-accent); background: rgba(16, 180, 200, 0.05); }
+
+@media (max-width: 768px) {
+    #thxPart1 { padding: 40px 16px; }
+    .thx-card { padding: 24px; }
+    .thx-grid-3 { grid-template-columns: 1fr; }
+}
+</style>
+
+<div id="thxPart1">
+
+    <header class="thx-header">
+        <span class="thx-sub">MARKET FORECAST 2026</span>
+        <h1 class="thx-title">
+            構造変化を読み解き、<br>
+            二極化する市場を制する。
+        </h1>
+        <p class="thx-desc">
+            「延べ遊技者割合（需要）」と「支持率（効率）」の全データを解析。<br>
+            2026年のパチスロ市場で勝つための構造とアクションを可視化する。
+        </p>
+    </header>
+
+    <section class="thx-section">
+        <div class="thx-card">
+            <div class="thx-card-head">
+                <h2 class="thx-h2">分析ロジック：ETSモデルの採用</h2>
+                <span class="thx-badge">Logic</span>
+            </div>
+            
+            <p style="color:var(--d-muted); margin-bottom:24px;">
+                本レポートの予測値は、単なる平均値や勘ではありません。
+                時系列解析の手法である <strong>ETS (Error, Trend, Seasonality) モデル</strong> を使用し、
+                「過去の長い積み上げ」と「直近のトレンド（勢い）」のバランスを数理的に計算して導き出しています。
+            </p>
+
+            <div class="thx-note">
+                <h3 style="font-size:18px; color:#fff; margin:0 0 24px 0;">なぜ、この計算式なのか？</h3>
+                
+                <div class="thx-formula-box">
+                    <span class="thx-formula-row" style="color:var(--d-accent); font-weight:700;">
+                        予測値(y) = レベル(Lt) + トレンド(Tt) + 季節性(St)
+                    </span>
+                    <span style="font-size:12px; color:rgba(255,255,255,0.5); display:block; margin-bottom:24px;">
+                        翻訳：「明日の予測」＝「基礎体力」＋「最近の勢い」＋「カレンダーの波」
+                    </span>
+                    
+                    <span class="thx-formula-row" style="color:#fff; font-weight:700;">
+                        Lt = α(直近の実績) + (1-α)(前回のレベル)
+                    </span>
+                    <span style="font-size:12px; color:rgba(255,255,255,0.5);">
+                        ※ この式が「認識（レベル）」を日々更新します。
+                    </span>
+                </div>
+
+                <p style="font-size:15px; color:#fff; margin-bottom:16px;">
+                    予測の精度を握るのは <strong>α（アルファ：平滑化係数）</strong> です。
+                </p>
+                <ul class="thx-param-list">
+                    <li>
+                        <strong>αが大きい場合（直近重視）：</strong><br>
+                        「昨日急増したなら、今日も増えるはず」と反応します。<br>
+                        <span style="color:var(--d-success);">→ スマスロのような「流行り廃りの激しい機種」の予測に最適。</span>
+                    </li>
+                    <li>
+                        <strong>αが小さい場合（過去重視）：</strong><br>
+                        「昨日はたまたま凹んだだけ。基本の実力は変わらない」と反応します。<br>
+                        <span style="color:var(--d-accent);">→ ジャグラーのような「安定市場」の予測に最適。</span>
+                    </li>
+                </ul>
+                <p style="font-size:14px; color:var(--d-muted); margin-top:24px;">
+                    このモデルにより、単純平均では捉えきれない「セグメントごとの波の性質」まで加味した予測が可能になります。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="thx-section">
+        <div class="thx-card">
+            <div class="thx-card-head">
+                <h2 class="thx-h2">2026年 シナリオ予測</h2>
+                <span class="thx-badge">Forecast</span>
+            </div>
+            
+            <p style="color:var(--d-muted);">
+                ETSモデルが示す2026年の結論は、<strong>「ジャグラーとスマスロ高純増による完全な二極化」</strong>です。
+                統計的に最も確率が高い<strong>「最尤（さいゆう）シナリオ」</strong>を中心に、3つのレンジを定義しました。
+            </p>
+            
+            <div style="background:rgba(16, 180, 200, 0.1); border-left:4px solid var(--d-accent); padding:16px; margin:24px 0; font-size:13px; color:var(--d-muted);">
+                <strong style="color:#fff;">※ 最尤（さいゆう）とは：</strong><br>
+                統計学用語で「最も尤（もっと）もらしい」こと。希望的観測を排し、データから理論上最も発生確率が高いと計算された予測結果を指します。
+            </div>
+
+            <div class="thx-grid-3">
+                <div class="thx-box">
+                    <span style="color:var(--d-success); font-weight:700; font-size:12px; display:block; margin-bottom:8px;">📈 上振れ（攻め）</span>
+                    <strong style="color:#fff; font-size:16px;">体験ドリブン市場</strong>
+                    <p style="font-size:12px; color:var(--d-muted); margin-top:12px;">
+                        スマスロ支持率がさらに上昇。新規客の流入が続き、市場全体が活性化するシナリオ。
+                    </p>
+                </div>
+                <div class="thx-box main">
+                    <span style="color:var(--d-accent); font-weight:700; font-size:12px; display:block; margin-bottom:8px;">⚖️ 標準（最尤）</span>
+                    <strong style="color:#fff; font-size:16px;">二極ポートフォリオ</strong>
+                    <p style="font-size:12px; color:var(--d-muted); margin-top:12px;">
+                        ジャグラーとスマスロで市場の85%を占める。安定（守り）と刺激（攻め）が均衡する未来。
+                    </p>
+                </div>
+                <div class="thx-box">
+                    <span style="color:var(--d-danger); font-weight:700; font-size:12px; display:block; margin-bottom:8px;">📉 下振れ（守り）</span>
+                    <strong style="color:#fff; font-size:16px;">安定回帰型市場</strong>
+                    <p style="font-size:12px; color:var(--d-muted); margin-top:12px;">
+                        スマスロの勢いが鈍化。冒険を避け、ジャグラーやAタイプへ回帰が進む。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+<style>
+/* Part 2 Specific Styles (Consist with Part 1) */
+#thxPart2 {
+    /* ▼▼ ここも同様に「背景/文字色」をラッパーで担保 ▼▼ */
+    background: var(--d-bg);
+    color: var(--d-text);
+    /* ▲▲ */
+    padding: 0 20px 80px 20px;
+    max-width: 960px;
+    margin: 0 auto;
+    font-family: "Inter", "Noto Sans JP", sans-serif;
+    line-height: 1.8;
+}
+
+/* Allocation Table */
+.thx-table-wrap { overflow-x: auto; margin: 32px 0; border: 1px solid var(--d-border); border-radius: 12px; }
+.thx-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 600px; }
+.thx-table th { background: rgba(255,255,255,0.05); color: #fff; padding: 14px; text-align: center; font-weight: 700; border-bottom: 1px solid var(--d-border); }
+.thx-table td { padding: 14px; border-bottom: 1px solid var(--d-border); color: var(--d-muted); text-align: center; vertical-align: middle; }
+.thx-table tr:last-child td { border-bottom: none; }
+.thx-cell-range { background: rgba(16, 180, 200, 0.15); color: #fff; font-weight: 700; padding: 4px 8px; border-radius: 4px; display: inline-block; }
+
+/* （以下略：元のまま） */
+
+/* Operation Matrix */
+.thx-op-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-top: 32px; }
+.thx-op-box { 
+    background: rgba(255,255,255,0.02); border-top: 3px solid var(--d-muted); 
+    padding: 24px; border-radius: 8px; text-align: left;
+}
+.thx-op-box.sunny { border-top-color: var(--d-success); }
+.thx-op-box.cloudy { border-top-color: var(--d-accent); }
+.thx-op-box.rainy { border-top-color: var(--d-danger); }
+
+/* Action Plan Section (Winning Moves) */
+.thx-action-list { list-style: none; padding: 0; margin: 32px 0; }
+.thx-action-item { 
+    display: flex; gap: 20px; margin-bottom: 24px; 
+    border-bottom: 1px dashed var(--d-border); padding-bottom: 24px;
+}
+.thx-action-num { 
+    font-size: 24px; font-weight: 800; color: var(--d-accent); 
+    opacity: 0.5; min-width: 40px; 
+}
+.thx-action-content strong { color: #fff; display: block; margin-bottom: 8px; font-size: 16px; }
+
+/* Conclusion */
+.thx-conclusion { 
+    text-align: center; padding: 60px 24px; margin-top: 60px;
+    background: linear-gradient(180deg, rgba(16, 180, 200, 0.05) 0%, transparent 100%); 
+    border-radius: 24px; border: 1px solid var(--d-accent); 
+}
+
+@media (max-width: 768px) { .thx-op-grid, .thx-action-item { flex-direction: column; display: block; } .thx-op-grid { grid-template-columns: 1fr; } }
+</style>
+
+<div id="thxPart2">
+
+    <section class="thx-section">
+        <div class="thx-card">
+            <div class="thx-card-head">
+                <h2 class="thx-h2">推奨 島配分モデル</h2>
+                <span class="thx-badge">Allocation</span>
+            </div>
+            
+            <p style="color:var(--d-muted);">
+                ユーザー様のご指摘に基づき、<strong>「需要（延べ遊技者割合）÷ 効率（支持率）」</strong>のロジックで適正台数を算出しました。
+                さらに、全台数を100%（200台）で埋めるための正規化を行い、運用の幅を持たせたレンジ提案としています。
+            </p>
+
+            <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:8px; margin-bottom:24px; text-align:center; font-size:13px; color:var(--d-muted);">
+                <strong style="color:var(--d-accent); display:block; margin-bottom:4px; font-size:15px;">算出ロジック</strong>
+                ① 必要なシェア ＝ 需要（延べ割合） ÷ 支持率（稼働効率）<br>
+                ② 200台の枠に収まるよう、全体を正規化（Normalize）
+            </div>
+
+            <div class="thx-table-wrap">
+                <table class="thx-table">
+                    <thead>
+                        <tr>
+                            <th style="width:15%">役割</th>
+                            <th style="width:25%">セグメント</th>
+                            <th style="width:20%">推奨比率</th>
+                            <th style="width:20%">200台店目安</th>
+                            <th style="width:20%">補足</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="2" style="font-weight:700; color:#fff;">柱<br><small>(Main)</small></td>
+                            <td style="font-weight:700;">ジャグラー</td>
+                            <td><span class="thx-cell-range">38〜40%</span></td>
+                            <td>76〜80台</td>
+                            <td style="font-size:12px;">※単体計算では<span class="thx-cell-range">35%</span>だが、<br>店全体を埋めるため補正増。</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:700;">スマスロ高純増</td>
+                            <td><span class="thx-cell-range">38〜40%</span></td>
+                            <td>76〜80台</td>
+                            <td style="font-size:12px;">成長ドライバー。<br>最も厚く構える。</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3">支援<br><small>(Variety)</small></td>
+                            <td>Aタイプ+技術介入</td>
+                            <td><span class="thx-cell-range">9〜11%</span></td>
+                            <td>18〜22台</td>
+                            <td style="font-size:12px;">二極化の緩衝材。</td>
+                        </tr>
+                        <tr>
+                            <td>30Φ</td>
+                            <td><span class="thx-cell-range">3〜5%</span></td>
+                            <td>6〜10台</td>
+                            <td style="font-size:12px;">固定客（約3.5%）<br>に見合った台数へ。統計的示唆ではあるが商圏依存が大きいため、適合しない商圏ではスマスロ低純増機への代替を推奨する。</td>
+                        </tr>
+                        <tr>
+                            <td>スマスロ低純増他</td>
+                            <td><span class="thx-cell-range">〜4%</span></td>
+                            <td>〜8台</td>
+                            <td style="font-size:12px;">実験・ニッチ枠。</td>
+                        </tr>
+                        <tr>
+                            <td>縮小<br><small>(Reduce)</small></td>
+                            <td>旧世代 (6.5号機等)</td>
+                            <td style="color:var(--d-danger);">〜8%（0%）</td>
+                            <td>MAX 16台（0台）</td>
+                            <td style="font-size:12px;">選択の理由が限定的。<br>上限を決めて管理。</td>
+                        </tr>
+                        <tr class="thx-table-total">
+                            <td colspan="2">合計 (TOTAL)</td>
+                            <td>100%</td>
+                            <td>200台</td>
+                            <td>完全整合</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="thx-section">
+        <div class="thx-card">
+            <div class="thx-card-head">
+                <h2 class="thx-h2">2026年の勝ち筋（Action Plan）</h2>
+                <span class="thx-badge">Strategy</span>
+            </div>
+            
+            <p style="color:var(--d-muted);">
+                分析結果を踏まえ、2026年にホールが取るべき具体的な行動指針を策定しました。
+                <strong style="color:#fff;">「何をすべきか（Do）」</strong>だけでなく<strong style="color:var(--d-danger);">「何を捨てるべきか（Don't）」</strong>を明確にします。
+            </p>
+
+            <ul class="thx-action-list">
+                <li class="thx-action-item">
+                    <span class="thx-action-num">01</span>
+                    <div class="thx-action-content">
+                        <strong>「中間」を捨てる勇気を持つ</strong>
+                        <p style="font-size:14px; color:var(--d-muted); margin:0;">
+                            6.5号機や低純増スマスロなど「どっちつかず」の台にリソースを割かないでください。
+                            それらは縮小枠（全体の8%以下）に押し込め、空いたスペースと予算を「2本の柱（ジャグ・高純増）」に集中させてください。
+                        </p>
+                    </div>
+                </li>
+                <li class="thx-action-item">
+                    <span class="thx-action-num">02</span>
+                    <div class="thx-action-content">
+                        <strong>ジャグラーは「稼働」ではなく「信頼」で管理する</strong>
+                        <p style="font-size:14px; color:var(--d-muted); margin:0;">
+                            ジャグラーの台数を減らして目先の利益率を上げようとしないでください。
+                            推奨比率（38〜40%）を維持することは、店の基礎体力を守ることと同義です。
+                            たとえ稼働が一時的に落ちても、ベースとして置き続けることが2026年の安定に繋がります。
+                        </p>
+                    </div>
+                </li>
+                <li class="thx-action-item">
+                    <span class="thx-action-num">03</span>
+                    <div class="thx-action-content">
+                        <strong>新台評価は「天気」に合わせて着替える</strong>
+                        <p style="font-size:14px; color:var(--d-muted); margin:0;">
+                            全ての新台を同じ基準で評価しないでください。
+                            市場が「晴れ（上振れ）」なら入口の強さで攻め、「雨（下振れ）」なら定着率で守る。
+                            週次のデータを見て、評価基準（ものさし）の方を変える運用を徹底してください。
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="thx-conclusion">
+        <h2 style="font-size:24px; font-weight:800; color:#fff; margin-bottom:16px;">
+            結論：迷ったら「データ」に帰る
+        </h2>
+        <p style="font-size:16px; color:var(--d-muted); line-height:1.8; margin:0;">
+            2026年のパチスロ市場は、感情や経験則が通用しにくい「二極化の極み」に達します。<br>
+            <br>
+            勝ち筋はシンプルです。<br>
+            <strong style="color:var(--d-accent); font-size:18px;">需要がある場所に、正しく台数を置くこと。</strong><br>
+            <br>
+            「ジャグラー」と「スマスロ高純増」。<br>
+            この2つの柱をデータ通りに磨き上げることが、不確実な未来を勝ち抜く唯一の解です。
+        </p>
+    </div>
+
+</div>
