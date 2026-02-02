@@ -6,163 +6,186 @@
     <title>複数体験が定着を生む構造 ― テーマパーク × パチンコ × レコメンド設計 ―</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme:'neutral'});</script>
+    <script>
+        mermaid.initialize({
+            startOnLoad:true, 
+            theme:'base',
+            themeVariables: {
+                primaryColor: '#e6eefc',
+                primaryTextColor: '#003399',
+                lineColor: '#003399',
+                edgeLabelBackground:'#ffffff',
+                mainBkg: '#ffffff'
+            }
+        });
+    </script>
     <style>
-        body { font-family: 'Helvetica Neue', Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif; }
-        .mermaid { display: flex; justify-content: center; margin: 2rem 0; }
+        /* ダイナム様のカラーコードを意識した設定 */
+        :root {
+            --dynam-blue: #003399; /* 信頼の紺色 */
+            --dynam-light-blue: #0055cc;
+            --dynam-accent-red: #da0000; /* ロゴのアクセント赤 */
+            --bg-gray: #f8f9fa;
+        }
+        body { font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
+        .bg-dynam-blue { background-color: var(--dynam-blue); }
+        .text-dynam-blue { color: var(--dynam-blue); }
+        .border-dynam-blue { border-color: var(--dynam-blue); }
+        .border-dynam-red { border-color: var(--dynam-accent-red); }
+        .marker-red { border-bottom: 2px solid var(--dynam-accent-red); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 leading-relaxed">
+<body class="bg-slate-50 text-slate-900">
 
-    <header class="bg-slate-900 text-white py-16 px-4 text-center">
-        <p class="text-blue-400 font-bold mb-2 tracking-widest">ANALYSIS REPORT</p>
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-4">複数体験が定着を生む構造</h1>
-        <p class="text-xl text-slate-300">― テーマパーク × パチンコ × レコメンド設計 ―</p>
+    <header class="bg-white border-b-4 border-dynam-blue py-8 px-4 shadow-sm">
+        <div class="max-w-5xl mx-auto text-center md:text-left">
+            <p class="text-sm font-bold text-dynam-blue tracking-widest mb-2 uppercase">Analysis & Strategy Report</p>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">
+                複数体験が定着を生む構造<br class="md:hidden">
+                <span class="text-dynam-blue">― テーマパーク × パチンコ × レコメンド設計 ―</span>
+            </h1>
+        </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-6 py-12 space-y-20">
+    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
 
-        <section>
-            <h2 class="text-2xl font-bold border-l-4 border-blue-600 pl-4 mb-6">0. 導入：テーマパークで起きている「当たり前の事実」</h2>
-            <p class="mb-6">アミューズメントテーマパーク業界では、<strong class="text-blue-700">「何に乗ったか」よりも「いくつ体験したか」</strong>が再訪・ファン化を左右することは、すでに共通認識となっています。</p>
+        <section class="bg-white p-8 rounded shadow-sm border border-slate-200">
+            <h2 class="text-xl font-bold text-dynam-blue mb-6 flex items-center">
+                <span class="w-1.5 h-6 bg-dynam-blue mr-3 italic underline"></span>
+                0. 導入：テーマパークで起きている「当たり前の事実」
+            </h2>
+            <p class="mb-8 text-lg">アミューズメントテーマパーク業界では、<br class="hidden md:block">
+            <span class="font-bold marker-red">「何に乗ったか」よりも「いくつ体験したか」</span>が再訪・ファン化を左右することは、すでに共通認識となっています。</p>
             
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-slate-500 mb-3 underline">■ 単一体験の来場者</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li>評価は単発（楽しい／微妙）</li>
-                        <li>合わなければ「一度で十分」</li>
+            <div class="grid md:grid-cols-2 gap-8 mb-8 text-sm md:text-base">
+                <div class="border-l-4 border-slate-300 pl-4">
+                    <h3 class="font-bold text-slate-500 mb-2">■ 単一体験の来場者</h3>
+                    <ul class="space-y-1 opacity-75">
+                        <li>・評価が単発（楽しい／微妙）に終始</li>
+                        <li>・一度の不満足で「離反」へ直結</li>
                     </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
-                    <h3 class="font-bold text-blue-600 mb-3 underline">■ 複数体験の来場者</h3>
-                    <ul class="list-disc list-inside space-y-1">
-                        <li>滞在時間が伸びる</li>
-                        <li>「一番良かった体験」が必ず残る</li>
-                        <li>「次はこれも」という再訪理由が生まれる</li>
+                <div class="border-l-4 border-dynam-blue pl-4">
+                    <h3 class="font-bold text-dynam-blue mb-2">■ 複数体験の来場者</h3>
+                    <ul class="space-y-1">
+                        <li>・滞在時間の延長による満足度向上</li>
+                        <li>・<span class="font-bold">お気に入りの形成</span>と再訪動機の創出</li>
                     </ul>
                 </div>
             </div>
 
             <div class="mermaid">
                 graph LR
-                    A[1体験] --> B{評価が単発}
-                    B --> C[離反]
-                    D[複数体験] --> E[滞在時間増]
-                    E --> F[お気に入り形成]
-                    F --> G[再訪動機]
-                    style D fill:#dbeafe,stroke:#2563eb
+                    A[1体験] --> B(評価が単発) --> C[離反]
+                    D[複数体験] --> E(滞在時間増) --> F(お気に入り形成) --> G[再訪動機]
+                    style D fill:#e6eefc,stroke:#003399
+                    style G fill:#003399,color:#fff
             </div>
         </section>
 
         <section>
-            <h2 class="text-2xl font-bold border-l-4 border-blue-600 pl-4 mb-6">1. 業界の実数レンジとパチンコへの翻訳</h2>
-            
+            <h2 class="text-xl font-bold text-dynam-blue mb-6 border-b border-slate-200 pb-2">1 & 2. 実数レンジ：パチンコへの翻訳</h2>
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse bg-white shadow-sm">
-                    <thead>
-                        <tr class="bg-slate-100">
-                            <th class="p-4 border">体験数</th>
+                <table class="w-full text-sm md:text-base border-collapse border border-slate-200">
+                    <thead class="bg-slate-100">
+                        <tr>
+                            <th class="p-4 border text-center">遊技機種数</th>
                             <th class="p-4 border">平均滞在時間</th>
-                            <th class="p-4 border">年間再訪率</th>
-                            <th class="p-4 border">顧客状態</th>
+                            <th class="p-4 border">再来店率</th>
+                            <th class="p-4 border text-center">顧客状態</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr><td class="p-4 border font-bold text-slate-500">1つ</td><td class="p-4 border text-slate-500">2〜3時間</td><td class="p-4 border text-slate-500">15〜25%</td><td class="p-4 border text-slate-500">試し来場</td></tr>
-                        <tr class="bg-blue-50/30"><td class="p-4 border font-bold">2〜3つ</td><td class="p-4 border">4〜6時間</td><td class="p-4 border">30〜45%</td><td class="p-4 border">検討層</td></tr>
-                        <tr class="bg-blue-50"><td class="p-4 border font-bold text-blue-700">4つ以上</td><td class="p-4 border text-blue-700 font-bold">6〜8時間超</td><td class="p-4 border text-blue-700 font-bold">55〜70%</td><td class="p-4 border text-blue-700 font-bold">ファン層</td></tr>
+                    <tbody class="bg-white">
+                        <tr class="text-slate-500 italic"><td class="p-4 border text-center font-bold">1機種</td><td class="p-4 border">30〜45分</td><td class="p-4 border text-center font-bold">20〜30%</td><td class="p-4 border text-center text-xs">試し打ち</td></tr>
+                        <tr class="text-slate-700 bg-blue-50/50"><td class="p-4 border text-center font-bold">2〜3機種</td><td class="p-4 border">60〜90分</td><td class="p-4 border text-center font-bold">35〜50%</td><td class="p-4 border text-center text-xs underline underline-offset-4 decoration-dynam-blue">比較・検討層</td></tr>
+                        <tr class="text-white bg-dynam-blue font-bold tracking-wider"><td class="p-4 border text-center">4機種以上</td><td class="p-4 border font-bold">120分超</td><td class="p-4 border text-center text-xl">55〜70%</td><td class="p-4 border text-center font-bold">常連・ファン層</td></tr>
                     </tbody>
                 </table>
             </div>
-            <p class="mt-4 text-sm text-slate-500 italic">👉 再訪率は線形ではなく段差的に上昇する。</p>
-
-            <div class="mt-8 bg-slate-100 p-6 rounded-xl border-t-2 border-slate-300">
-                <h3 class="font-bold mb-4 text-center text-slate-600 uppercase tracking-widest">パチンコへの翻訳：構造は完全に同じ</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                    <div><p class="text-xs text-slate-400">アトラクション</p><p class="font-bold text-lg">遊技機</p></div>
-                    <div><p class="text-xs text-slate-400">体験数</p><p class="font-bold text-lg">遊技機種数</p></div>
-                    <div><p class="text-xs text-slate-400">滞在時間</p><p class="font-bold text-lg">遊技時間</p></div>
-                    <div><p class="text-xs text-slate-400">年パス</p><p class="font-bold text-lg">常連・会員</p></div>
-                </div>
-            </div>
+            <p class="text-right text-xs mt-2 text-slate-400 italic">※再来店率は「線形」ではなく「段差的」に上昇する</p>
         </section>
 
-        <section class="bg-blue-900 text-white p-8 rounded-2xl shadow-xl">
-            <h2 class="text-2xl font-bold mb-6 flex items-center">
-                <span class="bg-blue-500 text-white px-3 py-1 rounded mr-3 text-sm italic underline">Important</span> 3. マジックナンバー分析
-            </h2>
-            <div class="space-y-4">
-                <p>行動が<strong class="text-yellow-400 text-lg">「偶発」から「習慣」へ切り替わる境界点</strong>を特定する分析。</p>
-                <div class="mermaid">
+        <section class="bg-slate-100 p-8 rounded-lg border-t-4 border-dynam-red">
+            <h2 class="text-xl font-bold text-slate-800 mb-4">3. マジックナンバー分析：行動が変質するライン</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <div class="flex-1 text-sm space-y-4 text-slate-700">
+                    <p>「たまたま（偶発）」が「習慣（定着）」に変わる境界。平均値ではなく、<strong class="text-dynam-blue">顧客体験が“変質”するライン</strong>を見極めることが重要です。</p>
+                    <ul class="space-y-2">
+                        <li class="bg-white p-2 rounded shadow-sm border-l-2 border-dynam-blue"><span class="font-bold">2機種：</span>単発評価から比較評価への転換点</li>
+                        <li class="bg-white p-2 rounded shadow-sm border-l-2 border-dynam-blue"><span class="font-bold">4機種：</span>「また来よう」と確信する定着ライン</li>
+                    </ul>
+                </div>
+                <div class="flex-1 mermaid w-full">
                     graph TD
-                        A[1機種] --> B(単発評価)
-                        C[2〜3機種] --> D(比較評価)
-                        E[4機種以上] --> F(定着)
-                        style E fill:#f59e0b,stroke:#000,color:#000
+                        A[1機種] --> B(単発)
+                        C[2-3機種] --> D(比較)
+                        E[4機種以上] --> F[定着]
+                        style E fill:#da0000,color:#fff,stroke:none
                 </div>
             </div>
         </section>
 
-        <section>
-            <h2 class="text-2xl font-bold border-l-4 border-blue-600 pl-4 mb-6">5 & 6. レコメンド設計のパラダイムシフト</h2>
+        <section class="space-y-8">
+            <h2 class="text-xl font-bold text-dynam-blue border-l-4 border-dynam-blue pl-4">5 & 6. レコメンド設計のパラダイムシフト</h2>
             
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="space-y-4 shadow-sm p-6 bg-slate-50 border-t-4 border-slate-300">
-                    <h3 class="font-bold text-slate-500 uppercase">従来のやり方</h3>
-                    <p class="text-sm">A機種を遊技 → <strong class="text-slate-700 underline underline-offset-4 decoration-red-400">A機種を再推薦</strong></p>
-                    <div class="mermaid">
-                        graph LR
-                            A[A機種履歴] --> B[A機種を推薦]
+            <div class="grid md:grid-cols-2 gap-0 md:gap-4 space-y-4 md:space-y-0 text-center">
+                <div class="bg-white border-2 border-slate-200 p-6 rounded relative overflow-hidden">
+                    <div class="bg-slate-200 text-slate-600 text-[10px] font-bold py-1 px-4 absolute top-0 left-0">従来の手法</div>
+                    <p class="font-bold text-slate-400 mb-4 pt-2">A機種遊技 → A機種推薦</p>
+                    <div class="text-xs text-red-500 bg-red-50 p-3 rounded border border-red-100">
+                        行動が変わらない・体験が閉じている
                     </div>
-                    <p class="text-xs text-red-500">× 体験が完結しており行動が変わらない</p>
                 </div>
-                <div class="space-y-4 shadow-md p-6 bg-white border-t-4 border-blue-600">
-                    <h3 class="font-bold text-blue-600 uppercase">新しいレコメンド構造</h3>
-                    <p class="text-sm">A機種を遊技 → <strong class="text-blue-700">特性の近いB・C機種を推薦</strong></p>
-                    <div class="mermaid">
-                        graph LR
-                            A[A機種履歴] --> B(特性抽出)
-                            B --> C[B・C機種を推薦]
+                <div class="bg-white border-2 border-dynam-blue p-6 rounded relative overflow-hidden">
+                    <div class="bg-dynam-blue text-white text-[10px] font-bold py-1 px-4 absolute top-0 left-0 italic underline italic underline italic underline">Next Standard</div>
+                    <p class="font-bold text-dynam-blue mb-4 pt-2 underline decoration-dynam-red underline-offset-8 decoration-2">A機種嗜好 → 未遊技のB・C機種推薦</p>
+                    <div class="text-xs text-dynam-blue bg-blue-50 p-3 rounded border border-blue-100 font-bold">
+                        機種名ではなく「構造・体験特性」を繋ぐ
                     </div>
-                    <p class="text-xs text-green-600 font-bold">◯ 新規性と比較行動を誘発しマジックナンバー到達へ</p>
                 </div>
             </div>
         </section>
 
         <section>
-            <div class="bg-yellow-50 border border-yellow-200 p-8 rounded-lg">
-                <h3 class="font-bold text-lg mb-4 text-yellow-800">SMS / DM文面の考え方</h3>
-                <div class="space-y-4">
-                    <div class="p-4 bg-white rounded border border-yellow-100">
-                        <p class="text-xs font-bold text-slate-400 mb-1">OK：体験拡張メッセージ</p>
-                        <p class="italic">「A機種を好まれる方が、最近はこちらのB機種も遊技されています」</p>
-                        <p class="italic mt-2 text-blue-600">「A機種がお好きなら、演出タイプの近いC機種もおすすめです」</p>
+            <div class="bg-white border border-slate-200 rounded p-8">
+                <h3 class="font-bold text-dynam-blue mb-6">7. SMS／DM：具体的アプローチ</h3>
+                <div class="space-y-6">
+                    <div class="relative pl-8 border-l-2 border-slate-100">
+                        <span class="absolute left-[-13px] top-0 bg-white px-1 text-slate-300 font-serif text-2xl">“</span>
+                        <p class="text-slate-800 text-lg leading-relaxed italic italic italic italic underline underline-offset-4 decoration-slate-200 decoration-1 italic">
+                            「A機種を好まれる方が、最近はこちらのB機種も遊技されています」<br>
+                            「A機種がお好きなら、演出タイプの近いC機種もおすすめです」
+                        </p>
                     </div>
-                    <p class="text-center font-bold text-blue-800">“あなたの好みを理解している”メッセージへの進化</p>
+                    <p class="bg-dynam-blue text-white text-sm p-4 rounded text-center font-bold tracking-widest">
+                        “あなたの好みを理解している” 信頼関係の構築
+                    </p>
                 </div>
             </div>
         </section>
 
-        <section class="border-t border-slate-200 pt-12 text-center pb-24">
-            <h2 class="text-3xl font-bold mb-8 italic">9. 結論</h2>
-            <p class="max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-                顧客定着は、出玉の強弱だけでは生まれない。<br>
-                定着を左右するのは、<strong class="text-blue-600">遊技体験がどれだけ広がったか</strong>である。
-            </p>
-            <div class="bg-slate-900 text-white p-8 rounded-lg text-left inline-block">
-                <ul class="space-y-2">
-                    <li>● 島構成 → 現場で体験を広げる実装</li>
-                    <li>● レコメンド → 来店前に体験を広げる実装</li>
-                </ul>
-                <p class="mt-6 font-bold border-t border-slate-700 pt-4">これらは「同じ設計思想」の別実装である。</p>
+        <section class="text-center py-12 border-t border-slate-200">
+            <h2 class="text-2xl font-bold mb-8">9. 結論：体験の「規模の経済」を活かす</h2>
+            <div class="max-w-3xl mx-auto space-y-6 text-left bg-white p-8 border border-slate-100 shadow-sm">
+                <p>定着を左右するのは、<strong class="text-dynam-blue">遊技体験がどれだけ広がったか</strong>です。</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-4 rounded border-t-2 border-dynam-blue">
+                        <p class="font-bold text-sm mb-1 text-dynam-blue underline italic underline-offset-2 decoration-1 italic underline italic">現場での施策（島構成）</p>
+                        <p class="text-xs">物理的に「次の1台」へ誘導する</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded border-t-2 border-dynam-blue">
+                        <p class="font-bold text-sm mb-1 text-dynam-blue underline italic underline-offset-2 decoration-1 italic underline italic">来店前の施策（デジタル）</p>
+                        <p class="text-xs">心理的に「次の1台」への意欲を作る</p>
+                    </div>
+                </div>
+                <p class="text-center font-bold text-dynam-blue text-lg pt-4 underline underline-offset-8 decoration-2 decoration-dynam-red">マジックナンバーを超える体験の連鎖をデザインする</p>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-slate-200 py-8 text-center text-sm text-slate-500">
-        &copy; 2026 Analysis Report Implementation Proposal
+    <footer class="bg-white py-12 text-center text-xs text-slate-400 border-t border-slate-100">
+        &copy; 2026 Strategy Execution Proposal | <span class="text-dynam-blue font-bold">DYNAM</span>
     </footer>
 
 </body>
