@@ -394,7 +394,7 @@
           <h1>「何を打ったか」よりも、<br/>「いくつ体験したか」で再来店は決まる</h1>
           <p class="lead">
             アミューズメントテーマパーク業界では、<strong>“体験数が再訪・ファン化を左右する”</strong>ことは共通認識である。
-            本稿はこの構造をパチンコへ翻訳し、<strong>島構成</strong>と<strong>レコメンド（SMS/DM）</strong>を同一の設計思想として整理する。
+            インサイトノートはこの構造をパチンコへ翻訳し、<strong>島構成</strong>と<strong>レコメンド（SMS/DM）</strong>を同一の設計思想として整理する。
           </p>
           <div class="chips" aria-label="key points">
             <div class="chip"><b>Core</b> 複数体験→定着</div>
@@ -444,7 +444,7 @@
         </ul>
 
         <p class="note" style="margin-top:16px;">
-          ※図表はMermaidで描画する。GitHub Pagesではそのまま動作する構成にしてある。
+          ※図表はMermaidで描画する。
         </p>
       </div>
 
@@ -461,7 +461,7 @@
           その境界をマジックナンバーとして扱い、現場（島）と来店前（レコメンド）で同時に超えさせる。
         </p>
         <p class="note">
-          以降の章は、概念→レンジ→翻訳→実装→KPIの順で読めるように設計している。
+          以降の章は、概念→レンジ→翻訳→実装→KPIの順で読み進められるように設計している。
         </p>
       </aside>
     </div>
@@ -638,17 +638,17 @@ flowchart LR
             <tbody>
               <tr>
                 <td><strong>1機種</strong></td>
-                <td>30〜45分</td>
+                <td>30〜60分</td>
                 <td>20〜30%</td>
               </tr>
               <tr>
                 <td><strong>2〜3機種</strong></td>
-                <td>60〜90分</td>
+                <td>90〜120分</td>
                 <td>35〜50%</td>
               </tr>
               <tr>
                 <td><strong>4機種以上</strong></td>
-                <td>120分超</td>
+                <td>150分超</td>
                 <td>55〜70%</td>
               </tr>
             </tbody>
@@ -744,14 +744,14 @@ graph TD
 
         <p class="note">※LT機は「事例」として使用</p>
         <p>
-          LT機が特別なのではない。<strong>「次の1台へ進みやすい条件」</strong>を多く持っているだけである。
-          重要なのは、島を「完結」させず、体験を連続させる構成にすることだ。
+          LT機やシリーズ機が特別なのではない。<strong>「次の1台へ進みやすい条件」</strong>を多く持っているだけである。
+          重要なのは、島を「完結」させず、体験を連続させる構成にすることである。
         </p>
 
         <div class="diagram">
           <div class="mermaid">
 flowchart LR
-  A[入口的機種] --> B[近縁タイプ]
+  A[入口的機種] --> B[近縁タイプ（スペックではなく体験）]
   B --> C[主力帯]
   C --> D[遊び帯]
           </div>
@@ -774,7 +774,7 @@ flowchart LR
         </div>
         <p>
           「入口→近縁→主力→遊び帯」の順に、体験の接続を作る。
-          ここで重要なのは“強い台”の羅列ではなく、<strong>次へ行ける連続性</strong>である。
+          ここで重要なのは“強い台”の羅列ではなく、<strong>次もまた行きたい連続性</strong>である。
         </p>
       </aside>
     </div>
@@ -936,7 +936,7 @@ flowchart LR
         </div>
 
         <ul>
-          <li>レコメンド経由来店率</li>
+          <li>レコメンド経由の来店率</li>
           <li>来店後の遊技機種数</li>
           <li><strong>2機種／4機種</strong> 到達率</li>
           <li>再来店率</li>
@@ -961,7 +961,7 @@ graph TD
           </div>
         </div>
         <p>
-          成果指標はアウトや粗利の単発反応ではなく、<strong>行動構造の変化</strong>として設計する。
+          成果指標はアウトや粗利、来店の有無といった単発反応ではなく、<strong>行動構造の変化</strong>として設計する。
           「2→4への到達」が上がれば、滞在と再来店は自然に追随しやすい。
         </p>
       </aside>
@@ -1023,7 +1023,7 @@ graph TD
       <footer class="thx-container">
         <div class="footer-inner">
           <div>© THINX-LAB. / Designing the future with data</div>
-          <div>Built for GitHub Pages (single-file)</div>
+          <div>Built for THINX Pages (single-file)</div>
         </div>
       </footer>
     </div>
