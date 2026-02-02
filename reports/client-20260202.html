@@ -1,192 +1,1008 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>複数体験が定着を生む構造 ― テーマパーク × パチンコ × レコメンド設計 ―</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>
-        mermaid.initialize({
-            startOnLoad:true, 
-            theme:'base',
-            themeVariables: {
-                primaryColor: '#e6eefc',
-                primaryTextColor: '#003399',
-                lineColor: '#003399',
-                edgeLabelBackground:'#ffffff',
-                mainBkg: '#ffffff'
-            }
-        });
-    </script>
-    <style>
-        /* ダイナム様のカラーコードを意識した設定 */
-        :root {
-            --dynam-blue: #003399; /* 信頼の紺色 */
-            --dynam-light-blue: #0055cc;
-            --dynam-accent-red: #da0000; /* ロゴのアクセント赤 */
-            --bg-gray: #f8f9fa;
-        }
-        body { font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; }
-        .bg-dynam-blue { background-color: var(--dynam-blue); }
-        .text-dynam-blue { color: var(--dynam-blue); }
-        .border-dynam-blue { border-color: var(--dynam-blue); }
-        .border-dynam-red { border-color: var(--dynam-accent-red); }
-        .marker-red { border-bottom: 2px solid var(--dynam-accent-red); }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="複数体験が定着を生む構造 ― テーマパーク × パチンコ × レコメンド設計 ―" />
+  <title>複数体験が定着を生む構造 | THINX-LAB.</title>
+
+  <!-- Fonts (THINX base: system-ui) -->
+  <style>
+    /* =========================================================
+       THINX Corporate Style (Base: #thxPhilosophy / #thxAbout)
+       ========================================================= */
+    :root{
+      --thx-accent:#10b4c8;          /* rgb(16,180,200) */
+      --thx-accent-rgb:16,180,200;
+      --thx-bg:#020b16;
+      --thx-text:#f9fbff;
+      --thx-muted:rgba(229,243,255,0.70);
+      --thx-border:rgba(148,163,184,0.20);
+      --thx-card:rgba(6,20,38,0.40);
+
+      --r-24:24px;
+      --r-18:18px;
+      --shadow: 0 24px 70px rgba(0,0,0,.35);
+      --shadow-soft: 0 18px 46px rgba(0,0,0,.28);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      color:var(--thx-text);
+      background: var(--thx-bg);
+      overflow-x:hidden;
+    }
+
+    /* 92px grid (fixed) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size:92px 92px;
+      opacity:.18;
+      pointer-events:none;
+      z-index:-2;
+      background-attachment:fixed;
+    }
+    /* subtle radial light */
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(closest-side at 20% 10%, rgba(var(--thx-accent-rgb),0.18), transparent 55%),
+        radial-gradient(closest-side at 80% 40%, rgba(255,255,255,0.06), transparent 60%),
+        radial-gradient(closest-side at 40% 90%, rgba(var(--thx-accent-rgb),0.10), transparent 60%);
+      pointer-events:none;
+      z-index:-3;
+      filter: blur(6px);
+    }
+
+    /* Layout */
+    .thx-section{
+      padding:80px 0;
+      margin:-2px 0; /* seam fix */
+    }
+    .thx-container{
+      max-width:1120px;
+      margin:0 auto;
+      padding:0 24px;
+    }
+
+    /* Header */
+    .hero{
+      padding:84px 0 44px;
+    }
+    .hero-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:24px;
+      flex-wrap:wrap;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(var(--thx-accent-rgb),0.35);
+      background: rgba(6,20,38,0.35);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-soft);
+      color:var(--thx-text);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background: var(--thx-accent);
+      box-shadow: 0 0 18px rgba(var(--thx-accent-rgb),0.65);
+    }
+    .en-label{
+      font-size:11px;
+      letter-spacing:0.4em;
+      color:rgba(229,243,255,0.62);
+      text-transform:uppercase;
+    }
+    .ja-title{
+      margin:12px 0 8px;
+      font-size:18px;
+      font-weight:700;
+      color:var(--thx-accent);
+      letter-spacing:.02em;
+    }
+    h1{
+      margin:0 0 18px;
+      font-weight:800;
+      font-size:clamp(28px, 3.5vw, 38px);
+      line-height:1.25;
+    }
+    .lead{
+      margin:0;
+      font-size:16px;
+      line-height:2;
+      color:var(--thx-muted);
+      max-width: 70ch;
+    }
+    .lead strong{ color:var(--thx-accent); font-weight:800; }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    /* CTA: text + circular arrow */
+    .cta{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--thx-text);
+      font-weight:700;
+      letter-spacing:.02em;
+    }
+    .cta span{
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 5px;
+      text-decoration-color: rgba(var(--thx-accent-rgb),0.55);
+    }
+    .cta .circle{
+      width:44px;height:44px;border-radius:999px;
+      border:1px solid rgba(var(--thx-accent-rgb),0.45);
+      display:grid;place-items:center;
+      background: rgba(6,20,38,0.35);
+      backdrop-filter: blur(14px);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      box-shadow: 0 0 0 rgba(var(--thx-accent-rgb),0);
+    }
+    .cta:hover .circle{
+      transform: translateX(5px);
+      background: rgba(var(--thx-accent-rgb),0.12);
+      box-shadow: 0 0 22px rgba(var(--thx-accent-rgb),0.45);
+      animation: svc-pulse 1.35s ease-in-out infinite;
+    }
+    .arrow{
+      width:18px;height:18px;
+      border-right:2px solid var(--thx-text);
+      border-top:2px solid var(--thx-text);
+      transform: rotate(45deg);
+      margin-left:-4px;
+    }
+    @keyframes svc-pulse{
+      0%,100%{ box-shadow: 0 0 0 rgba(var(--thx-accent-rgb),0); }
+      50%{ box-shadow: 0 0 26px rgba(var(--thx-accent-rgb),0.55); }
+    }
+
+    /* Cards */
+    .card{
+      border-radius:var(--r-24);
+      padding:40px;
+      background: var(--thx-card);
+      border: 1px solid var(--thx-border);
+      backdrop-filter: blur(15px);
+      box-shadow: var(--shadow);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap:60px;
+      align-items:start;
+    }
+    @media (max-width:900px){
+      .thx-section{ padding:60px 0; }
+      .grid{ grid-template-columns:1fr; gap:40px; }
+      .card{ padding:28px; }
+      .hero{ padding:72px 0 36px; }
+    }
+
+    /* Section heading */
+    .sec-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+    .sec-title{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      min-width:min(640px, 100%);
+    }
+    .sec-title .kicker{
+      font-size:11px;
+      letter-spacing:0.4em;
+      color:rgba(229,243,255,0.62);
+      text-transform:uppercase;
+    }
+    .sec-title h2{
+      margin:0;
+      font-size:clamp(24px, 3vw, 34px);
+      line-height:1.25;
+      font-weight:800;
+    }
+    .divider{
+      height:1px;
+      width:100%;
+      background: linear-gradient(to right, rgba(var(--thx-accent-rgb),0.0), rgba(var(--thx-accent-rgb),0.55), rgba(var(--thx-accent-rgb),0.0));
+      margin:18px 0 0;
+      opacity:.9;
+    }
+
+    /* Text */
+    p{ margin: 0 0 14px; font-size:16px; line-height:2; color:var(--thx-muted); }
+    p strong{ color:var(--thx-accent); font-weight:800; }
+    .note{
+      font-size:14px;
+      color: rgba(229,243,255,0.62);
+    }
+
+    /* Lists */
+    ul{ margin: 12px 0 0; padding-left: 1.2em; color:var(--thx-muted); line-height:2; }
+    li{ margin: 6px 0; }
+
+    /* Tables */
+    .table-wrap{
+      margin-top:16px;
+      overflow:auto;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,0.18);
+      background: rgba(6,20,38,0.35);
+      box-shadow: var(--shadow-soft);
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+    th,td{
+      padding:14px 16px;
+      border-bottom:1px solid rgba(148,163,184,0.12);
+      vertical-align:top;
+      text-align:left;
+      font-size:14px;
+      line-height:1.7;
+    }
+    th{
+      color: var(--thx-text);
+      font-weight:800;
+      background: rgba(6,20,38,0.25);
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+    }
+    tr:hover td{ background: rgba(var(--thx-accent-rgb),0.06); }
+
+    /* Mermaid block */
+    .diagram{
+      margin-top:16px;
+      padding:18px 18px;
+      border-radius:18px;
+      border:1px solid rgba(var(--thx-accent-rgb),0.18);
+      background: rgba(6,20,38,0.35);
+      box-shadow: var(--shadow-soft);
+      overflow:auto;
+    }
+    .mermaid{
+      min-width: 520px;
+    }
+
+    /* Small chips */
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.18);
+      background: rgba(6,20,38,0.35);
+      color: rgba(229,243,255,0.78);
+      font-size:12px;
+      letter-spacing:.02em;
+    }
+    .chip b{ color: var(--thx-text); }
+
+    /* Footer */
+    footer{
+      padding:34px 0 64px;
+      color: rgba(229,243,255,0.55);
+      font-size:12px;
+      letter-spacing:.02em;
+    }
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      flex-wrap:wrap;
+      border-top: 1px solid rgba(148,163,184,0.14);
+      padding-top:18px;
+    }
+
+    /* Anchor offset for sticky jump */
+    .anchor{ scroll-margin-top: 18px; }
+  </style>
+
+  <!-- Mermaid (GitHub Pages friendly) -->
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "dark",
+      securityLevel: "loose",
+      themeVariables: {
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif",
+        primaryColor: "rgba(6,20,38,0.55)",
+        primaryBorderColor: "rgba(16,180,200,0.35)",
+        primaryTextColor: "#f9fbff",
+        lineColor: "rgba(229,243,255,0.45)",
+        secondaryColor: "rgba(6,20,38,0.35)",
+        tertiaryColor: "rgba(6,20,38,0.25)"
+      }
+    });
+  </script>
 </head>
-<body class="bg-slate-50 text-slate-900">
 
-    <header class="bg-white border-b-4 border-dynam-blue py-8 px-4 shadow-sm">
-        <div class="max-w-5xl mx-auto text-center md:text-left">
-            <p class="text-sm font-bold text-dynam-blue tracking-widest mb-2 uppercase">Analysis & Strategy Report</p>
-            <h1 class="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight leading-tight">
-                複数体験が定着を生む構造<br class="md:hidden">
-                <span class="text-dynam-blue">― テーマパーク × パチンコ × レコメンド設計 ―</span>
-            </h1>
+<body>
+  <header class="thx-section hero">
+    <div class="thx-container">
+      <div class="hero-top">
+        <div>
+          <div class="badge"><span class="dot"></span>THINX-LAB. / Insight Note</div>
+          <div class="ja-title">■ 複数体験が定着を生む構造</div>
+          <div class="en-label">Theme Park × Pachinko × Recommendation Design</div>
+          <h1>「何を打ったか」よりも、<br/>「いくつ体験したか」で再来店は決まる</h1>
+          <p class="lead">
+            アミューズメントテーマパーク業界では、<strong>“体験数が再訪・ファン化を左右する”</strong>ことは共通認識である。
+            本稿はこの構造をパチンコへ翻訳し、<strong>島構成</strong>と<strong>レコメンド（SMS/DM）</strong>を同一の設計思想として整理する。
+          </p>
+          <div class="chips" aria-label="key points">
+            <div class="chip"><b>Core</b> 複数体験→定着</div>
+            <div class="chip"><b>Key</b> マジックナンバー</div>
+            <div class="chip"><b>Impl</b> 島構成×レコメンド</div>
+            <div class="chip"><b>KPI</b> 広がったか</div>
+          </div>
         </div>
-    </header>
 
-    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
+        <div class="hero-actions">
+          <a class="cta" href="#index">
+            <span>目次へ</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+          <a class="cta" href="#conclusion">
+            <span>結論へ</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-        <section class="bg-white p-8 rounded shadow-sm border border-slate-200">
-            <h2 class="text-xl font-bold text-dynam-blue mb-6 flex items-center">
-                <span class="w-1.5 h-6 bg-dynam-blue mr-3 italic underline"></span>
-                0. 導入：テーマパークで起きている「当たり前の事実」
-            </h2>
-            <p class="mb-8 text-lg">アミューズメントテーマパーク業界では、<br class="hidden md:block">
-            <span class="font-bold marker-red">「何に乗ったか」よりも「いくつ体験したか」</span>が再訪・ファン化を左右することは、すでに共通認識となっています。</p>
-            
-            <div class="grid md:grid-cols-2 gap-8 mb-8 text-sm md:text-base">
-                <div class="border-l-4 border-slate-300 pl-4">
-                    <h3 class="font-bold text-slate-500 mb-2">■ 単一体験の来場者</h3>
-                    <ul class="space-y-1 opacity-75">
-                        <li>・評価が単発（楽しい／微妙）に終始</li>
-                        <li>・一度の不満足で「離反」へ直結</li>
-                    </ul>
-                </div>
-                <div class="border-l-4 border-dynam-blue pl-4">
-                    <h3 class="font-bold text-dynam-blue mb-2">■ 複数体験の来場者</h3>
-                    <ul class="space-y-1">
-                        <li>・滞在時間の延長による満足度向上</li>
-                        <li>・<span class="font-bold">お気に入りの形成</span>と再訪動機の創出</li>
-                    </ul>
-                </div>
-            </div>
+  <!-- INDEX -->
+  <section class="thx-section" id="index">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">INDEX</div>
+            <h2>構成</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
 
-            <div class="mermaid">
-                graph LR
-                    A[1体験] --> B(評価が単発) --> C[離反]
-                    D[複数体験] --> E(滞在時間増) --> F(お気に入り形成) --> G[再訪動機]
-                    style D fill:#e6eefc,stroke:#003399
-                    style G fill:#003399,color:#fff
-            </div>
-        </section>
+        <ul>
+          <li><a href="#sec0" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">0. 導入：テーマパークで起きている「当たり前の事実」</a></li>
+          <li><a href="#sec1" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">1. テーマパーク業界の実数レンジ（一般的傾向）</a></li>
+          <li><a href="#sec2" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">2. パチンコへの翻訳：構造は完全に同じ</a></li>
+          <li><a href="#sec3" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">3. マジックナンバー分析（補足・重要）</a></li>
+          <li><a href="#sec4" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">4. 島構成でどう実装するか</a></li>
+          <li><a href="#sec5" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">5. 重要になる「レコメンド設計」</a></li>
+          <li><a href="#sec6" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">6. 発想転換：A嗜好者にB・Cをすすめる</a></li>
+          <li><a href="#sec7" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">7. SMS／DM文面の考え方</a></li>
+          <li><a href="#sec8" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">8. KPIは「打ったか」ではなく「広がったか」</a></li>
+          <li><a href="#conclusion" style="color:var(--thx-text); text-decoration-color:rgba(var(--thx-accent-rgb),0.55);">9. 結論</a></li>
+        </ul>
 
-        <section>
-            <h2 class="text-xl font-bold text-dynam-blue mb-6 border-b border-slate-200 pb-2">1 & 2. 実数レンジ：パチンコへの翻訳</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm md:text-base border-collapse border border-slate-200">
-                    <thead class="bg-slate-100">
-                        <tr>
-                            <th class="p-4 border text-center">遊技機種数</th>
-                            <th class="p-4 border">平均滞在時間</th>
-                            <th class="p-4 border">再来店率</th>
-                            <th class="p-4 border text-center">顧客状態</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white">
-                        <tr class="text-slate-500 italic"><td class="p-4 border text-center font-bold">1機種</td><td class="p-4 border">30〜45分</td><td class="p-4 border text-center font-bold">20〜30%</td><td class="p-4 border text-center text-xs">試し打ち</td></tr>
-                        <tr class="text-slate-700 bg-blue-50/50"><td class="p-4 border text-center font-bold">2〜3機種</td><td class="p-4 border">60〜90分</td><td class="p-4 border text-center font-bold">35〜50%</td><td class="p-4 border text-center text-xs underline underline-offset-4 decoration-dynam-blue">比較・検討層</td></tr>
-                        <tr class="text-white bg-dynam-blue font-bold tracking-wider"><td class="p-4 border text-center">4機種以上</td><td class="p-4 border font-bold">120分超</td><td class="p-4 border text-center text-xl">55〜70%</td><td class="p-4 border text-center font-bold">常連・ファン層</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-right text-xs mt-2 text-slate-400 italic">※再来店率は「線形」ではなく「段差的」に上昇する</p>
-        </section>
+        <p class="note" style="margin-top:16px;">
+          ※図表はMermaidで描画する。GitHub Pagesではそのまま動作する構成にしてある。
+        </p>
+      </div>
 
-        <section class="bg-slate-100 p-8 rounded-lg border-t-4 border-dynam-red">
-            <h2 class="text-xl font-bold text-slate-800 mb-4">3. マジックナンバー分析：行動が変質するライン</h2>
-            <div class="flex flex-col md:flex-row items-center gap-8">
-                <div class="flex-1 text-sm space-y-4 text-slate-700">
-                    <p>「たまたま（偶発）」が「習慣（定着）」に変わる境界。平均値ではなく、<strong class="text-dynam-blue">顧客体験が“変質”するライン</strong>を見極めることが重要です。</p>
-                    <ul class="space-y-2">
-                        <li class="bg-white p-2 rounded shadow-sm border-l-2 border-dynam-blue"><span class="font-bold">2機種：</span>単発評価から比較評価への転換点</li>
-                        <li class="bg-white p-2 rounded shadow-sm border-l-2 border-dynam-blue"><span class="font-bold">4機種：</span>「また来よう」と確信する定着ライン</li>
-                    </ul>
-                </div>
-                <div class="flex-1 mermaid w-full">
-                    graph TD
-                        A[1機種] --> B(単発)
-                        C[2-3機種] --> D(比較)
-                        E[4機種以上] --> F[定着]
-                        style E fill:#da0000,color:#fff,stroke:none
-                </div>
-            </div>
-        </section>
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SUMMARY</div>
+            <h2>この資料の狙い</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          定着の本質は「出玉」ではなく、<strong>体験が連続し、比較が生まれ、行動が変質すること</strong>にある。
+          その境界をマジックナンバーとして扱い、現場（島）と来店前（レコメンド）で同時に超えさせる。
+        </p>
+        <p class="note">
+          以降の章は、概念→レンジ→翻訳→実装→KPIの順で読めるように設計している。
+        </p>
+      </aside>
+    </div>
+  </section>
 
-        <section class="space-y-8">
-            <h2 class="text-xl font-bold text-dynam-blue border-l-4 border-dynam-blue pl-4">5 & 6. レコメンド設計のパラダイムシフト</h2>
-            
-            <div class="grid md:grid-cols-2 gap-0 md:gap-4 space-y-4 md:space-y-0 text-center">
-                <div class="bg-white border-2 border-slate-200 p-6 rounded relative overflow-hidden">
-                    <div class="bg-slate-200 text-slate-600 text-[10px] font-bold py-1 px-4 absolute top-0 left-0">従来の手法</div>
-                    <p class="font-bold text-slate-400 mb-4 pt-2">A機種遊技 → A機種推薦</p>
-                    <div class="text-xs text-red-500 bg-red-50 p-3 rounded border border-red-100">
-                        行動が変わらない・体験が閉じている
-                    </div>
-                </div>
-                <div class="bg-white border-2 border-dynam-blue p-6 rounded relative overflow-hidden">
-                    <div class="bg-dynam-blue text-white text-[10px] font-bold py-1 px-4 absolute top-0 left-0 italic underline italic underline italic underline">Next Standard</div>
-                    <p class="font-bold text-dynam-blue mb-4 pt-2 underline decoration-dynam-red underline-offset-8 decoration-2">A機種嗜好 → 未遊技のB・C機種推薦</p>
-                    <div class="text-xs text-dynam-blue bg-blue-50 p-3 rounded border border-blue-100 font-bold">
-                        機種名ではなく「構造・体験特性」を繋ぐ
-                    </div>
-                </div>
-            </div>
-        </section>
+  <!-- 0 -->
+  <section class="thx-section anchor" id="sec0">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 0</div>
+            <h2>導入：テーマパークで起きている「当たり前の事実」</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
 
-        <section>
-            <div class="bg-white border border-slate-200 rounded p-8">
-                <h3 class="font-bold text-dynam-blue mb-6">7. SMS／DM：具体的アプローチ</h3>
-                <div class="space-y-6">
-                    <div class="relative pl-8 border-l-2 border-slate-100">
-                        <span class="absolute left-[-13px] top-0 bg-white px-1 text-slate-300 font-serif text-2xl">“</span>
-                        <p class="text-slate-800 text-lg leading-relaxed italic italic italic italic underline underline-offset-4 decoration-slate-200 decoration-1 italic">
-                            「A機種を好まれる方が、最近はこちらのB機種も遊技されています」<br>
-                            「A機種がお好きなら、演出タイプの近いC機種もおすすめです」
-                        </p>
-                    </div>
-                    <p class="bg-dynam-blue text-white text-sm p-4 rounded text-center font-bold tracking-widest">
-                        “あなたの好みを理解している” 信頼関係の構築
-                    </p>
-                </div>
-            </div>
-        </section>
+        <p>
+          アミューズメントテーマパーク業界では、<strong>「何に乗ったか」よりも「いくつ体験したか」</strong>が再訪・ファン化を左右することは、すでに共通認識となっている。
+        </p>
 
-        <section class="text-center py-12 border-t border-slate-200">
-            <h2 class="text-2xl font-bold mb-8">9. 結論：体験の「規模の経済」を活かす</h2>
-            <div class="max-w-3xl mx-auto space-y-6 text-left bg-white p-8 border border-slate-100 shadow-sm">
-                <p>定着を左右するのは、<strong class="text-dynam-blue">遊技体験がどれだけ広がったか</strong>です。</p>
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="bg-slate-50 p-4 rounded border-t-2 border-dynam-blue">
-                        <p class="font-bold text-sm mb-1 text-dynam-blue underline italic underline-offset-2 decoration-1 italic underline italic">現場での施策（島構成）</p>
-                        <p class="text-xs">物理的に「次の1台」へ誘導する</p>
-                    </div>
-                    <div class="bg-slate-50 p-4 rounded border-t-2 border-dynam-blue">
-                        <p class="font-bold text-sm mb-1 text-dynam-blue underline italic underline-offset-2 decoration-1 italic underline italic">来店前の施策（デジタル）</p>
-                        <p class="text-xs">心理的に「次の1台」への意欲を作る</p>
-                    </div>
-                </div>
-                <p class="text-center font-bold text-dynam-blue text-lg pt-4 underline underline-offset-8 decoration-2 decoration-dynam-red">マジックナンバーを超える体験の連鎖をデザインする</p>
-            </div>
-        </section>
+        <div class="table-wrap" role="region" aria-label="single vs multiple experience">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:35%">来場者タイプ</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>単一体験</strong></td>
+                <td>
+                  評価は単発（楽しい／微妙）<br/>
+                  合わなければ「一度で十分」になりやすい
+                </td>
+              </tr>
+              <tr>
+                <td><strong>複数体験</strong></td>
+                <td>
+                  滞在時間が伸びる<br/>
+                  「一番良かった体験」が必ず残る<br/>
+                  「次はこれも」という再訪理由が生まれる
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-    </main>
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[1体験] --> B[評価が単発]
+  B --> C[離反]
 
-    <footer class="bg-white py-12 text-center text-xs text-slate-400 border-t border-slate-100">
-        &copy; 2026 Strategy Execution Proposal | <span class="text-dynam-blue font-bold">DYNAM</span>
-    </footer>
+  D[複数体験] --> E[滞在時間増]
+  E --> F[お気に入り形成]
+  F --> G[再訪動機]
+          </div>
+        </div>
+      </div>
 
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">INSIGHT</div>
+            <h2>“段差”が重要である</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          再訪率は線形には上がらない。体験が増えた瞬間に、<strong>行動の質が切り替わる</strong>。
+          ここが「定着設計」の要点である。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 1 -->
+  <section class="thx-section anchor" id="sec1">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 1</div>
+            <h2>テーマパーク業界の実数レンジ（一般的傾向）</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="theme park ranges">
+          <table>
+            <thead>
+              <tr>
+                <th>体験数</th>
+                <th>平均滞在時間</th>
+                <th>年間再訪率</th>
+                <th>顧客状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1つ</strong></td>
+                <td>2〜3時間</td>
+                <td>15〜25%</td>
+                <td>試し来場</td>
+              </tr>
+              <tr>
+                <td><strong>2〜3つ</strong></td>
+                <td>4〜6時間</td>
+                <td>30〜45%</td>
+                <td>検討層</td>
+              </tr>
+              <tr>
+                <td><strong>4つ以上</strong></td>
+                <td>6〜8時間超</td>
+                <td>55〜70%</td>
+                <td>ファン層</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note" style="margin-top:14px;">
+          👉 再訪率は線形ではなく段差的に上昇する。平均値の比較ではなく、境界（ライン）を捉えるべきである。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="thx-section anchor" id="sec2">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 2</div>
+            <h2>パチンコへの翻訳：構造は完全に同じ</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="mapping">
+          <table style="min-width:840px;">
+            <thead>
+              <tr>
+                <th>テーマパーク</th>
+                <th>パチンコ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>アトラクション</td><td>遊技機</td></tr>
+              <tr><td>体験数</td><td>遊技機種数</td></tr>
+              <tr><td>滞在時間</td><td>遊技時間</td></tr>
+              <tr><td>再訪率</td><td>再来店率</td></tr>
+              <tr><td>年パス</td><td>常連・会員</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:18px;">
+          体験の単発評価が離反を生み、複数体験が比較・お気に入り形成を生む。構造は同一である。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="pachinko ranges">
+          <table>
+            <thead>
+              <tr>
+                <th>遊技機種数</th>
+                <th>滞在時間</th>
+                <th>再来店率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1機種</strong></td>
+                <td>30〜45分</td>
+                <td>20〜30%</td>
+              </tr>
+              <tr>
+                <td><strong>2〜3機種</strong></td>
+                <td>60〜90分</td>
+                <td>35〜50%</td>
+              </tr>
+              <tr>
+                <td><strong>4機種以上</strong></td>
+                <td>120分超</td>
+                <td>55〜70%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="thx-section anchor" id="sec3">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 3</div>
+            <h2>マジックナンバー分析（補足・重要）</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          <strong>マジックナンバー分析</strong>とは、行動が「偶発（たまたま）」から「習慣（定着）」へ切り替わる境界点を特定する分析である。
+          平均値ではなく、<strong>行動が“変質するライン”</strong>を見る。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="magic numbers">
+          <table style="min-width:860px;">
+            <thead>
+              <tr>
+                <th>指標</th>
+                <th>マジックナンバー</th>
+                <th>行動変化</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>遊技機種数</td>
+                <td><strong>2機種</strong></td>
+                <td>単発評価 → 比較評価</td>
+              </tr>
+              <tr>
+                <td>遊技機種数</td>
+                <td><strong>4機種</strong></td>
+                <td>試し打ち → 定着</td>
+              </tr>
+              <tr>
+                <td>滞在時間</td>
+                <td><strong>60分</strong></td>
+                <td>ついで → 目的来店</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="diagram">
+          <div class="mermaid">
+graph TD
+  A[1機種] --> B[単発評価]
+  C[2〜3機種] --> D[比較評価]
+  E[4機種以上] --> F[定着]
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">WHY IT WORKS</div>
+            <h2>評価が“固定”から“探索”へ</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          体験が1つだと評価は固定されやすい。2機種を超えると比較が生まれ、4機種を超えると探索が習慣へ変わる。
+          ここに定着の段差がある。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="thx-section anchor" id="sec4">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 4</div>
+            <h2>島構成でどう実装するか</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p class="note">※LT機は「事例」として使用</p>
+        <p>
+          LT機が特別なのではない。<strong>「次の1台へ進みやすい条件」</strong>を多く持っているだけである。
+          重要なのは、島を「完結」させず、体験を連続させる構成にすることだ。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[入口的機種] --> B[近縁タイプ]
+  B --> C[主力帯]
+  C --> D[遊び帯]
+          </div>
+        </div>
+
+        <ul>
+          <li>島を「完結」させない</li>
+          <li>体験を連続させる構成にする</li>
+          <li>目的は <strong>2機種 → 4機種</strong> 到達</li>
+        </ul>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">IMPLEMENTATION</div>
+            <h2>“回遊”を設計する</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          「入口→近縁→主力→遊び帯」の順に、体験の接続を作る。
+          ここで重要なのは“強い台”の羅列ではなく、<strong>次へ行ける連続性</strong>である。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="thx-section anchor" id="sec5">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 5</div>
+            <h2>ここで重要になるのが「レコメンド設計」</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          現在の一般的なやり方は、過去の履歴に同一機種を当てる構造になりやすい。
+          しかしそれは、体験を<strong>閉じる</strong>方向に働く。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[A機種遊技履歴] --> B[A機種を再推薦]
+          </div>
+        </div>
+
+        <ul>
+          <li><strong>問題：</strong>体験はすでに完結している</li>
+          <li><strong>問題：</strong>評価は固まっている</li>
+          <li><strong>結果：</strong>行動が変わらない</li>
+        </ul>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">RISK</div>
+            <h2>再推薦は“定着”ではない</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          同一機種の再推薦は、戻す力は持つが、広げる力は弱い。
+          定着の段差（2機種/4機種）を超えにくい設計になってしまう。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="thx-section anchor" id="sec6">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 6</div>
+            <h2>発想転換：A機種嗜好者にはB・C機種をすすめる</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          A機種を遊技していた＝A機種が持つ<strong>体験特性</strong>を好んでいた、という解釈が正しい。
+          嗜好は機種名ではなく、<strong>構造に宿る</strong>。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[A機種遊技] --> B[特性抽出]
+  B --> C[B・C機種選定]
+  C --> D[別機種レコメンド]
+          </div>
+        </div>
+
+        <ul>
+          <li><strong>効果：</strong>新規性がある</li>
+          <li><strong>効果：</strong>比較行動が生まれる</li>
+          <li><strong>効果：</strong>複数機種遊技を誘発</li>
+          <li><strong>結果：</strong>マジックナンバー到達率が上がる</li>
+        </ul>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">DESIGN PRINCIPLE</div>
+            <h2>推すのは「次の体験」</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          レコメンドは、過去をなぞる装置ではなく、次の体験へ橋をかける装置である。
+          体験を“増やす”ことが、そのまま定着確率を引き上げる。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="thx-section anchor" id="sec7">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 7</div>
+            <h2>SMS／DM文面の考え方</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="sms copy">
+          <table style="min-width:860px;">
+            <thead>
+              <tr>
+                <th style="width:22%">分類</th>
+                <th>例文</th>
+                <th style="width:28%">意味</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>NG（同一機種）</strong></td>
+                <td>「以前遊技されたA機種が好調（おすすめ）です」</td>
+                <td>体験が完結し、行動が変わりにくい</td>
+              </tr>
+              <tr>
+                <td><strong>OK（体験拡張）</strong></td>
+                <td>
+                  「A機種を好まれる方が、最近はこちらのB機種も遊技されています」<br/>
+                  「A機種がお好きなら、演出タイプの近いC機種もおすすめです」
+                </td>
+                <td>“あなたの好みを理解している”メッセージになる</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note" style="margin-top:14px;">
+          👉 重要なのは、押し付けではなく「理解の提示」である。理解が提示されると、次の体験への心理的ハードルが下がる。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="thx-section anchor" id="sec8">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 8</div>
+            <h2>KPIは「打ったか」ではなく「広がったか」</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <ul>
+          <li>レコメンド経由来店率</li>
+          <li>来店後の遊技機種数</li>
+          <li><strong>2機種／4機種</strong> 到達率</li>
+          <li>再来店率</li>
+        </ul>
+
+        <div class="diagram">
+          <div class="mermaid">
+graph TD
+  A[レコメンド] --> B[来店]
+  B --> C[複数機種遊技]
+  C --> D[定着]
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">MEASUREMENT</div>
+            <h2>“広がり”は測定できる</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+        <p>
+          成果指標はアウトや粗利の単発反応ではなく、<strong>行動構造の変化</strong>として設計する。
+          「2→4への到達」が上がれば、滞在と再来店は自然に追随しやすい。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="thx-section anchor" id="conclusion">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 9</div>
+            <h2>結論</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          顧客定着は、出玉の強弱だけでは生まれない。実際、利益率が高くても繁盛している店舗は存在する。
+          定着を左右するのは、遊技体験がどれだけ広がったかである。
+        </p>
+        <p>
+          体験の選択肢が多いほど、規模の経済が働きやすく、総台数の意味が生きてくる。
+          島構成も、SMS／DMも、目的は同じである。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="final mapping">
+          <table style="min-width:860px;">
+            <thead>
+              <tr>
+                <th>問い</th>
+                <th>現場の実装</th>
+                <th>来店前の実装</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>マジックナンバーを超える体験をどう作るか</strong></td>
+                <td>島構成 → 現場で体験を広げる</td>
+                <td>レコメンド → 来店前に体験を広げる</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:16px;">
+          この2つは、同じ設計思想の別実装である。
+        </p>
+
+        <div style="margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;">
+          <a class="cta" href="#index">
+            <span>目次へ戻る</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+        </div>
+      </div>
+
+      <footer class="thx-container">
+        <div class="footer-inner">
+          <div>© THINX-LAB. / Designing the future with data</div>
+          <div>Built for GitHub Pages (single-file)</div>
+        </div>
+      </footer>
+    </div>
+  </section>
 </body>
 </html>
