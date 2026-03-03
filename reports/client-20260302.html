@@ -310,7 +310,11 @@
       box-shadow: var(--shadow-soft);
       overflow:auto;
     }
-    .mermaid{ min-width: 520px; }
+    .mermaid{
+      min-width: 520px;
+      /* Mermaidが失敗した場合でも “コード丸出し” にならない保険 */
+      white-space: pre-wrap;
+    }
 
     /* Small chips */
     .chips{
@@ -603,7 +607,7 @@
         <div class="hr"></div>
 
         <p class="note">
-          ▼資料掲載：運用上は、PDFを公開URLに置き換えてリンクしてください（下のボタン参照）。
+          ▼資料掲載：運用上は、PDFを公開URLに置き換えてリンクしてください（下のボタン参照）。<br/>
           画像で本文に埋め込みたい場合は、各ページを画像化して差し込めます（プレースホルダーを用意済み）。
         </p>
       </div>
@@ -618,7 +622,7 @@
         </div>
 
         <p>
-          参照資料（PDF）：スターバックス「今年5回目のご来店」メール。
+          参照資料（PDF）：スターバックス「今年5回目のご来店」メール。<br/>
           公開用URLに差し替えて掲載する。
         </p>
 
@@ -633,26 +637,27 @@
           </a>
         </div>
 
+        <!-- 重要：client-20260302.html は /reports/ 配下に置く想定なので、画像は assets/img への相対パスにする -->
         <div class="preview-grid" aria-label="pdf previews">
           <div class="preview">
             <div class="cap">Preview A（例：p2）</div>
             <div class="ph">
               ここに画像を置く：<br/>
-              <code>&lt;img src="reports/assets/img/starbucks_mail_p2.png" alt="Starbucks mail p2"&gt;</code>
+              <code>&lt;img src="assets/img/starbucks_mail_p2.png" alt="Starbucks mail p2"&gt;</code>
             </div>
           </div>
           <div class="preview">
             <div class="cap">Preview B（例：p3〜p4）</div>
             <div class="ph">
               ここに画像を置く：<br/>
-              <code>&lt;img src="reports/assets/img/starbucks_mail_p3.png" alt="Starbucks mail p3"&gt;</code>
+              <code>&lt;img src="assets/img/starbucks_mail_p3.png" alt="Starbucks mail p3"&gt;</code>
             </div>
           </div>
           <div class="preview">
             <div class="cap">Preview C（例：p6）</div>
             <div class="ph">
               ここに画像を置く：<br/>
-              <code>&lt;img src="YOUR_IMAGE_URL" alt="Next suggestion"&gt;</code>
+              <code>&lt;img src="assets/img/starbucks_mail_p6.png" alt="Starbucks mail p6"&gt;</code>
             </div>
           </div>
         </div>
@@ -682,22 +687,23 @@
           行動が“正しい/間違い”ではなく、“あなたらしい”という意味づけで、継続の確率を上げる。
         </p>
 
+        <!-- 重要：Mermaid内に <br/> を入れない（HTMLとして解釈されて壊れるため） -->
         <div class="diagram">
           <div class="mermaid">
 flowchart LR
-  A[節目の承認<br/>5回目] --> B[行動の可視化<br/>足跡データ]
-  B --> C[傾向の提示<br/>夜利用など]
-  C --> D[利用拡張提案<br/>朝もどう？]
-  D --> E[感情接続<br/>地域/物語]
-  E --> F[飽き防止<br/>次は違う選択]
-  F --> G[再来店の自然発生]
+  A["節目の承認\n5回目"] --> B["行動の可視化\n足跡データ"]
+  B --> C["傾向の提示\n夜利用など"]
+  C --> D["利用拡張提案\n朝もどう？"]
+  D --> E["感情接続\n地域/物語"]
+  E --> F["飽き防止\n次は違う選択"]
+  F --> G["再来店の自然発生"]
           </div>
         </div>
 
         <div class="two-col">
           <div class="callout">
             <strong>設計意図（要約）</strong><br/>
-            「あなたはすでに来ている」→「あなたの傾向を理解している」→「次の一歩を提案する」。
+            「あなたはすでに来ている」→「あなたの傾向を理解している」→「次の一歩を提案する」。<br/>
             押し付けではなく、“自己理解の補助”として提示している点が強い。
           </div>
           <div class="callout">
@@ -802,9 +808,9 @@ flowchart LR
         <div class="diagram">
           <div class="mermaid">
 graph TD
-  A[偶発: 初回] --> B[入口: 2〜3回]
-  B --> C[準定着: 4〜6回]
-  C --> D[定着: 7回以上]
+  A["偶発: 初回"] --> B["入口: 2〜3回"]
+  B --> C["準定着: 4〜6回"]
+  C --> D["定着: 7回以上"]
           </div>
         </div>
 
@@ -1100,11 +1106,11 @@ graph TD
         <div class="diagram">
           <div class="mermaid">
 flowchart LR
-  A[配信] --> B[短期来店]
-  B --> C[分布の変化]
-  C --> D[滞在/体験の質]
-  D --> E[翌月維持]
-  E --> F[関係性の固定]
+  A["配信"] --> B["短期来店"]
+  B --> C["分布の変化"]
+  C --> D["滞在/体験の質"]
+  D --> E["翌月維持"]
+  E --> F["関係性の固定"]
           </div>
         </div>
       </div>
@@ -1218,10 +1224,10 @@ flowchart LR
         <div class="diagram">
           <div class="mermaid">
 flowchart LR
-  A[行動データ] --> B[承認/意味づけ]
-  B --> C[自己認識の固定]
-  C --> D[次の一歩の提案]
-  D --> E[習慣化]
+  A["行動データ"] --> B["承認/意味づけ"]
+  B --> C["自己認識の固定"]
+  C --> D["次の一歩の提案"]
+  D --> E["習慣化"]
           </div>
         </div>
 
