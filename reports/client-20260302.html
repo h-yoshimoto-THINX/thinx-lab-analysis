@@ -417,6 +417,84 @@
       font-size:12px;
       color: rgba(229,243,255,0.82);
     }
+
+    /* ===== Section 2 table zoom (ADD ONLY) ===== */
+    .table-tools{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:12px;
+      margin-bottom:-6px;
+    }
+    .btn-ghost{
+      appearance:none;
+      border:1px solid rgba(148,163,184,0.22);
+      background: rgba(6,20,38,0.32);
+      color: rgba(229,243,255,0.86);
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:12px;
+      letter-spacing:.02em;
+      cursor:pointer;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-soft);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .btn-ghost:hover{
+      transform: translateY(-1px);
+      border-color: rgba(var(--thx-accent-rgb),0.38);
+      box-shadow: 0 0 22px rgba(var(--thx-accent-rgb),0.14);
+    }
+
+    .thx-modal{
+      width: min(1120px, 94vw);
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 22px;
+      padding: 0;
+      background: rgba(2,11,22,0.92);
+      color: var(--thx-text);
+      box-shadow: 0 40px 120px rgba(0,0,0,.55);
+      backdrop-filter: blur(16px);
+    }
+    .thx-modal::backdrop{
+      background: rgba(0,0,0,0.58);
+      backdrop-filter: blur(6px);
+    }
+    .thx-modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(148,163,184,0.14);
+      background: rgba(6,20,38,0.35);
+    }
+    .thx-modal-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    .thx-modal-close{
+      appearance:none;
+      border:1px solid rgba(148,163,184,0.22);
+      background: rgba(6,20,38,0.28);
+      color: rgba(229,243,255,0.86);
+      border-radius: 12px;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .thx-modal-body{
+      padding: 14px 16px 18px;
+    }
+    .thx-modal .table-wrap{
+      margin-top: 0;
+    }
+    .thx-modal table{
+      min-width: 0 !important; /* modal内は横スクロール抑制 */
+    }
+    .thx-modal p.note{
+      margin-top: 10px;
+    }
   </style>
 
   <!-- Mermaid (GitHub Pages friendly) -->
@@ -635,7 +713,7 @@
         </div>
 
         <p class="note" style="margin-top:14px;">
-          ※「PDFを開く」を押下して実際のメールを確認してください。
+          ※PDFを開くを押下して実際のメールをご確認ください。
         </p>
 
       </aside>
@@ -703,7 +781,15 @@ flowchart LR
 
         <p class="note">※ここでは「ナーチャリング施策としての機能」を、あえて機械的に分解する。</p>
 
-        <div class="table-wrap" role="region" aria-label="five mechanisms">
+        <!-- tools (SECTION 2 only) -->
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec2-five">
+            表を拡大して見る
+          </button>
+        </div>
+
+        <!-- original table (keep as-is) -->
+        <div class="table-wrap" role="region" aria-label="five mechanisms" data-table-src="sec2-five">
           <table style="min-width:980px;">
             <thead>
               <tr>
@@ -747,6 +833,20 @@ flowchart LR
             </tbody>
           </table>
         </div>
+
+        <!-- modal (SECTION 2 only) -->
+        <dialog class="thx-modal" data-table-modal="sec2-five" aria-label="five mechanisms expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 2｜分解：5つの仕掛け（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+
+          <div class="thx-modal-body">
+            <!-- JSで上の表を複製して挿入 -->
+            <div class="table-wrap" role="region" aria-label="five mechanisms expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
 
         <div class="callout">
           <strong>ここが核心：</strong><br/>
@@ -1223,5 +1323,54 @@ flowchart LR
       </footer>
     </div>
   </section>
+
+  <script>
+    // ===== Section 2 table zoom (ADD ONLY) =====
+    (function(){
+      const openers = document.querySelectorAll('[data-open-table]');
+      openers.forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-open-table');
+          const srcWrap = document.querySelector(`[data-table-src="${key}"]`);
+          const dialog = document.querySelector(`dialog[data-table-modal="${key}"]`);
+          if(!srcWrap || !dialog) return;
+
+          const targetWrap = dialog.querySelector('.thx-modal-body .table-wrap');
+          if(!targetWrap) return;
+
+          // clone once per open (safe)
+          targetWrap.innerHTML = '';
+          const cloned = srcWrap.cloneNode(true);
+          cloned.removeAttribute('data-table-src');
+          // modal内は横スクロールを抑えたいので min-width を解除
+          const table = cloned.querySelector('table');
+          if(table){
+            table.style.minWidth = '0px';
+          }
+          targetWrap.appendChild(cloned);
+
+          dialog.showModal();
+        });
+      });
+
+      document.querySelectorAll('dialog.thx-modal [data-close]').forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const dialog = btn.closest('dialog');
+          if(dialog) dialog.close();
+        });
+      });
+
+      // backdrop click to close
+      document.querySelectorAll('dialog.thx-modal').forEach(d=>{
+        d.addEventListener('click', (e)=>{
+          const rect = d.getBoundingClientRect();
+          const inDialog =
+            rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+          if(!inDialog) d.close();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
