@@ -418,7 +418,7 @@
       color: rgba(229,243,255,0.82);
     }
 
-    /* ===== Section 2 table zoom (ADD ONLY) ===== */
+    /* ===== Table zoom (ADD ONLY) ===== */
     .table-tools{
       display:flex;
       justify-content:flex-end;
@@ -490,7 +490,7 @@
       margin-top: 0;
     }
     .thx-modal table{
-      min-width: 0 !important; /* modal内は横スクロール抑制 */
+      min-width: 0 !important;
     }
     .thx-modal p.note{
       margin-top: 10px;
@@ -781,14 +781,10 @@ flowchart LR
 
         <p class="note">※ここでは「ナーチャリング施策としての機能」を、あえて機械的に分解する。</p>
 
-        <!-- tools (SECTION 2 only) -->
         <div class="table-tools">
-          <button class="btn-ghost" type="button" data-open-table="sec2-five">
-            表を拡大して見る
-          </button>
+          <button class="btn-ghost" type="button" data-open-table="sec2-five">表を拡大して見る</button>
         </div>
 
-        <!-- original table (keep as-is) -->
         <div class="table-wrap" role="region" aria-label="five mechanisms" data-table-src="sec2-five">
           <table style="min-width:980px;">
             <thead>
@@ -834,15 +830,12 @@ flowchart LR
           </table>
         </div>
 
-        <!-- modal (SECTION 2 only) -->
         <dialog class="thx-modal" data-table-modal="sec2-five" aria-label="five mechanisms expanded view">
           <div class="thx-modal-head">
             <div class="thx-modal-title">SECTION 2｜分解：5つの仕掛け（全体表示）</div>
             <button class="thx-modal-close" type="button" data-close>閉じる</button>
           </div>
-
           <div class="thx-modal-body">
-            <!-- JSで上の表を複製して挿入 -->
             <div class="table-wrap" role="region" aria-label="five mechanisms expanded"></div>
             <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
           </div>
@@ -960,7 +953,12 @@ graph TD
           そのため、スタバ型の良さを活かすには、承認軸を<strong>“行動”</strong>に置くのが合理的である。
         </p>
 
-        <div class="table-wrap" role="region" aria-label="safe axes">
+        <!-- tools (SECTION 4) -->
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec4-safe">表を拡大して見る</button>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="safe axes" data-table-src="sec4-safe">
           <table style="min-width:980px;">
             <thead>
               <tr>
@@ -1004,6 +1002,17 @@ graph TD
             </tbody>
           </table>
         </div>
+
+        <dialog class="thx-modal" data-table-modal="sec4-safe" aria-label="safe axes expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 4｜承認軸（推奨）テーブル（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+          <div class="thx-modal-body">
+            <div class="table-wrap" role="region" aria-label="safe axes expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
 
         <div class="callout">
           <strong>結論：</strong>「金額」ではなく「来店・分布・滞在・幅」を主語にすれば、<br/>
@@ -1130,7 +1139,12 @@ graph TD
           だからこそ、成果を「構造の変化」として捉える必要がある。
         </p>
 
-        <div class="table-wrap" role="region" aria-label="kpi">
+        <!-- tools (SECTION 6) -->
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec6-kpi">表を拡大して見る</button>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="kpi" data-table-src="sec6-kpi">
           <table style="min-width:980px;">
             <thead>
               <tr>
@@ -1174,6 +1188,17 @@ graph TD
             </tbody>
           </table>
         </div>
+
+        <dialog class="thx-modal" data-table-modal="sec6-kpi" aria-label="kpi expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 6｜KPI設計テーブル（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+          <div class="thx-modal-body">
+            <div class="table-wrap" role="region" aria-label="kpi expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
 
         <div class="diagram">
           <div class="mermaid">
@@ -1325,7 +1350,7 @@ flowchart LR
   </section>
 
   <script>
-    // ===== Section 2 table zoom (ADD ONLY) =====
+    // ===== Table zoom (ADD ONLY) =====
     (function(){
       const openers = document.querySelectorAll('[data-open-table]');
       openers.forEach(btn=>{
@@ -1338,11 +1363,10 @@ flowchart LR
           const targetWrap = dialog.querySelector('.thx-modal-body .table-wrap');
           if(!targetWrap) return;
 
-          // clone once per open (safe)
           targetWrap.innerHTML = '';
           const cloned = srcWrap.cloneNode(true);
           cloned.removeAttribute('data-table-src');
-          // modal内は横スクロールを抑えたいので min-width を解除
+
           const table = cloned.querySelector('table');
           if(table){
             table.style.minWidth = '0px';
@@ -1360,7 +1384,6 @@ flowchart LR
         });
       });
 
-      // backdrop click to close
       document.querySelectorAll('dialog.thx-modal').forEach(d=>{
         d.addEventListener('click', (e)=>{
           const rect = d.getBoundingClientRect();
