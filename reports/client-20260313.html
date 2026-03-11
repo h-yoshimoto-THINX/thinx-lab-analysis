@@ -127,6 +127,84 @@
     @media (max-width:980px){.two-col{grid-template-columns:1fr}}
     .formula{font-size:18px;font-weight:800;color:var(--thx-text);letter-spacing:.02em}
     .formula-box{margin-top:16px;padding:18px 20px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.22);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft)}
+  
+    /* ===== Table zoom (ADD ONLY) ===== */
+    .table-tools{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:12px;
+      margin-bottom:-6px;
+    }
+    .btn-ghost{
+      appearance:none;
+      border:1px solid rgba(148,163,184,0.22);
+      background: rgba(6,20,38,0.32);
+      color: rgba(229,243,255,0.86);
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:12px;
+      letter-spacing:.02em;
+      cursor:pointer;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-soft);
+      transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    }
+    .btn-ghost:hover{
+      transform: translateY(-1px);
+      border-color: rgba(var(--thx-accent-rgb),0.38);
+      box-shadow: 0 0 22px rgba(var(--thx-accent-rgb),0.14);
+    }
+
+    .thx-modal{
+      width: min(1120px, 94vw);
+      border: 1px solid rgba(148,163,184,0.22);
+      border-radius: 22px;
+      padding: 0;
+      background: rgba(2,11,22,0.92);
+      color: var(--thx-text);
+      box-shadow: 0 40px 120px rgba(0,0,0,.55);
+      backdrop-filter: blur(16px);
+    }
+    .thx-modal::backdrop{
+      background: rgba(0,0,0,0.58);
+      backdrop-filter: blur(6px);
+    }
+    .thx-modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 16px;
+      border-bottom:1px solid rgba(148,163,184,0.14);
+      background: rgba(6,20,38,0.35);
+    }
+    .thx-modal-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:.04em;
+    }
+    .thx-modal-close{
+      appearance:none;
+      border:1px solid rgba(148,163,184,0.22);
+      background: rgba(6,20,38,0.28);
+      color: rgba(229,243,255,0.86);
+      border-radius: 12px;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .thx-modal-body{
+      padding: 14px 16px 18px;
+    }
+    .thx-modal .table-wrap{
+      margin-top: 0;
+    }
+    .thx-modal table{
+      min-width: 0 !important;
+    }
+    .thx-modal p.note{
+      margin-top: 10px;
+    }
   </style>
 
   <script type="module">
@@ -208,6 +286,7 @@
           <li><a href="#sec5">5. 現場への翻訳：何を追い、何を追わないか</a></li>
           <li><a href="#sec6">6. 実務整理：変えられる数字と変えにくい数字</a></li>
           <li><a href="#conclusion">7. 結論：来店回数を動かすのではなく、来店習慣を設計する</a></li>
+          <li><a href="#sec7">8. 実務的な最終集約：店舗が追うべき3つの論点</a></li>
         </ul>
 
         <p class="note" style="margin-top:16px;">© THINX-LAB. / Designing the future with data</p>
@@ -233,7 +312,7 @@
           <strong>結論先出し：</strong><br/>
           来店回数は完全な操作変数ではない。<br/>
           ただし、<strong>来店の分割のされ方</strong>は店舗施策で一定程度変えられる。<br/>
-          ここに営業設計の余地がある。
+          そして実務的には、その打ち手は最終的に<strong>会員数を増やすこと</strong>、<strong>離反を防止すること</strong>、<strong>復活会員を定着させること</strong>の3点に集約される。
         </div>
       </aside>
     </div>
@@ -268,6 +347,17 @@
           「来店回数を増やす」という表現は正しいようでいて、構造的には粗い。<br/>
           正しくは、<strong>お客様の予算の中で、来店がどう分割されるか</strong>を問うべきである。
         </div>
+
+        <dialog class="thx-modal" data-table-modal="sec2-fixed" aria-label="fixed numbers expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 2｜変えられない数字テーブル（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+          <div class="thx-modal-body">
+            <div class="table-wrap" role="region" aria-label="fixed numbers expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
       </div>
 
       <aside class="card">
@@ -360,7 +450,11 @@ flowchart LR
           その代表が<strong>客単価</strong>と<strong>1来店あたり投資</strong>である。
         </p>
 
-        <div class="table-wrap" role="region" aria-label="fixed numbers">
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec2-fixed">表を拡大して見る</button>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="fixed numbers" data-table-src="sec2-fixed">
           <table>
             <thead>
               <tr>
@@ -492,7 +586,11 @@ flowchart LR
           つまり、同じ10万円を「2回来店で使う」のか、「5回来店で分割して使う」のかという来店習慣の側である。
         </p>
 
-        <div class="table-wrap" role="region" aria-label="habit design">
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec4-habit">表を拡大して見る</button>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="habit design" data-table-src="sec4-habit">
           <table>
             <thead>
               <tr>
@@ -530,6 +628,19 @@ flowchart LR
             </tbody>
           </table>
         </div>
+
+        </div>
+
+        <dialog class="thx-modal" data-table-modal="sec4-habit" aria-label="habit design expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 4｜来店習慣の設計テーブル（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+          <div class="thx-modal-body">
+            <div class="table-wrap" role="region" aria-label="habit design expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
 
         <div class="callout">
           <strong>本質：</strong><br/>
@@ -611,7 +722,11 @@ flowchart LR
           この区分を持っておくと、施策会議で「何に手を打つべきか」が明確になる。
         </p>
 
-        <div class="table-wrap" role="region" aria-label="classification">
+        <div class="table-tools">
+          <button class="btn-ghost" type="button" data-open-table="sec6-classification">表を拡大して見る</button>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="classification" data-table-src="sec6-classification">
           <table>
             <thead>
               <tr>
@@ -644,6 +759,19 @@ flowchart LR
           </table>
         </div>
 
+        </div>
+
+        <dialog class="thx-modal" data-table-modal="sec6-classification" aria-label="classification expanded view">
+          <div class="thx-modal-head">
+            <div class="thx-modal-title">SECTION 6｜整理表（全体表示）</div>
+            <button class="thx-modal-close" type="button" data-close>閉じる</button>
+          </div>
+          <div class="thx-modal-body">
+            <div class="table-wrap" role="region" aria-label="classification expanded"></div>
+            <p class="note">※この表示は「全体を一気に確認する」用途です（表の中身は元と同一）。</p>
+          </div>
+        </dialog>
+
         <div class="callout">
           <strong>実務メッセージ：</strong><br/>
           「変えにくい数字」を無理に追うのではなく、<strong>変えられる導線を磨く</strong>。<br/>
@@ -667,6 +795,80 @@ flowchart LR
           <li>来店回数は“結果”として扱う</li>
         </ul>
       </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec7">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 8</div>
+            <h2>実務的な最終集約：店舗が追うべき3つの論点</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          ここまでの整理を実務に落とし込むと、店舗が本質的に追うべきテーマは無数にあるわけではない。
+          来店回数や客単価といった見かけの数字を追い回すのではなく、営業施策の着地点は次の3点に集約されると整理できる。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="three priorities">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:28%">論点</th>
+                <th>意味</th>
+                <th style="width:34%">主な着眼点</th>
+                <th style="width:20%">役割</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>会員数を増やすこと</strong></td>
+                <td>そもそもの母数を拡大すること</td>
+                <td>新規会員化、カード利用導線、接点の獲得</td>
+                <td>入口を広げる</td>
+              </tr>
+              <tr>
+                <td><strong>離反を防止すること</strong></td>
+                <td>既存会員の流出を抑えること</td>
+                <td>来店頻度低下の早期検知、行動変化の把握、接触施策</td>
+                <td>土台を守る</td>
+              </tr>
+              <tr>
+                <td><strong>復活会員を定着させること</strong></td>
+                <td>戻ってきた会員を一過性で終わらせないこと</td>
+                <td>復活後の2回目・3回目来店、再離反防止、習慣化設計</td>
+                <td>再成長へつなげる</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:16px;">
+          この3点はいずれも、単なる人数管理ではない。
+          いずれも<strong>来店習慣の設計</strong>と深くつながっている。
+          新規会員は最初の習慣化が必要であり、離反防止は習慣の断絶を防ぐ活動であり、復活会員の定着は再習慣化そのものである。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[会員数を増やす] --> D[来店習慣の形成]
+  B[離反を防止する] --> D
+  C[復活会員を定着させる] --> D
+  D --> E[売上構造の安定]
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>要するに：</strong><br/>
+          店舗営業の本質は、来店回数という結果指標を追いかけることではない。<br/>
+          <strong>会員基盤を広げ、流出を抑え、戻ってきた会員を再び習慣化させること</strong>に尽きる。
+        </div>
+      </div>
     </div>
   </section>
 
@@ -694,6 +896,11 @@ flowchart LR
           だからこそ、施策の主語は「来店回数を増やす」ではなく、
           <strong>来店習慣をどう設計するか</strong>であるべきだ。
           この視点に立つことで、店舗は構造に逆らうのではなく、構造を理解したうえで勝ち筋を設計できる。
+        </p>
+        <p>
+          そして、その勝ち筋を実務的に言い換えるなら、
+          <strong>会員数を増やすこと</strong>、<strong>離反を防止すること</strong>、<strong>復活会員を定着させること</strong>の3点に集約される。
+          すなわち、店舗が本当に設計すべきなのは、数字そのものではなく、会員の来店習慣が継続する構造である。
         </p>
 
         <div class="diagram">
@@ -726,5 +933,50 @@ flowchart LR
       </footer>
     </div>
   </section>
+  <script>
+    // ===== Table zoom =====
+    (function(){
+      const openers = document.querySelectorAll('[data-open-table]');
+      openers.forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const key = btn.getAttribute('data-open-table');
+          const srcWrap = document.querySelector(`[data-table-src="${key}"]`);
+          const dialog = document.querySelector(`dialog[data-table-modal="${key}"]`);
+          if(!srcWrap || !dialog) return;
+
+          const targetWrap = dialog.querySelector('.thx-modal-body .table-wrap');
+          if(!targetWrap) return;
+
+          targetWrap.innerHTML = '';
+          const cloned = srcWrap.cloneNode(true);
+          cloned.removeAttribute('data-table-src');
+
+          const table = cloned.querySelector('table');
+          if(table){
+            table.style.minWidth = '0px';
+          }
+          targetWrap.appendChild(cloned);
+          dialog.showModal();
+        });
+      });
+
+      document.querySelectorAll('dialog.thx-modal [data-close]').forEach(btn=>{
+        btn.addEventListener('click', () => {
+          const dialog = btn.closest('dialog');
+          if(dialog) dialog.close();
+        });
+      });
+
+      document.querySelectorAll('dialog.thx-modal').forEach(d=>{
+        d.addEventListener('click', (e)=>{
+          const rect = d.getBoundingClientRect();
+          const inDialog =
+            rect.top <= e.clientY && e.clientY <= rect.top + rect.height &&
+            rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+          if(!inDialog) d.close();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
