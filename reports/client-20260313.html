@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="変えられる数字と変えられない数字を整理し、来店回数の構造をわかりやすく整理したTHINX-LAB. Insight Note" />
+  <title>変えられる数字と変えられない数字 | THINX-LAB.</title>
+
+  <style>
+    :root{
+      --thx-accent:#10b4c8;
+      --thx-accent-rgb:16,180,200;
+      --thx-bg:#020b16;
+      --thx-text:#f9fbff;
+      --thx-muted:rgba(229,243,255,0.70);
+      --thx-border:rgba(148,163,184,0.20);
+      --thx-card:rgba(6,20,38,0.40);
+      --r-24:24px;
+      --r-18:18px;
+      --shadow:0 24px 70px rgba(0,0,0,.35);
+      --shadow-soft:0 18px 46px rgba(0,0,0,.28);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+      color:var(--thx-text);
+      background:var(--thx-bg);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size:92px 92px;
+      opacity:.18;
+      pointer-events:none;
+      z-index:-2;
+      background-attachment:fixed;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(closest-side at 20% 10%, rgba(var(--thx-accent-rgb),0.18), transparent 55%),
+        radial-gradient(closest-side at 80% 40%, rgba(255,255,255,0.06), transparent 60%),
+        radial-gradient(closest-side at 40% 90%, rgba(var(--thx-accent-rgb),0.10), transparent 60%);
+      pointer-events:none;
+      z-index:-3;
+      filter:blur(6px);
+    }
+
+    .thx-section{padding:80px 0; margin:-2px 0}
+    .thx-container{max-width:1120px; margin:0 auto; padding:0 24px}
+
+    .hero{padding:84px 0 44px}
+    .hero-top{display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap}
+    .badge{
+      display:inline-flex; align-items:center; gap:10px; padding:10px 14px;
+      border-radius:999px; border:1px solid rgba(var(--thx-accent-rgb),0.35);
+      background:rgba(6,20,38,0.35); backdrop-filter:blur(14px); box-shadow:var(--shadow-soft);
+      color:var(--thx-text); font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--thx-accent);box-shadow:0 0 18px rgba(var(--thx-accent-rgb),0.65)}
+    .en-label{font-size:11px;letter-spacing:0.4em;color:rgba(229,243,255,0.62);text-transform:uppercase}
+    .ja-title{margin:12px 0 8px;font-size:18px;font-weight:700;color:var(--thx-accent);letter-spacing:.02em}
+    h1{margin:0 0 18px;font-weight:800;font-size:clamp(28px,3.5vw,38px);line-height:1.25}
+    .lead{margin:0;font-size:16px;line-height:2;color:var(--thx-muted);max-width:76ch}
+    .lead strong{color:var(--thx-accent);font-weight:800}
+
+    .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .cta{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--thx-text);font-weight:700;letter-spacing:.02em}
+    .cta span{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:rgba(var(--thx-accent-rgb),0.55)}
+    .cta .circle{
+      width:44px;height:44px;border-radius:999px;border:1px solid rgba(var(--thx-accent-rgb),0.45);
+      display:grid;place-items:center;background:rgba(6,20,38,0.35);backdrop-filter:blur(14px);
+      transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+      box-shadow:0 0 0 rgba(var(--thx-accent-rgb),0);
+    }
+    .cta:hover .circle{transform:translateX(5px);background:rgba(var(--thx-accent-rgb),0.12);box-shadow:0 0 22px rgba(var(--thx-accent-rgb),0.45);animation:svc-pulse 1.35s ease-in-out infinite}
+    .arrow{width:18px;height:18px;border-right:2px solid var(--thx-text);border-top:2px solid var(--thx-text);transform:rotate(45deg);margin-left:-4px}
+    @keyframes svc-pulse{0%,100%{box-shadow:0 0 0 rgba(var(--thx-accent-rgb),0)}50%{box-shadow:0 0 26px rgba(var(--thx-accent-rgb),0.55)}}
+
+    .card{border-radius:var(--r-24);padding:40px;background:var(--thx-card);border:1px solid var(--thx-border);backdrop-filter:blur(15px);box-shadow:var(--shadow);min-width:0}
+    .grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(360px,0.8fr);gap:48px;align-items:stretch}
+    @media (max-width:1100px){.grid{grid-template-columns:minmax(0,1.25fr) minmax(340px,0.75fr);gap:44px}}
+    @media (max-width:980px){.thx-section{padding:60px 0}.grid{grid-template-columns:1fr;gap:40px}.card{padding:28px}.hero{padding:72px 0 36px}}
+
+    .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap}
+    .sec-title{display:flex;flex-direction:column;gap:8px;min-width:0}
+    .sec-title .kicker{font-size:11px;letter-spacing:0.4em;color:rgba(229,243,255,0.62);text-transform:uppercase}
+    .sec-title h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.25;font-weight:800;overflow-wrap:anywhere}
+    aside.card .sec-title h2{font-size:clamp(22px,2.2vw,30px);line-height:1.18;word-break:keep-all;max-width:18ch}
+    .divider{height:1px;width:100%;background:linear-gradient(to right, rgba(var(--thx-accent-rgb),0.0), rgba(var(--thx-accent-rgb),0.55), rgba(var(--thx-accent-rgb),0.0));margin:18px 0 0;opacity:.9}
+
+    p{margin:0 0 14px;font-size:16px;line-height:2;color:var(--thx-muted)}
+    p strong{color:var(--thx-accent);font-weight:800}
+    .note{font-size:14px;color:rgba(229,243,255,0.62)}
+    ul{margin:12px 0 0;padding-left:1.2em;color:var(--thx-muted);line-height:2}
+    li{margin:6px 0}
+
+    .table-wrap{margin-top:16px;overflow:auto;border-radius:18px;border:1px solid rgba(148,163,184,0.18);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft)}
+    table{width:100%;border-collapse:collapse;min-width:760px}
+    th,td{padding:14px 16px;border-bottom:1px solid rgba(148,163,184,0.12);vertical-align:top;text-align:left;font-size:14px;line-height:1.7}
+    th{color:var(--thx-text);font-weight:800;background:rgba(6,20,38,0.25);position:sticky;top:0;backdrop-filter:blur(10px)}
+    tr:hover td{background:rgba(var(--thx-accent-rgb),0.06)}
+
+    .diagram{margin-top:16px;padding:18px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.18);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft);overflow:auto}
+    .mermaid{min-width:520px}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(148,163,184,0.18);background:rgba(6,20,38,0.35);color:rgba(229,243,255,0.78);font-size:12px;letter-spacing:.02em}
+    .chip b{color:var(--thx-text)}
+    .callout{margin-top:14px;padding:14px 16px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.22);background:rgba(var(--thx-accent-rgb),0.07);color:rgba(229,243,255,0.82);box-shadow:var(--shadow-soft)}
+    .callout strong{color:var(--thx-text)}
+    footer{padding:34px 0 64px;color:rgba(229,243,255,0.55);font-size:12px;letter-spacing:.02em}
+    .footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(148,163,184,0.14);padding-top:18px}
+    .anchor{scroll-margin-top:18px}
+    a{color:var(--thx-text);text-decoration-color:rgba(var(--thx-accent-rgb),0.55)}
+    a:hover{text-decoration-color:rgba(var(--thx-accent-rgb),0.85)}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+    @media (max-width:980px){.two-col{grid-template-columns:1fr}}
+    .formula{font-size:18px;font-weight:800;color:var(--thx-text);letter-spacing:.02em}
+    .formula-box{margin-top:16px;padding:18px 20px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.22);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft)}
+  </style>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "dark",
+      securityLevel: "loose",
+      themeVariables: {
+        fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif",
+        primaryColor: "rgba(6,20,38,0.55)",
+        primaryBorderColor: "rgba(16,180,200,0.35)",
+        primaryTextColor: "#f9fbff",
+        lineColor: "rgba(229,243,255,0.45)",
+        secondaryColor: "rgba(6,20,38,0.35)",
+        tertiaryColor: "rgba(6,20,38,0.25)"
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <header class="thx-section hero">
+    <div class="thx-container">
+      <div class="hero-top">
+        <div>
+          <div class="badge"><span class="dot"></span>THINX-LAB. / Insight Note</div>
+          <div class="ja-title">■ 変えられる数字と変えられない数字</div>
+          <div class="en-label">Control Variable × Structural Variable × Store Strategy</div>
+
+          <h1>来店回数は、<br/>本当に「動かせる数字」なのか</h1>
+
+          <p class="lead">
+            店舗運営において重要なのは、<strong>すべての数字を同じ粒度で扱わないこと</strong>である。
+            客単価や1来店あたり投資のように構造的に決まりやすい数字と、
+            来店習慣や行動設計のように店舗側の工夫で変化しうる数字を分けて捉えることで、
+            施策の精度は大きく高まる。
+          </p>
+
+          <div class="chips" aria-label="key points">
+            <div class="chip"><b>Core</b> 数字を構造で分ける</div>
+            <div class="chip"><b>Key</b> 来店回数は従属変数</div>
+            <div class="chip"><b>Focus</b> 習慣は設計できる</div>
+            <div class="chip"><b>Goal</b> 動かせる領域へ集中</div>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="cta" href="#index">
+            <span>目次へ</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+          <a class="cta" href="#conclusion">
+            <span>結論へ</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="thx-section" id="index">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">INDEX</div>
+            <h2>構成</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <ul>
+          <li><a href="#sec0">0. 問題提起：なぜ来店回数を再定義する必要があるのか</a></li>
+          <li><a href="#sec1">1. 数式構造：売上を分解すると何が見えるか</a></li>
+          <li><a href="#sec2">2. 変えられない数字：客単価と1来店あたり投資</a></li>
+          <li><a href="#sec3">3. 来店回数の位置づけ：操作変数ではなく従属変数</a></li>
+          <li><a href="#sec4">4. それでも店舗が関与できる領域：来店習慣の設計</a></li>
+          <li><a href="#sec5">5. 現場への翻訳：何を追い、何を追わないか</a></li>
+          <li><a href="#sec6">6. 実務整理：変えられる数字と変えにくい数字</a></li>
+          <li><a href="#conclusion">7. 結論：来店回数を動かすのではなく、来店習慣を設計する</a></li>
+        </ul>
+
+        <p class="note" style="margin-top:16px;">© THINX-LAB. / Designing the future with data</p>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SUMMARY</div>
+            <h2>本ノートの要点</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          来店回数は、しばしば「増やすべき数字」として扱われる。
+          しかし実際には、<strong>客単価と1来店あたり投資の関係から導かれる側面</strong>が強い。
+          したがって、来店回数そのものを直接操作する発想ではなく、
+          <strong>来店習慣の設計</strong>に視点を移すことが重要である。
+        </p>
+
+        <div class="callout">
+          <strong>結論先出し：</strong><br/>
+          来店回数は完全な操作変数ではない。<br/>
+          ただし、<strong>来店の分割のされ方</strong>は店舗施策で一定程度変えられる。<br/>
+          ここに営業設計の余地がある。
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec0">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 0</div>
+            <h2>問題提起：なぜ来店回数を再定義する必要があるのか</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          現場では、売上が伸びないときに「来店回数を増やそう」という言葉が使われやすい。
+          しかし、来店回数は単独で存在する数字ではない。
+          プレイヤーの月間予算、すなわち<strong>客単価</strong>と、
+          その時代の機械情勢によって変わる<strong>1来店あたり投資</strong>によって、
+          かなりの部分が規定される。
+        </p>
+        <p>
+          つまり、来店回数を「自由に動かせる数字」と見なしてしまうと、
+          施策設計がズレやすくなる。
+          まず必要なのは、<strong>何が構造で決まり、何が施策で動くのか</strong>を切り分けることである。
+        </p>
+
+        <div class="callout">
+          <strong>論点：</strong><br/>
+          「来店回数を増やす」という表現は正しいようでいて、構造的には粗い。<br/>
+          正しくは、<strong>お客様の予算の中で、来店がどう分割されるか</strong>を問うべきである。
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">QUESTION</div>
+            <h2>よくある誤解</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <ul>
+          <li>来店回数は店舗が直接動かせる</li>
+          <li>来店回数が増えれば必ず良い</li>
+          <li>客単価と来店回数は別々に動く</li>
+        </ul>
+
+        <p class="note" style="margin-top:14px;">
+          実際には、これらはそれぞれ独立した数字ではなく、相互に連動している。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec1">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 1</div>
+            <h2>数式構造：売上を分解すると何が見えるか</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          店舗売上を整理すると、基本構造は非常にシンプルである。
+          まずは全体式を確認し、その後に来店回数の位置づけを捉える必要がある。
+        </p>
+
+        <div class="formula-box">
+          <div class="formula">売上 ＝ 会員数 × 来店回数 × 投資金額／来店</div>
+        </div>
+
+        <p style="margin-top:16px;">
+          この式だけを見ると、来店回数も投資金額／来店も同じように見える。
+          しかし、実際には両者の性質は異なる。
+          とくに投資金額／来店は、機械スペックや市場の単価構造に強く影響されるため、
+          店舗の意思だけで大きく動かすことが難しい。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[売上] --> B[会員数]
+  A --> C[来店回数]
+  A --> D[投資金額/来店]
+  C --> E[客単価との関係]
+  D --> F[機械情勢との関係]
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="callout">
+            <strong>ポイント1</strong><br/>
+            売上式に出てくるすべての数字が、同じように操作できるわけではない。
+          </div>
+          <div class="callout">
+            <strong>ポイント2</strong><br/>
+            数式上は独立して見えても、実務上は従属関係にある数字が存在する。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec2">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 2</div>
+            <h2>変えられない数字：客単価と1来店あたり投資</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          まず、店舗が直接コントロールしにくい数字を明確にしておく必要がある。
+          その代表が<strong>客単価</strong>と<strong>1来店あたり投資</strong>である。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="fixed numbers">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:24%">数字</th>
+                <th>意味</th>
+                <th style="width:32%">主な決定要因</th>
+                <th style="width:24%">店舗の関与余地</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>客単価</strong></td>
+                <td>お客様が月間で使う予算総額</td>
+                <td>財布事情、可処分所得、個人の遊技予算</td>
+                <td>小さい</td>
+              </tr>
+              <tr>
+                <td><strong>1来店あたり投資</strong></td>
+                <td>1回の来店で使われる投資額</td>
+                <td>機械スペック、市場単価、機械情勢</td>
+                <td>小さい</td>
+              </tr>
+              <tr>
+                <td><strong>市場単価構造</strong></td>
+                <td>遊技1回あたりに必要な投資水準</td>
+                <td>時代の機械設計、業界全体のトレンド</td>
+                <td>極めて小さい</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p style="margin-top:16px;">
+          たとえば月間の客単価が10万円で固定されているプレイヤーを想定する。
+          昔のように1来店あたり2万円で遊べる機械環境であれば、月5回来店が成立する。
+          一方で、現代のように1来店あたり5万円近い投資が必要になる機械環境であれば、月2回来店になる。
+        </p>
+
+        <div class="callout">
+          <strong>重要：</strong><br/>
+          来店回数の背後には、常に「予算 ÷ 1回あたり投資」という構造がある。<br/>
+          この意味で、来店回数は単独で存在していない。
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">EXAMPLE</div>
+            <h2>具体例</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <div class="formula-box" style="margin-top:0;">
+          <div class="formula">客単価10万円 ÷ 2万円 ＝ 5回来店</div>
+        </div>
+        <div class="formula-box">
+          <div class="formula">客単価10万円 ÷ 5万円 ＝ 2回来店</div>
+        </div>
+
+        <p class="note" style="margin-top:14px;">
+          来店回数の減少が、必ずしも店舗努力不足を意味するわけではない。市場単価の上昇という構造要因が背景にある場合も多い。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec3">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 3</div>
+            <h2>来店回数の位置づけ：操作変数ではなく従属変数</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          上記を踏まえると、来店回数は「増やす対象」として単独で扱うよりも、
+          <strong>他の条件によって導かれる従属変数</strong>として捉えるほうが実態に近い。
+        </p>
+
+        <div class="formula-box">
+          <div class="formula">来店回数 ＝ 客単価 ÷ 1来店あたり投資</div>
+        </div>
+
+        <p style="margin-top:16px;">
+          もちろん、現実はここまで単純ではない。
+          しかし少なくとも、来店回数は店舗がボタンを押して直接変えられる数字ではない。
+          むしろ、プレイヤーの予算配分と市場単価構造の結果として現れる数字だと考えたほうが、分析の精度は高まる。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[客単価] --> C[来店回数]
+  B[1来店あたり投資] --> C[来店回数]
+  C --> D[見かけ上の頻度]
+  D --> E[売上構造]
+          </div>
+        </div>
+
+        <div class="callout">
+          <strong>整理：</strong><br/>
+          来店回数は「完全に変えられない数字」ではない。<br/>
+          しかし、<strong>完全に自由な操作変数でもない</strong>。<br/>
+          位置づけとしては、その中間にある。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec4">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 4</div>
+            <h2>それでも店舗が関与できる領域：来店習慣の設計</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          来店回数が従属変数であるとしても、店舗が何もできないわけではない。
+          店舗が関与できるのは、<strong>予算の総額そのものではなく、予算の使われ方</strong>である。
+          つまり、同じ10万円を「2回来店で使う」のか、「5回来店で分割して使う」のかという来店習慣の側である。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="habit design">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:24%">設計領域</th>
+                <th>内容</th>
+                <th style="width:32%">期待される変化</th>
+                <th style="width:22%">例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>来店動機</strong></td>
+                <td>再来店の理由を用意する</td>
+                <td>単発来店から継続来店へ</td>
+                <td>ポイント、LINE、接客導線</td>
+              </tr>
+              <tr>
+                <td><strong>来店分布</strong></td>
+                <td>曜日・時間帯の分散を促す</td>
+                <td>無理のない来店習慣化</td>
+                <td>平日提案、夜→昼の提案</td>
+              </tr>
+              <tr>
+                <td><strong>滞在体験</strong></td>
+                <td>短時間でも成立する体験価値を作る</td>
+                <td>重たい来店から軽い来店への転換</td>
+                <td>快適性、遊び方提案</td>
+              </tr>
+              <tr>
+                <td><strong>会員運用</strong></td>
+                <td>接点を継続的に持つ</td>
+                <td>偶発来店の減少</td>
+                <td>カード利用、来店承認</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>本質：</strong><br/>
+          店舗が設計すべきなのは「もっとお金を使わせること」ではない。<br/>
+          <strong>同じ予算の中で、より自然に、より継続的に来店が分割される構造</strong>を作ることである。
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">KEY PHRASE</div>
+            <h2>一言で言うなら</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          <strong>来店回数は操作変数ではない。<br/>しかし、来店習慣は設計できる。</strong>
+        </p>
+
+        <p class="note">
+          この整理が入るだけで、施策の主語が「数字」から「行動設計」へ切り替わる。
+        </p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec5">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 5</div>
+            <h2>現場への翻訳：何を追い、何を追わないか</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          こうした整理を行うと、現場で追うべき数字も明確になる。
+          来店回数そのものをKPIにすることはできるが、それだけを主目標にすると誤る。
+          大切なのは、来店回数の背後にある行動変数を追うことである。
+        </p>
+
+        <div class="two-col">
+          <div class="callout">
+            <strong>追うべきもの</strong><br/>
+            来店導線、再来店率、連続来店率、カード利用率、時間帯分布、短時間来店の発生など。
+          </div>
+          <div class="callout">
+            <strong>追いすぎないもの</strong><br/>
+            客単価そのもの、時代の機械情勢で自然増する1来店あたり投資、単月の回数増減だけの評価。
+          </div>
+        </div>
+
+        <p style="margin-top:16px;">
+          この視点に立つと、来店回数の増減を「結果指標」として扱い、
+          その前段にある行動の質を「原因指標」として見る構造が作れる。
+          ここまで整理できると、会議でも施策でも議論がぶれにくくなる。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec6">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 6</div>
+            <h2>実務整理：変えられる数字と変えにくい数字</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          最後に、実務用に整理すると以下のようになる。
+          この区分を持っておくと、施策会議で「何に手を打つべきか」が明確になる。
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="classification">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:24%">区分</th>
+                <th>数字</th>
+                <th style="width:34%">考え方</th>
+                <th style="width:22%">扱い方</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>変えにくい数字</strong></td>
+                <td>客単価、1来店あたり投資、市場単価構造</td>
+                <td>構造条件。店舗の直接コントロール余地は小さい</td>
+                <td>前提条件として把握する</td>
+              </tr>
+              <tr>
+                <td><strong>部分的に動かせる数字</strong></td>
+                <td>来店回数、滞在時間、曜日分布、時間帯分布</td>
+                <td>構造の影響を受けるが、行動設計で一定の変化余地がある</td>
+                <td>習慣設計の結果として見る</td>
+              </tr>
+              <tr>
+                <td><strong>比較的動かしやすい数字</strong></td>
+                <td>会員化率、カード利用率、配信接触率、再来店導線</td>
+                <td>店舗施策の影響を受けやすい</td>
+                <td>重点KPIとして追う</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout">
+          <strong>実務メッセージ：</strong><br/>
+          「変えにくい数字」を無理に追うのではなく、<strong>変えられる導線を磨く</strong>。<br/>
+          その結果として、来店習慣が整い、来店回数が変わる構造をつくるべきである。
+        </div>
+      </div>
+
+      <aside class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">PRACTICE</div>
+            <h2>会議での使い方</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <ul>
+          <li>まず前提条件を共有する</li>
+          <li>次に動かせる導線を特定する</li>
+          <li>結果指標と原因指標を分けて見る</li>
+          <li>来店回数は“結果”として扱う</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="conclusion">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head">
+          <div class="sec-title">
+            <div class="kicker">SECTION 7</div>
+            <h2>結論：来店回数を動かすのではなく、来店習慣を設計する</h2>
+            <div class="divider"></div>
+          </div>
+        </div>
+
+        <p>
+          来店回数は、客単価と1来店あたり投資の関係から導かれる従属的な数字である。
+          したがって、来店回数そのものを直接コントロールしようとする発想は、やや粗い。
+        </p>
+        <p>
+          一方で、店舗は無力ではない。
+          来店のきっかけ、分布、体験価値、接点設計を通じて、
+          お客様の予算がどのように分割されるか、すなわち<strong>来店習慣</strong>の部分には関与できる。
+        </p>
+        <p>
+          だからこそ、施策の主語は「来店回数を増やす」ではなく、
+          <strong>来店習慣をどう設計するか</strong>であるべきだ。
+          この視点に立つことで、店舗は構造に逆らうのではなく、構造を理解したうえで勝ち筋を設計できる。
+        </p>
+
+        <div class="diagram">
+          <div class="mermaid">
+flowchart LR
+  A[構造条件の理解] --> B[変えられない数字を整理]
+  B --> C[動かせる導線を特定]
+  C --> D[来店習慣を設計]
+  D --> E[結果として来店回数が変わる]
+          </div>
+        </div>
+
+        <div style="margin-top:22px; display:flex; gap:14px; flex-wrap:wrap;">
+          <a class="cta" href="#index">
+            <span>目次へ戻る</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+          <a class="cta" href="#sec6">
+            <span>整理表を見る</span>
+            <div class="circle" aria-hidden="true"><div class="arrow"></div></div>
+          </a>
+        </div>
+      </div>
+
+      <footer class="thx-container">
+        <div class="footer-inner">
+          <div>© THINX-LAB. / Designing the future with data</div>
+          <div>Built for THINX Pages (single-file)</div>
+        </div>
+      </footer>
+    </div>
+  </section>
+</body>
+</html>
