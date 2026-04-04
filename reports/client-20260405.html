@@ -618,60 +618,7 @@
       </aside>
     </div>
   </section>
-
-  <section class="thx-section" id="sec7">
-    <div class="thx-container grid">
-      <div class="card">
-        <div class="sec-head">
-          <div>
-            <div class="kicker">SECTION 7</div>
-            <h2>実装メモ：PDFをダウンロード可能にする方法</h2>
-            <div class="divider"></div>
-          </div>
-        </div>
-        <p>
-          PDFをダウンロード可能にするためには、HTML内のリンクに <strong>download属性</strong> を付与する。今回のHTMLでは以下のように実装している。
-        </p>
-        <div class="code-box">
-          <code>&lt;a href="assets/img/starbucks_mail.pdf" download="starbucks_mail.pdf"&gt;PDF資料をダウンロード&lt;/a&gt;</code>
-        </div>
-        <p>
-          また、WordPressや静的ホスティング環境では、HTMLから参照できるパスにPDF実体を置く必要がある。今回の想定は、レポートHTMLと同階層の <strong>assets/img/</strong> 配下である。
-        </p>
-        <div class="code-box">
-          <code>/reports/
-├─ client-20260404.html
-└─ assets/
-   └─ img/
-      ├─ starbucks_mail.pdf
-      ├─ starbucks_mail_p2.png
-      ├─ starbucks_mail_p3.png
-      └─ starbucks_mail_p4.png</code>
-        </div>
-        <div class="callout">
-          <strong>補足</strong><br>
-          一部ブラウザやサーバー設定では、PDFが新規タブで開かれることがある。そのため本HTMLでは、<strong>開くリンク</strong> と <strong>ダウンロードリンク</strong> を分けて実装している。
-        </div>
-      </div>
-
-      <aside class="card">
-        <div class="sec-head">
-          <div>
-            <div class="kicker">CHECK</div>
-            <h2>配置前チェック</h2>
-            <div class="divider"></div>
-          </div>
-        </div>
-        <ul>
-          <li>PDFファイル名とhrefの表記が一致しているか</li>
-          <li>相対パスがレポート設置場所と整合しているか</li>
-          <li>日本語ファイル名より英数字ファイル名の方が安全か</li>
-          <li>スマホ環境でもタップしやすい導線になっているか</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
-
+  
   <section class="thx-section" id="conclusion">
     <div class="thx-container">
       <div class="card">
