@@ -134,12 +134,22 @@
     .preview-note{padding:12px 14px;font-size:12px;line-height:1.8;color:rgba(229,243,255,.72);border-top:1px solid rgba(148,163,184,.12);}
     .split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;}
     .metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:18px;}
-    .metric{padding:18px;border-radius:18px;background:rgba(6,20,38,.30);border:1px solid rgba(148,163,184,.16);box-shadow:var(--shadow-soft);}
-    .metric .label{font-size:12px;color:rgba(229,243,255,.62);letter-spacing:.08em;text-transform:uppercase;}
-    .metric .value{margin-top:8px;font-size:26px;font-weight:800;color:var(--thx-text);line-height:1.2;}
+    .metric{padding:18px;border-radius:18px;background:rgba(6,20,38,.30);border:1px solid rgba(148,163,184,.16);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;}
+    .metric .label{font-size:12px;color:rgba(229,243,255,.62);letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;margin:0 auto;}
+    .metric .value{margin-top:8px;font-size:26px;font-weight:800;color:var(--thx-text);line-height:1.2;display:flex;align-items:center;justify-content:center;text-align:center;width:100%;}
     .note{font-size:14px;color:rgba(229,243,255,.62);}
     .code-box{margin-top:16px;padding:18px;border-radius:18px;background:rgba(6,20,38,.30);border:1px solid rgba(148,163,184,.16);box-shadow:var(--shadow-soft);}
     .code-box code{display:block;white-space:pre-wrap;word-break:break-all;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.9;color:rgba(229,243,255,.85);}
+    .zoom-tools{display:flex;justify-content:flex-end;gap:10px;margin-top:14px;margin-bottom:-4px;}
+    .btn-ghost{appearance:none;border:1px solid rgba(148,163,184,.22);background:rgba(6,20,38,.32);color:rgba(229,243,255,.86);border-radius:999px;padding:10px 12px;font-size:12px;letter-spacing:.02em;cursor:pointer;backdrop-filter:blur(12px);box-shadow:var(--shadow-soft);transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease;}
+    .btn-ghost:hover{transform:translateY(-1px);border-color:rgba(var(--thx-accent-rgb),.38);box-shadow:0 0 22px rgba(var(--thx-accent-rgb),.14);}
+    .thx-modal{width:min(1120px,94vw);border:1px solid rgba(148,163,184,.22);border-radius:22px;padding:0;background:rgba(2,11,22,.92);color:var(--thx-text);box-shadow:0 40px 120px rgba(0,0,0,.55);backdrop-filter:blur(16px);}
+    .thx-modal::backdrop{background:rgba(0,0,0,.58);backdrop-filter:blur(6px);}
+    .thx-modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border-bottom:1px solid rgba(148,163,184,.14);background:rgba(6,20,38,.35);}
+    .thx-modal-title{font-size:13px;font-weight:800;letter-spacing:.04em;}
+    .thx-modal-close{appearance:none;border:1px solid rgba(148,163,184,.22);background:rgba(6,20,38,.28);color:rgba(229,243,255,.86);border-radius:12px;padding:8px 10px;cursor:pointer;}
+    .thx-modal-body{padding:14px 16px 18px;}
+    .thx-modal .table-wrap{margin-top:0;}
     footer{padding:34px 0 64px;color:rgba(229,243,255,.55);font-size:12px;}
     .footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(148,163,184,.14);padding-top:18px;}
     a{color:var(--thx-text);text-decoration-color:rgba(var(--thx-accent-rgb),.55);}
@@ -511,7 +521,10 @@
         <p>
           実務上は、1人の会員に対して必ずしも1機種だけを案内する必要はない。むしろ、<strong>「戻る」「近いものへ動く」「別シーンへ動く」</strong>の3系統を並べて配信するほうが、店内での選択肢を保持しやすい。
         </p>
-        <div class="table-wrap">
+        <div class="zoom-tools">
+          <button class="btn-ghost" type="button" data-open-target="sec5-table">表を拡大して見る</button>
+        </div>
+        <div class="table-wrap" id="sec5-table">
           <table>
             <thead>
               <tr>
@@ -690,5 +703,53 @@
       <div>Prepared for insight use / HTML report proposal</div>
     </div>
   </footer>
+
+  <dialog class="thx-modal" id="zoomModal" aria-label="拡大表示モーダル">
+    <div class="thx-modal-head">
+      <div class="thx-modal-title">拡大表示</div>
+      <button class="thx-modal-close" type="button" data-close-modal>閉じる</button>
+    </div>
+    <div class="thx-modal-body" id="zoomModalBody"></div>
+  </dialog>
+
+  <script>
+    (function(){
+      const modal = document.getElementById('zoomModal');
+      const modalBody = document.getElementById('zoomModalBody');
+      const openButtons = document.querySelectorAll('[data-open-target]');
+      const closeButtons = document.querySelectorAll('[data-close-modal]');
+
+      if (!modal || !modalBody) return;
+
+      openButtons.forEach(function(button){
+        button.addEventListener('click', function(){
+          const targetId = button.getAttribute('data-open-target');
+          const target = document.getElementById(targetId);
+          if(!target) return;
+          modalBody.innerHTML = '';
+          const wrap = document.createElement('div');
+          wrap.className = 'table-wrap';
+          const clonedTable = target.querySelector('table').cloneNode(true);
+          wrap.appendChild(clonedTable);
+          modalBody.appendChild(wrap);
+          modal.showModal();
+        });
+      });
+
+      closeButtons.forEach(function(button){
+        button.addEventListener('click', function(){
+          modal.close();
+        });
+      });
+
+      modal.addEventListener('click', function(e){
+        const rect = modal.getBoundingClientRect();
+        const inDialog = rect.top <= e.clientY && e.clientY <= rect.top + rect.height && rect.left <= e.clientX && e.clientX <= rect.left + rect.width;
+        if(!inDialog){
+          modal.close();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
