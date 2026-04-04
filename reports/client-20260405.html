@@ -151,7 +151,7 @@
     .thx-modal-body{padding:14px 16px 18px;}
     .thx-modal .table-wrap,.thx-modal .diagram{margin-top:0;}
     .metric{padding:18px;border-radius:18px;background:rgba(6,20,38,.30);border:1px solid rgba(148,163,184,.16);box-shadow:var(--shadow-soft);display:flex;flex-direction:column;}
-    .metric .label{font-size:12px;color:rgba(229,243,255,.62);letter-spacing:.08em;text-transform:uppercase;text-align:center;}
+    .metric .label{font-size:12px;color:rgba(229,243,255,.62);letter-spacing:.08em;text-transform:uppercase;text-align:center;display:flex;align-items:center;justify-content:center;min-height:30px;width:100%;}
     .metric .value{margin-top:8px;font-size:26px;font-weight:800;color:var(--thx-text);line-height:1.2;flex:1;display:flex;align-items:center;justify-content:center;text-align:center;}
     footer{padding:34px 0 64px;color:rgba(229,243,255,.55);font-size:12px;}
     .footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(148,163,184,.14);padding-top:18px;}
@@ -314,7 +314,7 @@
         <div class="zoom-tools">
           <button class="btn-ghost" type="button" data-open-target="sec1-diagram">拡大して見る</button>
         </div>
-        <div class="diagram" id="sec1-diagram">
+        <div class="diagram" id="sec1-diagram" data-zoom-title="SECTION 1 / 構造整理：1通の中に複数の継続導線が埋め込まれている">
           <div class="flow">
             <div class="flow-step">
               <div class="num">01</div>
@@ -363,7 +363,7 @@
         <div class="zoom-tools">
           <button class="btn-ghost" type="button" data-open-target="sec5-table">表を拡大して見る</button>
         </div>
-        <div class="table-wrap" id="sec5-table">
+        <div class="table-wrap" id="sec5-table" data-zoom-title="SECTION 5 / 実装例：会員向け配信シナリオ">
           <table>
             <thead>
               <tr>
@@ -668,6 +668,7 @@
     (function(){
       const modal = document.getElementById('zoomModal');
       const modalBody = document.getElementById('zoomModalBody');
+      const modalTitle = modal ? modal.querySelector('.thx-modal-title') : null;
       const openButtons = document.querySelectorAll('[data-open-target]');
       const closeButtons = document.querySelectorAll('[data-close-modal]');
 
@@ -676,7 +677,12 @@
           const targetId = button.getAttribute('data-open-target');
           const target = document.getElementById(targetId);
           if(!target || !modal || !modalBody) return;
-          modalBody.innerHTML = target.outerHTML;
+          const zoomTitle = target.getAttribute('data-zoom-title') || '拡大表示';
+          if(modalTitle) modalTitle.textContent = zoomTitle;
+          const clone = target.cloneNode(true);
+          clone.removeAttribute('id');
+          modalBody.innerHTML = '';
+          modalBody.appendChild(clone);
           modal.showModal();
         });
       });
