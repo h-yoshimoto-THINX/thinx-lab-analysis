@@ -63,6 +63,13 @@ background:rgba(6,20,38,0.32);color:#fff;
 border-radius:999px;padding:10px 14px;cursor:pointer;
 }
 
+
+.zoom-inner svg{
+width:100% !important;
+height:auto !important;
+min-height:400px;
+}
+
 </style>
   <script type="module">
     import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
@@ -349,11 +356,20 @@ flowchart LR
     </div>
   </section>
 
-<script>
+
+<script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+
+mermaid.initialize({
+  startOnLoad:true,
+  theme:"dark",
+  securityLevel:"loose"
+});
+
 document.querySelectorAll('.table-wrap, .diagram').forEach((el,idx)=>{
-  const wrap = document.createElement('div');
+  const wrap=document.createElement('div');
   wrap.className='zoomable-wrap';
-  el.parentNode.insertBefore(wrap, el);
+  el.parentNode.insertBefore(wrap,el);
   wrap.appendChild(el);
 
   const tools=document.createElement('div');
@@ -362,9 +378,9 @@ document.querySelectorAll('.table-wrap, .diagram').forEach((el,idx)=>{
   const btn=document.createElement('button');
   btn.className='zoom-btn';
   btn.textContent='拡大して見る';
-  tools.appendChild(btn);
 
-  wrap.insertBefore(tools, el);
+  tools.appendChild(btn);
+  wrap.insertBefore(tools,el);
 
   const modal=document.createElement('div');
   modal.className='zoom-modal';
@@ -376,22 +392,47 @@ document.querySelectorAll('.table-wrap, .diagram').forEach((el,idx)=>{
   close.className='zoom-close';
   close.textContent='閉じる';
 
-  const clone=el.cloneNode(true);
-  clone.style.maxWidth='100%';
-  clone.style.overflow='auto';
-
   inner.appendChild(close);
-  inner.appendChild(clone);
+
+  if(el.classList.contains('diagram')){
+      const mermaidSrc = el.querySelector('.mermaid');
+      const holder=document.createElement('div');
+      holder.className='diagram';
+
+      const renderId='mermaid_zoom_'+idx;
+
+      mermaid.render(renderId, mermaidSrc.textContent).then(({svg})=>{
+          holder.innerHTML=svg;
+      });
+
+      inner.appendChild(holder);
+
+  } else {
+      const clone=el.cloneNode(true);
+      clone.style.maxWidth='100%';
+      clone.style.overflow='auto';
+      inner.appendChild(clone);
+  }
+
   modal.appendChild(inner);
   document.body.appendChild(modal);
 
-  btn.addEventListener('click',()=>modal.classList.add('active'));
-  close.addEventListener('click',()=>modal.classList.remove('active'));
+  btn.addEventListener('click',()=>{
+      modal.classList.add('active');
+  });
+
+  close.addEventListener('click',()=>{
+      modal.classList.remove('active');
+  });
+
   modal.addEventListener('click',(e)=>{
-    if(e.target===modal){modal.classList.remove('active')}
+      if(e.target===modal){
+          modal.classList.remove('active');
+      }
   });
 });
 </script>
+
 
 </body>
 </html>
