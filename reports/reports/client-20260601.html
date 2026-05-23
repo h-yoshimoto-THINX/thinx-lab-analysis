@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="スマスロ超高単価時代の落とし穴と、パチスロ市場で始まった熱量分散の構造を整理したTHINX-LAB. Insight Note" />
+  <title>スマスロ超高単価時代の落とし穴 | THINX-LAB.</title>
+
+  <style>
+    :root{
+      --thx-accent:#10b4c8;
+      --thx-accent-rgb:16,180,200;
+      --thx-bg:#020b16;
+      --thx-text:#f9fbff;
+      --thx-muted:rgba(229,243,255,0.70);
+      --thx-border:rgba(148,163,184,0.20);
+      --thx-card:rgba(6,20,38,0.40);
+      --r-24:24px;
+      --shadow:0 24px 70px rgba(0,0,0,.35);
+      --shadow-soft:0 18px 46px rgba(0,0,0,.28);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans JP","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;color:var(--thx-text);background:var(--thx-bg);overflow-x:hidden}
+    body::before{content:"";position:fixed;inset:0;background:linear-gradient(to right, rgba(255,255,255,0.06) 1px, transparent 1px),linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px);background-size:92px 92px;opacity:.18;pointer-events:none;z-index:-2;background-attachment:fixed}
+    body::after{content:"";position:fixed;inset:-20%;background:radial-gradient(closest-side at 20% 10%, rgba(var(--thx-accent-rgb),0.18), transparent 55%),radial-gradient(closest-side at 80% 40%, rgba(255,255,255,0.06), transparent 60%),radial-gradient(closest-side at 40% 90%, rgba(var(--thx-accent-rgb),0.10), transparent 60%);pointer-events:none;z-index:-3;filter:blur(6px)}
+    .thx-section{padding:80px 0;margin:-2px 0}.thx-container{max-width:1120px;margin:0 auto;padding:0 24px}.hero{padding:84px 0 44px}.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid rgba(var(--thx-accent-rgb),0.35);background:rgba(6,20,38,0.35);backdrop-filter:blur(14px);box-shadow:var(--shadow-soft);font-size:12px;letter-spacing:.08em;text-transform:uppercase}.dot{width:8px;height:8px;border-radius:50%;background:var(--thx-accent);box-shadow:0 0 18px rgba(var(--thx-accent-rgb),0.65)}
+    .en-label{font-size:11px;letter-spacing:0.4em;color:rgba(229,243,255,0.62);text-transform:uppercase}.ja-title{margin:12px 0 8px;font-size:18px;font-weight:700;color:var(--thx-accent)}
+    h1{margin:0 0 18px;font-weight:800;font-size:clamp(30px,4.2vw,48px);line-height:1.18;letter-spacing:.01em}.lead{margin:0;font-size:16px;line-height:2;color:var(--thx-muted);max-width:78ch}.lead strong,p strong{color:var(--thx-accent);font-weight:800}
+    .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cta{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--thx-text);font-weight:700;letter-spacing:.02em}.cta span{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:rgba(var(--thx-accent-rgb),0.55)}.cta .circle{width:44px;height:44px;border-radius:999px;border:1px solid rgba(var(--thx-accent-rgb),0.45);display:grid;place-items:center;background:rgba(6,20,38,0.35);backdrop-filter:blur(14px);transition:transform .25s ease, box-shadow .25s ease, background .25s ease}.cta:hover .circle{transform:translateX(5px);background:rgba(var(--thx-accent-rgb),0.12);box-shadow:0 0 22px rgba(var(--thx-accent-rgb),0.45);animation:svc-pulse 1.35s ease-in-out infinite}.arrow{width:18px;height:18px;border-right:2px solid var(--thx-text);border-top:2px solid var(--thx-text);transform:rotate(45deg);margin-left:-4px}@keyframes svc-pulse{0%,100%{box-shadow:0 0 0 rgba(var(--thx-accent-rgb),0)}50%{box-shadow:0 0 26px rgba(var(--thx-accent-rgb),0.55)}}
+    .card{border-radius:var(--r-24);padding:40px;background:var(--thx-card);border:1px solid var(--thx-border);backdrop-filter:blur(15px);box-shadow:var(--shadow);min-width:0}.grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(320px,0.8fr);gap:48px;align-items:start}.grid > *{min-width:0}@media(max-width:980px){.thx-section{padding:60px 0}.grid{grid-template-columns:1fr;gap:28px}.card{padding:28px}.hero{padding:72px 0 36px}}
+    .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap}.sec-title{display:flex;flex-direction:column;gap:8px;min-width:0;max-width:100%}.sec-title .kicker{font-size:11px;letter-spacing:0.4em;color:rgba(229,243,255,0.62);text-transform:uppercase}.sec-title h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.25;font-weight:800;overflow-wrap:anywhere}.divider{height:1px;width:100%;background:linear-gradient(to right, rgba(var(--thx-accent-rgb),0.0), rgba(var(--thx-accent-rgb),0.55), rgba(var(--thx-accent-rgb),0.0));margin:18px 0 0;opacity:.9}
+    p{margin:0 0 14px;font-size:16px;line-height:2;color:var(--thx-muted)}.note{font-size:14px;color:rgba(229,243,255,0.62)}ul{margin:12px 0 0;padding-left:1.2em;color:var(--thx-muted);line-height:2}li{margin:6px 0}.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(148,163,184,0.18);background:rgba(6,20,38,0.35);color:rgba(229,243,255,0.78);font-size:12px}.chip b{color:var(--thx-text)}
+    .callout{margin-top:14px;padding:14px 16px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.22);background:rgba(var(--thx-accent-rgb),0.07);color:rgba(229,243,255,0.82);box-shadow:var(--shadow-soft)}.callout strong{color:var(--thx-text)}.formula-box{margin-top:16px;padding:18px 20px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.22);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft)}.formula{font-size:18px;font-weight:800;color:var(--thx-text);letter-spacing:.02em;line-height:1.7}
+    .table-wrap{margin-top:16px;overflow:auto;border-radius:18px;border:1px solid rgba(148,163,184,0.18);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft)}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:14px 16px;border-bottom:1px solid rgba(148,163,184,0.12);vertical-align:top;text-align:left;font-size:14px;line-height:1.7}th{color:var(--thx-text);font-weight:800;background:rgba(6,20,38,0.25);position:sticky;top:0;backdrop-filter:blur(10px)}tr:hover td{background:rgba(var(--thx-accent-rgb),0.06)}
+    .diagram{margin-top:16px;padding:18px;border-radius:18px;border:1px solid rgba(var(--thx-accent-rgb),0.18);background:rgba(6,20,38,0.35);box-shadow:var(--shadow-soft);overflow:auto}.mermaid{min-width:520px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}@media(max-width:980px){.two-col{grid-template-columns:1fr}}.anchor{scroll-margin-top:18px}a{color:var(--thx-text);text-decoration-color:rgba(var(--thx-accent-rgb),0.55)}a:hover{text-decoration-color:rgba(var(--thx-accent-rgb),0.85)}
+    footer{padding:34px 0 64px;color:rgba(229,243,255,0.55);font-size:12px;letter-spacing:.02em}.footer-inner{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid rgba(148,163,184,0.14);padding-top:18px}
+  </style>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({startOnLoad:true,theme:"dark",securityLevel:"loose",themeVariables:{fontFamily:"system-ui, -apple-system, Segoe UI, Roboto, Noto Sans JP, sans-serif",primaryColor:"rgba(6,20,38,0.55)",primaryBorderColor:"rgba(16,180,200,0.35)",primaryTextColor:"#f9fbff",lineColor:"rgba(229,243,255,0.45)",secondaryColor:"rgba(6,20,38,0.35)",tertiaryColor:"rgba(6,20,38,0.25)"}});
+  </script>
+</head>
+<body>
+  <header class="thx-section hero">
+    <div class="thx-container">
+      <div class="hero-top">
+        <div>
+          <div class="badge"><span class="dot"></span>THINX-LAB. / Insight Note</div>
+          <div class="ja-title">■ “スマスロ超高単価時代”の落とし穴</div>
+          <div class="en-label">High Unit Price Slot × Heat Dispersion × Store Strategy</div>
+          <h1>パチスロ市場で始まった<br/>「熱量分散」の正体</h1>
+          <p class="lead">
+            現在のパチスロ高単価市場で起きているのは、<strong>プレイヤー数の拡大</strong>ではなく、<strong>限られた高単価ユーザーの奪い合い</strong>である。
+            スマスロ市場の成長を単純な市場拡大として捉えると、2026年お盆商戦の営業設計は大きくズレる。
+          </p>
+          <div class="chips" aria-label="key points">
+            <div class="chip"><b>Core</b> 市場拡大ではなく置き換え</div>
+            <div class="chip"><b>Phase</b> 急成長から高原期へ</div>
+            <div class="chip"><b>Risk</b> 超高単価への寄せ過ぎ</div>
+            <div class="chip"><b>Goal</b> 熱量配分の設計</div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a class="cta" href="#index"><span>目次へ</span><div class="circle" aria-hidden="true"><div class="arrow"></div></div></a>
+          <a class="cta" href="#conclusion"><span>結論へ</span><div class="circle" aria-hidden="true"><div class="arrow"></div></div></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="thx-section" id="index">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">INDEX</div><h2>構成</h2><div class="divider"></div></div></div>
+        <ul>
+          <li><a href="#sec0">0. 問題提起：なぜ「市場拡大」と見誤ってはいけないのか</a></li>
+          <li><a href="#sec1">1. スマスロ市場の本質：新規創出ではなく既存市場の置き換え</a></li>
+          <li><a href="#sec2">2. 市場フェーズ：急成長から高原期・成熟フェーズへ</a></li>
+          <li><a href="#sec3">3. 高単価市場で起きている中間体験の弱体化</a></li>
+          <li><a href="#sec4">4. 超高単価化の落とし穴：市場拡大ではなく取り合い</a></li>
+          <li><a href="#sec5">5. 熱量分散の正体：稼働崩壊ではなく遊技深度の低下</a></li>
+          <li><a href="#sec6">6. お盆商戦への示唆：売り場全体を寄せすぎない</a></li>
+          <li><a href="#conclusion">7. 結論：強い機種より、熱量配分を設計できる店舗へ</a></li>
+        </ul>
+        <p class="note" style="margin-top:16px;">© THINX-LAB. / Designing the future with data</p>
+      </div>
+      <aside class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SUMMARY</div><h2>本ノートの要点</h2><div class="divider"></div></div></div>
+        <p>
+          スマスロ市場は2022年11月以降、急速にシェアを伸ばした。しかし、その成長は新規プレイヤーの大量創出ではなく、6.0〜6.4号機や6.5号機からの<strong>置き換え</strong>として捉えるべきである。
+        </p>
+        <div class="callout">
+          <strong>結論先出し：</strong><br/>
+          2026年お盆商戦で危険なのは、超高単価機が強いという理由だけで売り場全体を一方向へ寄せ過ぎることだ。今後は、<strong>プレイヤー熱量をどこに、どの程度配分するか</strong>を設計できる店舗が優位に立つ。
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec0">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 0</div><h2>問題提起：なぜ「市場拡大」と見誤ってはいけないのか</h2><div class="divider"></div></div></div>
+        <p>
+          現在のパチスロ高単価市場で起きているのは、プレイヤー数の純増ではない。むしろ、限られた高単価ユーザーの可処分時間と予算を、複数のスマスロ機が奪い合う構造である。
+        </p>
+        <p>
+          この前提を誤ると、「強いカテゴリだから増台する」「超高単価が支持されているから売り場全体を寄せる」といった判断に傾きやすい。しかし実際には、市場全体の器が大きくなっているのではなく、<strong>器の中で配分が変わっている</strong>と見る必要がある。
+        </p>
+        <div class="callout"><strong>論点：</strong><br/>問うべきは「スマスロ市場はどこまで伸びるのか」ではない。<br/><strong>限られたユーザー熱量を、どの機種・どの単価帯に配分するべきか</strong>である。</div>
+      </div>
+      <aside class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">QUESTION</div><h2>見誤りやすい判断</h2><div class="divider"></div></div></div>
+        <ul>
+          <li>シェア拡大をそのまま市場拡大と判断する</li>
+          <li>超高単価化をプレイヤー増加の証拠と捉える</li>
+          <li>遊技人数の維持だけで熱量維持と判断する</li>
+        </ul>
+        <p class="note" style="margin-top:14px;">実務では「人数」だけでなく「時間」「深度」「60分以上遊技者割合」を合わせて確認する必要がある。</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec1">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 1</div><h2>スマスロ市場の本質：新規創出ではなく既存市場の置き換え</h2><div class="divider"></div></div></div>
+        <p>
+          スマスロ市場は2022年11月の登場以降、急速に市場シェアを拡大し、現在は30〜33％レンジで定着している。しかし、これは単純な市場拡大ではない。実態としては、6.0〜6.4号機や6.5号機が失ったシェアをスマスロが吸収してきた側面が強い。
+        </p>
+        <p>
+          つまり現在のスマスロ市場は、<strong>新規プレイヤー大量創出市場</strong>ではなく、<strong>既存市場の置き換えによって形成された市場</strong>である。この構造は、動画配信市場でDVDレンタルや地上波視聴時間がNetflixやDisney+へ移った構造に近い。
+        </p>
+        <div class="diagram"><div class="mermaid">
+flowchart LR
+  A[6.0〜6.4号機・6.5号機] -->|シェア低下| B[スマスロ]
+  C[既存プレイヤーの時間・予算] --> B
+  B --> D[市場シェア30〜33％レンジ]
+  D --> E[新規大量創出ではなく置き換え]
+        </div></div>
+        <div class="two-col">
+          <div class="callout"><strong>ポイント1</strong><br/>シェア拡大は、必ずしも市場全体の拡大を意味しない。</div>
+          <div class="callout"><strong>ポイント2</strong><br/>既存ユーザーの時間配分が変わった結果として、スマスロ比率が高まった可能性が高い。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec2">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 2</div><h2>市場フェーズ：急成長から高原期・成熟フェーズへ</h2><div class="divider"></div></div></div>
+        <p>
+          さらに重要なのは、スマスロ市場そのものがすでに急成長フェーズから、30％前後で推移する高原期・成熟フェーズへ入り始めている点である。2024年以降、スマスロシェアは27〜34％レンジで推移し、かつてのような急拡大は見られにくくなっている。
+        </p>
+        <div class="table-wrap" role="region" aria-label="スマスロ市場の変遷">
+          <table>
+            <thead><tr><th>フェーズ</th><th>期間</th><th>スマスロ割合</th><th>主な動き</th></tr></thead>
+            <tbody>
+              <tr><td><strong>導入前</strong></td><td>〜2022年10月</td><td>0%</td><td>スマスロ未登場</td></tr>
+              <tr><td><strong>黎明期</strong></td><td>2022年11月〜12月</td><td>4.7〜6.1%</td><td>市場参入直後</td></tr>
+              <tr><td><strong>低迷期</strong></td><td>2023年1月〜3月</td><td>4.6〜5.8%</td><td>機種数が少なく伸び悩み</td></tr>
+              <tr><td><strong>急拡大期</strong></td><td>2023年4月〜8月</td><td>10.1〜17.3%</td><td>人気機種投入で急騰</td></tr>
+              <tr><td><strong>成長加速期</strong></td><td>2023年9月〜2024年3月</td><td>16.5〜26.1%</td><td>継続的な新機種投入</td></tr>
+              <tr><td><strong>高原期①</strong></td><td>2024年4月〜12月</td><td>27.3〜30.9%</td><td>約30％前後で安定</td></tr>
+              <tr><td><strong>高原期②</strong></td><td>2025年1月〜2026年5月</td><td>29.2〜33.6%</td><td>30〜33％で定着</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:16px;">この状態は、市場が失速したという意味ではない。むしろ、成長余地は残しながらも、急拡大期とは異なる競争ルールへ移行したと見るべきである。</p>
+      </div>
+      <aside class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">PHASE</div><h2>高原期と表現する意図</h2><div class="divider"></div></div></div>
+        <p>
+          「成熟期」という表現は終盤感や停滞感を生みやすい。一方で「高原期」は、急成長が一巡したものの、まだ一定の標高を維持している状態を表現しやすい。
+        </p>
+        <div class="callout"><strong>表現方針：</strong><br/>本HTMLでは、資料上の成熟フェーズを踏まえつつ、読者に過度な失速印象を与えないよう<strong>高原期</strong>として整理している。</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec3">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 3</div><h2>高単価市場で起きている中間体験の弱体化</h2><div class="divider"></div></div></div>
+        <p>
+          この構造変化は、高単価機マーケットで特に顕著である。近年のスマスロ市場は高単価機・超高単価機を中心にけん引されてきた。しかし現在は、リスクとリターンのバランスで支持されてきた<strong>中間的な高単価体験</strong>が成立しづらくなっている。
+        </p>
+        <p>
+          ユーザーの期待値は、より強い一撃性能や短時間で大きなリターンを期待できる超高単価型へシフトし始めている。これはスマートフォン市場で、価格と性能のバランス型から、iPhone Proのようなハイエンド型と低価格帯の二極化が進んだ構造にも近い。
+        </p>
+        <div class="formula-box"><div class="formula">属性定義：高単価機＝コイン単価3.5〜4.0未満 ／ 超高単価機＝4.0以上</div></div>
+        <div class="diagram"><div class="mermaid">
+flowchart LR
+  A[従来の高単価機] --> B[リスクとリターンのバランス]
+  B --> C[中間体験]
+  D[現在のユーザー期待] --> E[一撃性能・短時間リターン]
+  E --> F[超高単価型へ期待値シフト]
+        </div></div>
+      </div>
+      <aside class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">ANALOGY</div><h2>ハイエンド化の構造</h2><div class="divider"></div></div></div>
+        <p>
+          市場が成熟すると、単なるバランス型では差別化しづらくなる。結果として、明確に強い体験を提供する高価格・高性能側と、低負担側へ需要が分かれやすい。
+        </p>
+        <div class="callout"><strong>示唆：</strong><br/>中間帯を残す場合は、単価だけでなく「なぜ選ばれるのか」という体験理由を明確にする必要がある。</div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec4">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 4</div><h2>超高単価化の落とし穴：市場拡大ではなく取り合い</h2><div class="divider"></div></div></div>
+        <p>
+          ただし、最も重要なのは、超高単価化が市場拡大を意味しない点である。高単価機＋超高単価機の市場シェアそのものが大きく拡大していない以上、起きているのは高単価市場の拡大ではなく、限られた高単価ユーザーの取り合いである。
+        </p>
+        <div class="table-wrap" role="region" aria-label="市場解釈の違い">
+          <table>
+            <thead><tr><th>見方</th><th>解釈</th><th>営業判断への影響</th><th>リスク</th></tr></thead>
+            <tbody>
+              <tr><td><strong>市場拡大型</strong></td><td>超高単価化でユーザーが増えている</td><td>売り場全体を超高単価へ寄せやすい</td><td>熱量の奪い合いを見落とす</td></tr>
+              <tr><td><strong>置き換え型</strong></td><td>限られたユーザーの時間・予算が移動している</td><td>単価帯の配分と機種役割を設計する</td><td>設計を誤ると遊技深度が落ちる</td></tr>
+              <tr><td><strong>熱量配分型</strong></td><td>人数ではなく熱量の置き場所が変わっている</td><td>集客・滞在・勝ち体験の役割分担を見る</td><td>強い機種偏重で売り場全体が細る</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout"><strong>要するに：</strong><br/>超高単価機が強いことと、市場全体が拡大していることは別問題である。<br/>この違いを見誤ると、商戦期の機種構成が過度に一方向へ傾く。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec5">
+    <div class="thx-container grid">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 5</div><h2>熱量分散の正体：稼働崩壊ではなく遊技深度の低下</h2><div class="divider"></div></div></div>
+        <p>
+          現在起きている変化は、単純な稼働崩壊ではない。遊技人数は維持されている一方で、遊技時間や60分以上遊技者割合が低下し始めている。これは、プレイヤーがいなくなったというより、ひとつの機種・ひとつの売り場に注がれる熱量が薄くなっている状態である。
+        </p>
+        <div class="diagram"><div class="mermaid">
+flowchart LR
+  A[遊技人数は維持] --> C[見かけ上の稼働は残る]
+  B[遊技時間・60分以上割合の低下] --> D[遊技深度の低下]
+  C --> E[稼働崩壊ではない]
+  D --> F[熱量の希薄化]
+  E --> G[熱量配分の再設計]
+  F --> G
+        </div></div>
+        <div class="callout"><strong>分析視点：</strong><br/>稼働人数だけを見ると問題が見えにくい。<br/>商戦期こそ、<strong>遊技時間・60分以上遊技者割合・リピート構造</strong>を組み合わせて確認する必要がある。</div>
+      </div>
+      <aside class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">CHECK</div><h2>確認すべき指標</h2><div class="divider"></div></div></div>
+        <ul>
+          <li>台あたり遊技人数</li>
+          <li>平均遊技時間</li>
+          <li>60分以上遊技者割合</li>
+          <li>15分以内離脱割合</li>
+          <li>勝ち率・勝ち金額・Rv</li>
+          <li>高単価／超高単価の構成比</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="sec6">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 6</div><h2>お盆商戦への示唆：売り場全体を寄せすぎない</h2><div class="divider"></div></div></div>
+        <p>
+          2026年お盆商戦で最も危険なのは、「スマスロ超高単価が強い」という理由だけで、売り場全体を超高単価へ寄せ過ぎることである。強い体験は必要だが、それだけで売り場全体の熱量を維持できるわけではない。
+        </p>
+        <div class="table-wrap" role="region" aria-label="営業設計の論点">
+          <table>
+            <thead><tr><th>設計論点</th><th>見るべきこと</th><th>判断の方向性</th><th>避けたい状態</th></tr></thead>
+            <tbody>
+              <tr><td><strong>超高単価機</strong></td><td>一撃期待と話題性</td><td>核として配置しつつ偏重しすぎない</td><td>プレイヤー熱量の一点集中</td></tr>
+              <tr><td><strong>高単価機</strong></td><td>中間体験としての存在理由</td><td>バランスではなく選ばれる理由を明確化</td><td>超高単価の劣化版になる</td></tr>
+              <tr><td><strong>低〜中単価帯</strong></td><td>滞在と再来店の受け皿</td><td>熱量の逃げ場・分散先として整える</td><td>高単価疲れの受け皿不足</td></tr>
+              <tr><td><strong>商戦全体</strong></td><td>人数・時間・深度のバランス</td><td>強い機種と長く遊べる導線を併存</td><td>見かけの人数だけで判断する</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout"><strong>実務メッセージ：</strong><br/>商戦期の勝ち筋は「強い機種を持つこと」だけではない。<br/><strong>強い機種に集まった熱量を、売り場全体へどう循環させるか</strong>まで設計することが重要である。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="thx-section anchor" id="conclusion">
+    <div class="thx-container">
+      <div class="card">
+        <div class="sec-head"><div class="sec-title"><div class="kicker">SECTION 7</div><h2>結論：強い機種より、熱量配分を設計できる店舗へ</h2><div class="divider"></div></div></div>
+        <p>
+          ここまでの整理を総合すると、現在のスマスロ市場は「伸び続ける市場」から「内部競争が激化する市場」へ移行している。高単価・超高単価の存在感は大きいが、それは市場全体の拡大ではなく、限られた高単価ユーザーの取り合いとして理解すべきである。
+        </p>
+        <p>
+          したがって、2026年お盆商戦において重要なのは、単に超高単価機を増やすことではない。遊技人数が維持されていても、遊技時間や60分以上遊技者割合が落ちているなら、売り場の中で熱量が薄まり始めている可能性がある。
+        </p>
+        <p>
+          今後の市場は、<strong>強い機種を持つ店舗</strong>ではなく、<strong>プレイヤー熱量をどう配分するかを設計できる店舗</strong>が勝つ時代へ移行していく。商戦期の営業設計では、超高単価の集客力を活かしながら、同時に滞在・分散・再来店を支える売り場構造を整えることが求められる。
+        </p>
+        <div class="diagram"><div class="mermaid">
+flowchart LR
+  A[市場拡大ではなく置き換え] --> B[スマスロ内部競争の激化]
+  B --> C[超高単価への期待値シフト]
+  C --> D[熱量の希薄化リスク]
+  D --> E[単価帯と機種役割の再設計]
+  E --> F[お盆商戦の勝ち筋]
+        </div></div>
+        <div style="margin-top:22px;display:flex;gap:14px;flex-wrap:wrap;">
+          <a class="cta" href="#index"><span>目次へ戻る</span><div class="circle" aria-hidden="true"><div class="arrow"></div></div></a>
+          <a class="cta" href="#sec6"><span>営業設計を見る</span><div class="circle" aria-hidden="true"><div class="arrow"></div></div></a>
+        </div>
+      </div>
+      <footer>
+        <div class="footer-inner">
+          <div>© THINX-LAB. / Designing the future with data</div>
+          <div>Built for THINX Pages (single-file)</div>
+        </div>
+      </footer>
+    </div>
+  </section>
+</body>
+</html>
