@@ -1,0 +1,519 @@
+<!-- ===== THINX-LAB. VOL.329 / L戦国乙女5 L8 市場ポテンシャル分析 ここから貼り付け ===== -->
+<style>
+.tlx329{--bg:#0a0e16;--panel:#0e1623;--panel2:#0c1320;--line:rgba(34,211,238,.18);--line2:rgba(148,163,184,.16);--txt:#e6edf5;--muted:#93a4b8;--cyan:#22d3ee;--cyan2:#0bb6d6;--cyandim:rgba(34,211,238,.14);--gold:#f5c451;--red:#f4717f;--green:#4fd1a1;color:var(--txt);background:var(--bg);background-image:linear-gradient(var(--line2) 1px,transparent 1px),linear-gradient(90deg,var(--line2) 1px,transparent 1px);background-size:34px 34px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;line-height:1.85;font-size:16px;letter-spacing:.01em;padding:clamp(16px,4vw,40px);border:1px solid var(--line);border-radius:14px;max-width:920px;margin:0 auto;box-sizing:border-box;-webkit-text-size-adjust:100%}
+.tlx329 *{box-sizing:border-box}
+.tlx329 .tlx-kicker{display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--cyan);border:1px solid var(--line);background:var(--cyandim);padding:5px 12px;border-radius:999px;margin-bottom:16px}
+.tlx329 h1{font-size:clamp(22px,5vw,32px);line-height:1.35;margin:.2em 0 .5em;font-weight:800;letter-spacing:.01em;color:#f1f8fb}
+.tlx329 h2{font-size:clamp(18px,3.6vw,23px);margin:2.4em 0 .8em;padding:12px 16px;font-weight:700;border-left:4px solid var(--cyan);background:linear-gradient(90deg,var(--cyandim),transparent);border-radius:0 8px 8px 0;color:#e8f6fb}
+.tlx329 h3{font-size:clamp(16px,3vw,18.5px);margin:1.8em 0 .6em;font-weight:700;color:#cfe9f2}
+.tlx329 h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--cyan);margin-right:9px;transform:rotate(45deg);vertical-align:middle}
+.tlx329 p{margin:.7em 0;color:#dbe6f1}
+.tlx329 strong{color:#fff;font-weight:700;background:linear-gradient(transparent 62%,rgba(34,211,238,.22) 62%)}
+.tlx329 .tlx-meta{font-size:13.5px;color:var(--muted);margin:0 0 4px}
+.tlx329 .tlx-rule{height:1px;background:linear-gradient(90deg,var(--cyan),transparent);border:0;margin:30px 0}
+.tlx329 .tlx-lead{font-size:clamp(15px,2.6vw,17px);color:#e8f1f7;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:18px 20px}
+.tlx329 .tlx-summary{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.tlx329 .tlx-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;border:1px solid var(--line2);border-radius:10px}
+.tlx329 table{width:100%;border-collapse:collapse;min-width:480px;font-size:14px}
+.tlx329 th,.tlx329 td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line2);white-space:nowrap;color:#dbe6f1}
+.tlx329 thead th{background:var(--panel2);color:var(--cyan);font-weight:700;font-size:12.5px;letter-spacing:.03em}
+.tlx329 td:not(:first-child),.tlx329 th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.tlx329 tbody tr:nth-child(odd){background:rgba(255,255,255,.015)}
+.tlx329 tr.tlx-hl td{background:var(--cyandim);color:#fff;font-weight:700}
+.tlx329 tr.tlx-cat td{background:rgba(34,211,238,.07);color:var(--cyan);font-weight:700;font-size:12.5px;letter-spacing:.05em;text-align:left}
+.tlx329 td.tlx-l{text-align:left !important}
+.tlx329 .tlx-note{font-size:12.5px;color:var(--muted);margin:6px 2px 0}
+.tlx329 .ev2{color:var(--cyan);font-weight:700}
+.tlx329 .ev1{color:var(--green);font-weight:700}
+.tlx329 .ev0{color:#cfd9e4}
+.tlx329 .evx{color:var(--red)}
+.tlx329 .star{color:var(--gold);letter-spacing:1px;white-space:nowrap}
+.tlx329 .star b{color:rgba(148,163,184,.4);font-weight:400}
+.tlx329 .tlx-fig{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px clamp(14px,3vw,22px);margin:20px 0}
+.tlx329 .tlx-fig-h{font-size:12px;letter-spacing:.14em;color:var(--cyan);font-weight:700;margin-bottom:4px}
+.tlx329 .tlx-fig-t{font-size:clamp(15px,2.6vw,17px);font-weight:700;margin:0 0 16px;color:#f1f8fb}
+.tlx329 .tlx-bar-row{display:flex;align-items:center;gap:10px;margin:9px 0}
+.tlx329 .tlx-bar-name{flex:0 0 38%;max-width:38%;font-size:13px;color:#cfd9e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tlx329 .tlx-bar-track{flex:1;background:rgba(255,255,255,.04);border-radius:6px;height:26px;position:relative;overflow:hidden}
+.tlx329 .tlx-bar-fill{height:100%;background:linear-gradient(90deg,rgba(34,211,238,.35),rgba(34,211,238,.7));border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px;color:#fff;font-weight:700;min-width:40px}
+.tlx329 .tlx-bar-row.hl .tlx-bar-fill{background:linear-gradient(90deg,var(--cyan2),var(--cyan));box-shadow:0 0 14px rgba(34,211,238,.5)}
+.tlx329 .tlx-bar-row.dim .tlx-bar-fill{background:linear-gradient(90deg,rgba(148,163,184,.25),rgba(148,163,184,.5))}
+.tlx329 .tlx-bar-sub{font-size:11px;color:var(--muted);margin-left:6px;white-space:nowrap}
+.tlx329 .tlx-map{position:relative;height:340px;background:var(--panel2);border:1px solid var(--line2);border-radius:10px;margin:8px 0 4px}
+.tlx329 .tlx-quad{position:absolute;left:60%;top:0;right:0;bottom:50%;background:rgba(34,211,238,.08);border-left:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+.tlx329 .tlx-quad-l{position:absolute;top:8px;right:10px;font-size:11px;color:var(--cyan);font-weight:700}
+.tlx329 .tlx-dot{position:absolute;transform:translate(-50%,50%);text-align:center}
+.tlx329 .tlx-dot span{display:block;width:13px;height:13px;border-radius:50%;background:var(--muted);margin:0 auto 3px;border:2px solid rgba(255,255,255,.25)}
+.tlx329 .tlx-dot.hl span{width:20px;height:20px;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.tlx329 .tlx-dot label{font-size:10.5px;color:#cfd9e4;white-space:nowrap}
+.tlx329 .tlx-dot.hl label{color:#fff;font-weight:700;font-size:11.5px}
+.tlx329 .tlx-axis-x{text-align:center;font-size:11px;color:var(--muted);margin-top:6px}
+.tlx329 .tlx-axis-y{position:absolute;left:-6px;top:50%;transform:rotate(-90deg);transform-origin:left;font-size:11px;color:var(--muted)}
+.tlx329 .tlx-quads{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.tlx329 .tlx-quads div{font-size:12px;color:var(--muted);background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:9px 11px}
+.tlx329 .tlx-quads b{color:var(--cyan)}
+.tlx329 .tlx-dev-row{margin:11px 0}
+.tlx329 .tlx-dev-label{font-size:12.5px;color:#cfd9e4;margin-bottom:4px}
+.tlx329 .tlx-dev-bars{display:flex;flex-direction:column;gap:4px}
+.tlx329 .tlx-dev-bar{height:14px;border-radius:4px;display:flex;align-items:center;padding-left:7px;font-size:10px;color:#04222b;font-weight:700;min-width:30px}
+.tlx329 .tlx-c1{background:linear-gradient(90deg,var(--cyan2),var(--cyan))}
+.tlx329 .tlx-c2{background:rgba(148,163,184,.55);color:#0a0e16}
+.tlx329 .tlx-c3{background:rgba(245,196,81,.7);color:#2a1f00}
+.tlx329 .tlx-legend{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 2px;font-size:12px;color:var(--muted)}
+.tlx329 .tlx-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.tlx329 .tlx-stack-row{display:flex;align-items:center;gap:10px;margin:9px 0}
+.tlx329 .tlx-stack-name{flex:0 0 34%;max-width:34%;font-size:12.5px;color:#cfd9e4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tlx329 .tlx-stack{flex:1;display:flex;height:26px;border-radius:6px;overflow:hidden;background:rgba(255,255,255,.04)}
+.tlx329 .tlx-seg{display:flex;align-items:center;justify-content:center;font-size:10.5px;color:#fff;font-weight:700;min-width:0}
+.tlx329 .tlx-s1{background:rgba(244,113,127,.8)}
+.tlx329 .tlx-s2{background:rgba(148,163,184,.4)}
+.tlx329 .tlx-s3{background:linear-gradient(90deg,var(--cyan2),var(--cyan));color:#04222b}
+.tlx329 .tlx-scn{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0}
+.tlx329 .tlx-scn-c{background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:14px}
+.tlx329 .tlx-scn-c.main{border-color:var(--cyan);background:var(--cyandim)}
+.tlx329 .tlx-scn-c h4{margin:0 0 8px;font-size:13px;color:#dbe6f1}
+.tlx329 .tlx-prob{font-size:26px;font-weight:800;color:var(--cyan);line-height:1}
+.tlx329 .tlx-scn-c.main .tlx-prob{color:#fff}
+.tlx329 .tlx-scn-c p{font-size:12px;color:var(--muted);margin:8px 0 0;white-space:normal}
+.tlx329 .tlx-cols{display:flex;align-items:flex-end;gap:clamp(8px,3vw,26px);height:230px;padding:10px 4px 0;border-bottom:1px solid var(--line2)}
+.tlx329 .tlx-col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.tlx329 .tlx-col-bar{width:100%;max-width:74px;background:linear-gradient(180deg,rgba(148,163,184,.3),rgba(148,163,184,.55));border-radius:6px 6px 0 0;position:relative;display:flex;align-items:flex-start;justify-content:center}
+.tlx329 .tlx-col.hl .tlx-col-bar{background:linear-gradient(180deg,var(--cyan),var(--cyan2));box-shadow:0 0 16px rgba(34,211,238,.45)}
+.tlx329 .tlx-col-val{position:absolute;top:-22px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.tlx329 .tlx-col-x{display:flex;gap:clamp(8px,3vw,26px);padding:8px 4px 0}
+.tlx329 .tlx-col-x div{flex:1;text-align:center;font-size:11.5px;color:var(--muted)}
+.tlx329 .tlx-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:6px 0}
+.tlx329 .tlx-card{background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:14px}
+.tlx329 .tlx-card .lab{font-size:12px;color:var(--muted)}
+.tlx329 .tlx-card .met{font-size:14px;color:#e6edf5;font-weight:700;margin:4px 0}
+.tlx329 .tlx-total{margin-top:12px;text-align:center;background:linear-gradient(90deg,var(--cyandim),transparent,var(--cyandim));border:1px solid var(--line);border-radius:10px;padding:14px}
+.tlx329 .tlx-total .t{font-size:13px;color:var(--muted);letter-spacing:.1em}
+.tlx329 .tlx-total .s{font-size:24px;color:var(--gold);letter-spacing:3px}
+.tlx329 .tlx-foot{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line2);margin-top:34px;padding-top:18px;line-height:1.7}
+@media(max-width:560px){
+ .tlx329{padding:16px 13px}
+ .tlx329 .tlx-bar-name,.tlx329 .tlx-stack-name{flex-basis:32%;max-width:32%;font-size:11.5px}
+ .tlx329 .tlx-scn{grid-template-columns:1fr}
+ .tlx329 .tlx-cards{grid-template-columns:1fr}
+ .tlx329 .tlx-quads{grid-template-columns:1fr}
+ .tlx329 .tlx-map{height:300px}
+ .tlx329 .tlx-bar-sub{display:none}
+}
+</style>
+
+<div class="tlx329">
+<span class="tlx-kicker">THINX-LAB. VOL.329</span>
+<h1>「L戦国乙女5 L8」市場ポテンシャル分析レポート<br>─ 中単価帯市場の新たな頂点と、シリーズ史上最高傑作の誕生</h1>
+<p class="tlx-meta">発行日：2026年6月15日　|　THINX Inc. データアナリスト</p>
+<p class="tlx-meta">分析対象：「L戦国乙女5 L8」（オリンピア製造／平和販売、2026年6月8日導入）</p>
+<p class="tlx-meta">データ基準：導入7日間実績（2026年6月8日〜14日）／出典：THINX-LAB.OLAP SIS - パチスロ</p>
+
+<hr class="tlx-rule">
+
+<h2>エグゼクティブサマリー</h2>
+<div class="tlx-summary">
+<p>「L戦国乙女5 L8」は、2026年6月8日に導入されたスマスロ中単価帯機種です。導入7日間の実績を分析した結果、本機は<strong>スマスロ全148機種中、Rv（勝ち体験指標）第4位（11,080）、遊技時間第4位（134.4分）</strong>を記録し、「長時間遊技×高い勝ち体験」の両立という観点では実質的にスマスロ全体のトップに位置することが明らかになりました。</p>
+<p>戦国乙女シリーズとしては、前作「L戦国乙女4」（Rv 6,356）比で<strong>Rv +74%増</strong>という驚異的な進化を遂げ、シリーズ史上最高傑作と評価できる水準に達しています。</p>
+<p>本レポートでは、ダッシュボード実データ（THINX-LAB.OLAP SIS - パチスロ）を基に、市場ポジショニング・プレイヤー支持構造・中長期稼働ポテンシャル・店舗収益性・戦国乙女シリーズ内評価の5軸から多面的に分析し、2つの問いに対する結論を導きます。</p>
+</div>
+
+<h2>第1章　市場全体におけるポジショニング</h2>
+<h3>1-1. スマスロ全体でのRvランキング</h3>
+<p>スマスロ全148機種のRvランキングで、「L戦国乙女5 L8」は第4位（11,080）に位置します。上位3機種（「ビッグドリーム」13,320、「銭形5」11,778、「スーパービンゴネオSB5」11,386）はいずれも「高勝ち金額×短時間遊技」型の特殊構造で、遊技時間は84〜85分台に留まります。<strong>「遊技時間130分超×Rv 10,000超」を同時に満たす機種は、スマスロ全体で本機と「真打吉宗」（Rv 10,059・139.9分）の2機種のみ</strong>です。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.01 ── スマスロ Rv上位ランキング</div>
+<div class="tlx-fig-t">Rv上位10機種（遊技時間を併記）</div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">1 ビッグドリームKR</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:100%">13,320</div></div><span class="tlx-bar-sub">84.1分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">2 銭形5 L2</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:88.4%">11,778</div></div><span class="tlx-bar-sub">85.4分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">3 スーパービンゴSB5</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:85.5%">11,386</div></div><span class="tlx-bar-sub">85.0分</span></div>
+<div class="tlx-bar-row hl"><div class="tlx-bar-name">★4 L戦国乙女5 L8</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:83.2%">11,080</div></div><span class="tlx-bar-sub">134.4分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">5 SHAMAN KING SS</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:83.1%">11,071</div></div><span class="tlx-bar-sub">98.3分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">6 SAO Ⅱ</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:81.4%">10,838</div></div><span class="tlx-bar-sub">98.6分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">7 真打吉宗 A1</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:75.5%">10,059</div></div><span class="tlx-bar-sub">139.9分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">8 東京喰種CT</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:73.1%">9,736</div></div><span class="tlx-bar-sub">107.3分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">9 ヴァルヴレイヴ2</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:71.9%">9,571</div></div><span class="tlx-bar-sub">87.8分</span></div>
+<div class="tlx-bar-row dim"><div class="tlx-bar-name">10 北斗転生の章2</div><div class="tlx-bar-track"><div class="tlx-bar-fill" style="width:71.8%">9,566</div></div><span class="tlx-bar-sub">119.5分</span></div>
+</div>
+
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>順位</th><th>機種名</th><th>Rv</th><th>遊技時間</th><th>60分以上</th><th>稼働構造</th></tr></thead>
+<tbody>
+<tr><td>1</td><td class="tlx-l">ビッグドリームKR</td><td>13,320</td><td>84.1分</td><td>50.6%</td><td class="tlx-l">高単価特殊型</td></tr>
+<tr><td>2</td><td class="tlx-l">銭形5 L2</td><td>11,778</td><td>85.4分</td><td>53.4%</td><td class="tlx-l">高単価特殊型</td></tr>
+<tr><td>3</td><td class="tlx-l">スーパービンゴネオSB5</td><td>11,386</td><td>85.0分</td><td>53.1%</td><td class="tlx-l">高単価特殊型</td></tr>
+<tr class="tlx-hl"><td>★4</td><td class="tlx-l">L戦国乙女5 L8</td><td>11,080</td><td>134.4分</td><td>64.9%</td><td class="tlx-l">人数×粘り型</td></tr>
+<tr><td>5</td><td class="tlx-l">SHAMAN KING SS</td><td>11,071</td><td>98.3分</td><td>53.6%</td><td class="tlx-l">中単価標準型</td></tr>
+<tr><td>6</td><td class="tlx-l">SAO Ⅱ</td><td>10,838</td><td>98.6分</td><td>55.3%</td><td class="tlx-l">超高単価型</td></tr>
+<tr><td>7</td><td class="tlx-l">真打吉宗 A1</td><td>10,059</td><td>139.9分</td><td>64.6%</td><td class="tlx-l">人数×粘り型</td></tr>
+<tr><td>8</td><td class="tlx-l">東京喰種CT</td><td>9,736</td><td>107.3分</td><td>60.2%</td><td class="tlx-l">中単価標準型</td></tr>
+<tr><td>9</td><td class="tlx-l">革命機ヴァルヴレイヴ2</td><td>9,571</td><td>87.8分</td><td>53.0%</td><td class="tlx-l">中単価標準型</td></tr>
+<tr><td>10</td><td class="tlx-l">北斗転生の章2</td><td>9,566</td><td>119.5分</td><td>61.1%</td><td class="tlx-l">人数×粘り型</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">★＝本機。上位3機種は短時間遊技型、本機・真打吉宗・北斗転生2は長時間×粘り型。</p>
+
+<h3>1-2. 「長時間遊技×高Rv」ポジショニングマップ</h3>
+<p>縦軸にRv、横軸に遊技時間を取ると、「L戦国乙女5 L8」は右上の「高Rv×長時間」象限に位置し、この最上位象限に属するのは本機と「真打吉宗」の2機種のみです。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.02 ── 遊技時間 × Rv ポジショニングマップ</div>
+<div class="tlx-fig-t">右上＝最高水準ゾーン（高Rv×長時間遊技）</div>
+<div class="tlx-map">
+ <div class="tlx-quad"><span class="tlx-quad-l">最高水準ゾーン</span></div>
+ <div class="tlx-axis-y">Rv →</div>
+ <div class="tlx-dot hl" style="left:74.4%;bottom:84.7%"><label>L戦国乙女5</label><span></span></div>
+ <div class="tlx-dot" style="left:79.9%;bottom:67.6%"><label>真打吉宗</label><span></span></div>
+ <div class="tlx-dot" style="left:47.3%;bottom:62.3%"><label>東京喰種</label><span></span></div>
+ <div class="tlx-dot" style="left:59.5%;bottom:59.4%"><label>北斗転生2</label><span></span></div>
+ <div class="tlx-dot" style="left:34.9%;bottom:28.8%"><label>カバネリ</label><span></span></div>
+</div>
+<div class="tlx-axis-x">遊技時間（60分 → 160分）｜縦軸：Rv（6,000 → 12,000）</div>
+<div class="tlx-quads">
+ <div><b>右上：最高水準ゾーン</b>（120分超×Rv 9,000超）← 戦国乙女5・真打吉宗のみ</div>
+ <div><b>右中：安定高水準ゾーン</b>（120分超×Rv 7,000〜9,000）← カバネリ・北斗転生2等</div>
+ <div><b>左上：高Rv短時間ゾーン</b>（100分未満×Rv 9,000超）← 東京喰種・SAO Ⅱ等</div>
+ <div><b>左中：標準ゾーン</b>（100分未満×Rv 7,000〜9,000）← 多数機種</div>
+</div>
+</div>
+
+<h2>第2章　中単価帯機種内での競争力分析</h2>
+<h3>2-1. 偏差値分析（8指標総合評価）</h3>
+<p>比較対象11機種を8指標で評価した結果、<strong>「L戦国乙女5 L8」は総合偏差値68.0で比較対象11機種中第1位</strong>です。特に「アウト@1人（77）」「遊技時間（74）」「Rv（75）」の3指標で偏差値70台後半を記録し、「長時間遊技×高い勝ち体験」の両立を数値で証明しています。次表は総合偏差値の降順、数値は偏差値です。</p>
+
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>機種名</th><th>アウト@1人</th><th>遊技時間</th><th>60分以上</th><th>15分以内</th><th>勝ち率</th><th>勝ち金額</th><th>Rv</th><th>勝敗差分</th><th>総合</th></tr></thead>
+<tbody>
+<tr class="tlx-hl"><td class="tlx-l">★L戦国乙女5 L8</td><td>77</td><td>74</td><td>66</td><td>60</td><td>59</td><td>65</td><td>75</td><td>68</td><td>68.0</td></tr>
+<tr><td class="tlx-l">甲鉄城のカバネリ</td><td>82</td><td>79</td><td>68</td><td>64</td><td>56</td><td>57</td><td>63</td><td>60</td><td>66.1</td></tr>
+<tr><td class="tlx-l">マギアレコードRN</td><td>81</td><td>79</td><td>68</td><td>60</td><td>59</td><td>55</td><td>62</td><td>58</td><td>65.3</td></tr>
+<tr><td class="tlx-l">北斗転生の章2</td><td>71</td><td>67</td><td>62</td><td>58</td><td>55</td><td>62</td><td>68</td><td>63</td><td>63.3</td></tr>
+<tr><td class="tlx-l">東京喰種</td><td>64</td><td>62</td><td>61</td><td>60</td><td>42</td><td>71</td><td>68</td><td>72</td><td>62.5</td></tr>
+<tr><td class="tlx-l">SAO Ⅱ</td><td>60</td><td>57</td><td>57</td><td>57</td><td>42</td><td>76</td><td>74</td><td>77</td><td>62.5</td></tr>
+<tr><td class="tlx-l">化物語</td><td>72</td><td>70</td><td>63</td><td>60</td><td>54</td><td>56</td><td>59</td><td>59</td><td>61.6</td></tr>
+<tr><td class="tlx-l">モンキーターン5</td><td>70</td><td>69</td><td>63</td><td>59</td><td>55</td><td>57</td><td>62</td><td>58</td><td>61.6</td></tr>
+<tr><td class="tlx-l">北斗AD</td><td>67</td><td>65</td><td>59</td><td>57</td><td>60</td><td>50</td><td>55</td><td>52</td><td>58.1</td></tr>
+<tr><td class="tlx-l">からくりサーカスG</td><td>54</td><td>51</td><td>53</td><td>48</td><td>44</td><td>64</td><td>63</td><td>64</td><td>55.1</td></tr>
+<tr><td class="tlx-l">バーディーウイングBC</td><td>49</td><td>47</td><td>46</td><td>47</td><td>37</td><td>59</td><td>52</td><td>57</td><td>49.3</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">★＝本機。総合は8指標の単純平均。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.03 ── 偏差値プロファイル比較</div>
+<div class="tlx-fig-t">両立型（本機）×稼働寄り（カバネリ）×勝ち金額寄り（SAO Ⅱ）</div>
+<div class="tlx-legend"><span><i style="background:var(--cyan)"></i>L戦国乙女5</span><span><i style="background:rgba(148,163,184,.55)"></i>甲鉄城のカバネリ</span><span><i style="background:rgba(245,196,81,.7)"></i>SAO Ⅱ</span></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">アウト@1人</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:82%">77</div><div class="tlx-dev-bar tlx-c2" style="width:93%">82</div><div class="tlx-dev-bar tlx-c3" style="width:44%">60</div></div></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">遊技時間</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:76%">74</div><div class="tlx-dev-bar tlx-c2" style="width:87%">79</div><div class="tlx-dev-bar tlx-c3" style="width:38%">57</div></div></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">60分以上割合</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:58%">66</div><div class="tlx-dev-bar tlx-c2" style="width:62%">68</div><div class="tlx-dev-bar tlx-c3" style="width:38%">57</div></div></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">勝ち率</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:42%">59</div><div class="tlx-dev-bar tlx-c2" style="width:36%">56</div><div class="tlx-dev-bar tlx-c3" style="width:4%">42</div></div></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">勝ち金額</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:56%">65</div><div class="tlx-dev-bar tlx-c2" style="width:38%">57</div><div class="tlx-dev-bar tlx-c3" style="width:80%">76</div></div></div>
+<div class="tlx-dev-row"><div class="tlx-dev-label">Rv</div><div class="tlx-dev-bars"><div class="tlx-dev-bar tlx-c1" style="width:78%">75</div><div class="tlx-dev-bar tlx-c2" style="width:51%">63</div><div class="tlx-dev-bar tlx-c3" style="width:76%">74</div></div></div>
+<p class="tlx-note">本機は突出した凹みがなく全方位で高水準。カバネリは稼働寄り、SAO Ⅱは勝ち金額寄りに偏る。</p>
+</div>
+
+<h3>2-2. 主要収益指標ランキング</h3>
+<p>打込支持率（436.8）は比較群内第2位で、「プレイヤーが本機を選んで長時間遊技する」支持の強さを示します。利益率・粗利貢献率が中位に留まるのは、高い勝ち体験（Rv 11,080）がプレイヤーへの還元として機能しているためで、「勝ちやすい機種」という特性の自然な反映です。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>指標</th><th>1位</th><th>2位</th><th>★戦国乙女5の順位</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">打込支持率</td><td>北斗AD（477.7）</td><td>★戦国乙女5（436.8）</td><td>★2位</td></tr>
+<tr><td class="tlx-l">売上貢献率</td><td>SAO Ⅱ（560.9）</td><td>からくりサーカス（479.2）</td><td>★4位（448.2）</td></tr>
+<tr><td class="tlx-l">粗利貢献率</td><td>SAO Ⅱ（137.1）</td><td>東京喰種（119.9）</td><td>★6位（97.8）</td></tr>
+<tr><td class="tlx-l">利益率</td><td>SAO Ⅱ（23.0%）</td><td>東京喰種（19.1%）</td><td>★6位（16.4%）</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">Rv</td><td>戦国乙女5（11,080）</td><td>SAO Ⅱ（10,838）</td><td>★1位</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">遊技時間</td><td>戦国乙女5（134.4分）</td><td>北斗転生2（67.8分）</td><td>★1位（比較群内）</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">60分以上割合</td><td>戦国乙女5（64.9%）</td><td>カバネリ（51.7%）</td><td>★1位（比較群内）</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>第3章　プレイヤー支持構造の分析</h2>
+<h3>3-1. 遊技時間分布（プレイヤー構成比）</h3>
+<p>本機の<strong>15分以内遊技者割合5.3%は比較群内で最低水準</strong>であり、「来たプレイヤーが帰らない機種」としての特性が際立っています。60分以上遊技者割合64.9%は、「甲鉄城のカバネリ」（51.7%）を13ポイント上回る最高値です。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.04 ── 遊技時間分布比較</div>
+<div class="tlx-fig-t">プレイヤー構成比（100%積み上げ）</div>
+<div class="tlx-legend"><span><i style="background:rgba(244,113,127,.8)"></i>15分以内（離脱）</span><span><i style="background:rgba(148,163,184,.4)"></i>15〜60分</span><span><i style="background:var(--cyan)"></i>60分以上（コア）</span></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">L戦国乙女5</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:5.3%"></div><div class="tlx-seg tlx-s2" style="width:29.8%">29.8</div><div class="tlx-seg tlx-s3" style="width:64.9%">64.9%</div></div></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">甲鉄城のカバネリ</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:6.9%"></div><div class="tlx-seg tlx-s2" style="width:41.4%">41.4</div><div class="tlx-seg tlx-s3" style="width:51.7%">51.7%</div></div></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">化物語</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:18%">18</div><div class="tlx-seg tlx-s2" style="width:45.9%">45.9</div><div class="tlx-seg tlx-s3" style="width:36.1%">36.1%</div></div></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">北斗転生の章2</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:24.4%">24.4</div><div class="tlx-seg tlx-s2" style="width:44.1%">44.1</div><div class="tlx-seg tlx-s3" style="width:31.5%">31.5%</div></div></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">モンキーターン5</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:18.9%">18.9</div><div class="tlx-seg tlx-s2" style="width:49.4%">49.4</div><div class="tlx-seg tlx-s3" style="width:31.7%">31.7%</div></div></div>
+<div class="tlx-stack-row"><div class="tlx-stack-name">戦国乙女4</div><div class="tlx-stack"><div class="tlx-seg tlx-s1" style="width:20.6%">20.6</div><div class="tlx-seg tlx-s2" style="width:39.7%">39.7</div><div class="tlx-seg tlx-s3" style="width:39.7%">39.7%</div></div></div>
+<p class="tlx-note">★本機は赤セグメント（離脱5.3%）が最小、シアン（コア64.9%）が最大。各機種の特徴は下表参照。</p>
+</div>
+
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>機種名</th><th>15分以内</th><th>15〜60分</th><th>60分以上</th><th>特徴</th></tr></thead>
+<tbody>
+<tr class="tlx-hl"><td class="tlx-l">★L戦国乙女5 L8</td><td>5.3%</td><td>29.8%</td><td>64.9%</td><td class="tlx-l">ライト離脱極小・コア層厚い</td></tr>
+<tr><td class="tlx-l">甲鉄城のカバネリ</td><td>6.9%</td><td>41.4%</td><td>51.7%</td><td class="tlx-l">バランス型（安定）</td></tr>
+<tr><td class="tlx-l">化物語</td><td>18.0%</td><td>45.9%</td><td>36.1%</td><td class="tlx-l">ライト離脱多め</td></tr>
+<tr><td class="tlx-l">北斗転生の章2</td><td>24.4%</td><td>44.1%</td><td>31.5%</td><td class="tlx-l">ライト離脱大・コア依存型</td></tr>
+<tr><td class="tlx-l">モンキーターン5</td><td>18.9%</td><td>49.4%</td><td>31.7%</td><td class="tlx-l">ライト離脱多め</td></tr>
+<tr><td class="tlx-l">戦国乙女4</td><td>20.6%</td><td>39.7%</td><td>39.7%</td><td class="tlx-l">ライト離脱多め</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>3-2. Rv構造（勝ち率 × 勝ち体験）</h3>
+<p>勝ち率とRvの関係では、本機は<strong>勝ち率35.5%・Rv 11,080</strong>で右上に単独位置します。勝ち率35%超の機種群（「北斗AD」「マギアレコード」「戦国乙女5」）のうちRvが突出して高いのは本機のみで、「勝ちやすく、かつ勝ったときの体験が最も大きい」という稀有な特性を持ちます。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>機種名</th><th>勝ち率</th><th>Rv</th></tr></thead>
+<tbody>
+<tr class="tlx-hl"><td class="tlx-l">★戦国乙女5</td><td>35.5%</td><td>11,080</td></tr>
+<tr><td class="tlx-l">東京喰種</td><td>27.1%</td><td>9,736</td></tr>
+<tr><td class="tlx-l">北斗転生2</td><td>33.2%</td><td>9,566</td></tr>
+<tr><td class="tlx-l">からくりサーカス</td><td>28.2%</td><td>8,704</td></tr>
+<tr><td class="tlx-l">カバネリ</td><td>34.1%</td><td>8,589</td></tr>
+<tr><td class="tlx-l">マギアレコード</td><td>35.2%</td><td>8,426</td></tr>
+<tr><td class="tlx-l">モンキーターン5</td><td>33.4%</td><td>8,424</td></tr>
+<tr><td class="tlx-l">化物語</td><td>32.7%</td><td>7,932</td></tr>
+<tr><td class="tlx-l">北斗AD</td><td>36.0%</td><td>6,991</td></tr>
+<tr><td class="tlx-l">バーディーウイング</td><td>24.5%</td><td>6,534</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>第4章　稼働推移と中長期ポテンシャル</h2>
+<h3>4-1. 比較機種の週次推移データ（2026年4〜6月）</h3>
+<p>比較機種の週次推移を見ると、「甲鉄城のカバネリ」は導入3ヶ月後（6/8週）でも遊技時間94.9分・Rv 7,728を維持する一方、「北斗転生2」「化物語」は導入5〜6ヶ月後に遊技時間55〜75分台・Rv 4,539〜6,678まで低下しています。本機（6/8週）は遊技時間134.4分・Rv 11,080と、いずれの機種の初週水準をも上回っています。</p>
+
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>週次</th><th>戦国乙女5</th><th>カバネリ</th><th>北斗転生2</th><th>化物語</th><th>モンキー5</th><th>戦国乙女4</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">04-06</td><td>─</td><td>109.1</td><td>62.6</td><td>64.9</td><td>64.3</td><td>59.0</td></tr>
+<tr><td class="tlx-l">04-13</td><td>─</td><td>100.6</td><td>58.6</td><td>67.1</td><td>58.8</td><td>52.9</td></tr>
+<tr><td class="tlx-l">04-20</td><td>─</td><td>102.8</td><td>60.4</td><td>63.1</td><td>67.9</td><td>58.2</td></tr>
+<tr><td class="tlx-l">04-27</td><td>─</td><td>104.7</td><td>59.8</td><td>66.8</td><td>65.8</td><td>61.4</td></tr>
+<tr><td class="tlx-l">05-04</td><td>─</td><td>109.8</td><td>67.3</td><td>69.5</td><td>72.3</td><td>68.6</td></tr>
+<tr><td class="tlx-l">05-11</td><td>─</td><td>102.4</td><td>54.6</td><td>62.2</td><td>73.0</td><td>58.8</td></tr>
+<tr><td class="tlx-l">05-18</td><td>─</td><td>94.7</td><td>56.4</td><td>76.8</td><td>68.8</td><td>55.0</td></tr>
+<tr><td class="tlx-l">05-25</td><td>─</td><td>96.3</td><td>55.7</td><td>75.2</td><td>70.9</td><td>58.3</td></tr>
+<tr><td class="tlx-l">06-01</td><td>─</td><td>96.3</td><td>55.7</td><td>75.2</td><td>70.9</td><td>58.3</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">06-08</td><td>134.4</td><td>94.9</td><td>67.8</td><td>72.0</td><td>61.7</td><td>58.1</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">遊技時間 週次推移（分）。戦国乙女5は2026年6月8日導入のため、それ以前の週は実績なし（─）。甲鉄城カバネリは導入3ヶ月後（6/8週）で94.9分を維持。</p>
+
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>週次</th><th>戦国乙女5</th><th>カバネリ</th><th>北斗転生2</th><th>化物語</th><th>モンキー5</th><th>戦国乙女4</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">04-06</td><td>─</td><td>7,150</td><td>5,120</td><td>6,472</td><td>4,775</td><td>4,737</td></tr>
+<tr><td class="tlx-l">04-13</td><td>─</td><td>7,374</td><td>5,248</td><td>6,824</td><td>5,425</td><td>5,810</td></tr>
+<tr><td class="tlx-l">04-20</td><td>─</td><td>6,954</td><td>5,432</td><td>5,257</td><td>5,072</td><td>5,402</td></tr>
+<tr><td class="tlx-l">04-27</td><td>─</td><td>7,343</td><td>6,379</td><td>5,003</td><td>5,086</td><td>5,012</td></tr>
+<tr><td class="tlx-l">05-04</td><td>─</td><td>7,883</td><td>7,254</td><td>5,583</td><td>5,377</td><td>5,045</td></tr>
+<tr><td class="tlx-l">05-11</td><td>─</td><td>7,804</td><td>4,918</td><td>5,049</td><td>5,215</td><td>5,433</td></tr>
+<tr><td class="tlx-l">05-18</td><td>─</td><td>6,967</td><td>6,039</td><td>5,384</td><td>4,804</td><td>3,443</td></tr>
+<tr><td class="tlx-l">05-25</td><td>─</td><td>6,270</td><td>5,923</td><td>4,752</td><td>6,252</td><td>4,867</td></tr>
+<tr><td class="tlx-l">06-01</td><td>─</td><td>6,270</td><td>5,923</td><td>4,752</td><td>6,252</td><td>4,867</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">06-08</td><td>11,080</td><td>7,728</td><td>6,678</td><td>4,539</td><td>4,157</td><td>5,120</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">Rv 週次推移。戦国乙女5は2026年6月8日導入のため、それ以前の週は実績なし（─）。カバネリは3ヶ月後もRv 7,728（比較群内最高）。化物語は6ヶ月後にRv 4,539（初週比 -43%）。</p>
+
+<h3>4-2. 稼働推移の類型化と戦国乙女5への示唆</h3>
+<p>比較機種の推移から、スマスロ中単価帯機種の稼働推移には2類型が存在します。<strong>本機の初週構造（134.4分・Rv 11,080・15分以内5.3%）は、類型Aの「カバネリ」初週（144.5分・8,589・3.4%）と極めて類似</strong>しており、類型Aへの移行可能性が高いと判断します。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>類型</th><th>遊技時間推移</th><th>Rv推移</th><th>離脱/コア</th><th>特徴</th><th>中長期評価</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">A：緩やか安定低下<br>（カバネリ型）</td><td>144.5→94.9分<br>（-34%）</td><td>8,589→7,728<br>（-10%）</td><td class="tlx-l">60分以上 66.9%→51.7%</td><td class="tlx-l">Rv低下が緩やか・コア層残存</td><td class="tlx-l">準主力機として長期機能</td></tr>
+<tr><td class="tlx-l">B：急速二極化<br>（転生2・化物語型）</td><td>119〜125→55〜75分<br>（-40〜55%）</td><td>7,932〜9,566→4,539〜6,678<br>（-30〜53%）</td><td class="tlx-l">15分以内 6〜7%→18〜26%</td><td class="tlx-l">ライト急速離脱・コア依存へ</td><td class="tlx-l">補完機種へ格下げ</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>4-3. 中長期稼働シナリオ</h3>
+<p>最有力はシナリオA（確率60%）で、3ヶ月後の推定値は<strong>遊技時間約105分・Rv約9,000・60分以上約58%</strong>。現在の「カバネリ」（Rv 7,728）を上回り、3ヶ月後も比較群内で最高水準を維持する見込みです。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.05 ── 中長期稼働シナリオ（3ヶ月後予測）</div>
+<div class="tlx-fig-t">Rv／遊技時間／60分以上割合の予測レンジ</div>
+<div class="tlx-scn">
+ <div class="tlx-scn-c main"><h4>A：安定低下</h4><div class="tlx-prob">60%</div><p>Rv 8,500〜9,500／遊技時間 100〜115分／60分以上 55〜60%。カバネリを上回る水準で安定。</p></div>
+ <div class="tlx-scn-c"><h4>B：超安定維持</h4><div class="tlx-prob">25%</div><p>Rv 9,500〜10,500／遊技時間 115〜125分／60分以上 60%台維持。市場の基準機として長期君臨。</p></div>
+ <div class="tlx-scn-c"><h4>C：急速二極化</h4><div class="tlx-prob">15%</div><p>Rv 5,000〜7,000／遊技時間 70〜85分／15分以内 15%超。要早期検知。</p></div>
+</div>
+<p class="tlx-note">シナリオC早期検知：2週目に遊技時間100分未満＋15分以内10%超。最有力Aの3ヶ月後推定＝遊技時間約105分／Rv約9,000／60分以上約58%。</p>
+</div>
+
+<h2>第5章　店舗収益性への寄与</h2>
+<h3>5-1. 収益指標の総合評価</h3>
+<p>導入7日間の台売上48,520円、台粗利11,960円、利益率16.4%。<strong>アウト22,870枚は比較群内の現在値（カバネリ9,810・北斗転生2 5,960・化物語4,450）を大幅に上回り</strong>、台数規模の差を考慮しても1台あたり稼働効率が突出して高いことを示します。遊技人数@台4.45人も比較群で最多です。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>指標</th><th>戦国乙女5</th><th>カバネリ</th><th>北斗転生2</th><th>化物語</th><th>比較群平均</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">利益率（%）</td><td>16.4</td><td>14.5</td><td>15.8</td><td>16.4</td><td>15.8</td></tr>
+<tr><td class="tlx-l">打込支持率</td><td>436.8</td><td>417.1</td><td>342.2</td><td>433.7</td><td>390.0</td></tr>
+<tr><td class="tlx-l">売上貢献率</td><td>448.2</td><td>410.7</td><td>397.9</td><td>434.3</td><td>420.0</td></tr>
+<tr><td class="tlx-l">粗利貢献率</td><td>97.8</td><td>90.2</td><td>95.6</td><td>94.7</td><td>93.0</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">アウト（枚）</td><td>22,870</td><td>9,810</td><td>5,960</td><td>4,450</td><td>─</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">遊技人数@台（人）</td><td>4.45</td><td>2.7</td><td>2.6</td><td>2.0</td><td>─</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">本機の台売上は48,520円、台粗利は11,960円（導入7日間の単独集計値）。これらは比較機種・比較群平均には該当データがないため表から除外しています。比較群平均のアウト・遊技人数@台も未集計（─）。カバネリ等の数値は導入3〜6ヶ月後の現在値。</p>
+
+<h3>5-2. フロア収益構造への影響</h3>
+<p>本機は「高Rv×長時間」の最上位ポジションを単独占有します。同ゾーンの「カバネリ」と組み合わせる「長時間遊技ゾーン」形成が最適フロア設計であり、「北斗転生2」「化物語」「モンキーターン5」は台数削減・入れ替えの検討時期です。下表はフロア内機種別役割マトリクス（2026年6月8日時点、各セルは Rv／遊技時間）。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>遊技時間帯</th><th>高Rv（9,000超）</th><th>中Rv（7,000〜9,000）</th><th>低Rv（7,000未満）</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">長時間（120分超）</td><td>★戦国乙女5<br>11,080／134.4分</td><td>カバネリ<br>7,728／94.9分</td><td>─</td></tr>
+<tr><td class="tlx-l">中時間（60〜120分）</td><td>北斗転生2<br>6,678／67.8分</td><td>─</td><td>化物語<br>4,539／72.0分</td></tr>
+<tr><td class="tlx-l">短時間（60分未満）</td><td>─</td><td>─</td><td>モンキーターン5 4,157／61.7分<br>戦国乙女4 5,120／58.1分</td></tr>
+</tbody>
+</table>
+</div>
+<p class="tlx-note">★＝本機。戦国乙女5は「高Rv×長時間」を単独占有。カバネリとの長時間遊技ゾーン形成が最適。</p>
+
+<h2>第6章　戦国乙女シリーズ分析</h2>
+<h3>6-1. シリーズ全作品比較</h3>
+<p>シリーズ全4作品で、本機は遊技時間・60分以上割合・Rv・勝ち金額・台粗利のすべてでシリーズ最高を更新。<strong>「戦国乙女3」比でRv +301%、勝ち金額 +247%</strong>です（遊技時間 +46.8分／+51%、60分以上 +3.5pt、台粗利 +4,450円／+59%）。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>機種名</th><th>導入日</th><th>機種区分</th><th>遊技時間</th><th>60分以上</th><th>勝ち率</th><th>勝ち金額</th><th>Rv</th><th>アウト</th><th>台粗利</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">S戦国乙女3 天剣を継ぐもの</td><td>2021/01</td><td>6.0〜6.4号機</td><td>91.6分</td><td>61.4%</td><td>30.7%</td><td>9,000円</td><td>2,763</td><td>14,520</td><td>7,510円</td></tr>
+<tr><td class="tlx-l">S戦国乙女 暁の関ヶ原 L7</td><td>2021/11</td><td>6.0〜6.4号機</td><td>72.9分</td><td>45.2%</td><td>31.5%</td><td>14,710円</td><td>4,628</td><td>15,120</td><td>8,060円</td></tr>
+<tr><td class="tlx-l">L戦国乙女4 S3</td><td>2023/09</td><td>スマスロ</td><td>90.4分</td><td>52.8%</td><td>34.6%</td><td>18,390円</td><td>6,356</td><td>19,610</td><td>10,830円</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">★L戦国乙女5 L8</td><td>2026/06</td><td>スマスロ</td><td>134.4分</td><td>64.9%</td><td>35.5%</td><td>31,210円</td><td>11,080</td><td>22,870</td><td>11,960円</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>6-2. シリーズRv進化チャート</h3>
+<p>作品間の伸び率は「3→暁 +68%」「暁→4 +37%」「4→5 +74%」で、最新作への飛躍が最大です。</p>
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.06 ── 戦国乙女シリーズ Rv進化推移</div>
+<div class="tlx-fig-t">2,763 → 4,628 → 6,356 → 11,080（最終区間 +74%）</div>
+<div class="tlx-cols">
+ <div class="tlx-col"><div class="tlx-col-bar" style="height:23%"><span class="tlx-col-val">2,763</span></div></div>
+ <div class="tlx-col"><div class="tlx-col-bar" style="height:38.6%"><span class="tlx-col-val">4,628</span></div></div>
+ <div class="tlx-col"><div class="tlx-col-bar" style="height:53%"><span class="tlx-col-val">6,356</span></div></div>
+ <div class="tlx-col hl"><div class="tlx-col-bar" style="height:92.3%"><span class="tlx-col-val">11,080</span></div></div>
+</div>
+<div class="tlx-col-x"><div>戦国乙女3<br>2021/01</div><div>暁の関ヶ原<br>2021/11</div><div>戦国乙女4<br>2023/09</div><div>戦国乙女5<br>2026/06</div></div>
+</div>
+
+<h3>6-3. シリーズ内ポジション評価</h3>
+<p>全指標でシリーズ最高水準を達成。特にRv（+74%）と遊技時間（+44分）の飛躍が突出し、シリーズ最高傑作と評価できます。評価記号は <span class="ev2">◎◎</span>＝最高水準／<span class="ev1">◎</span>＝高水準／<span class="ev0">○</span>＝標準／<span class="evx">△</span>＝低水準。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>評価軸</th><th>戦国乙女3</th><th>暁の関ヶ原</th><th>戦国乙女4</th><th>★戦国乙女5</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">遊技時間（滞在性）</td><td class="ev1">◎</td><td class="evx">△</td><td class="ev0">○</td><td class="ev2">◎◎</td></tr>
+<tr><td class="tlx-l">60分以上割合（粘り）</td><td class="ev1">◎</td><td class="evx">△</td><td class="ev0">○</td><td class="ev2">◎◎</td></tr>
+<tr><td class="tlx-l">勝ち体験（Rv）</td><td class="evx">△</td><td class="evx">△</td><td class="ev0">○</td><td class="ev2">◎◎</td></tr>
+<tr><td class="tlx-l">勝ち金額</td><td class="evx">△</td><td class="evx">△</td><td class="ev0">○</td><td class="ev2">◎◎</td></tr>
+<tr><td class="tlx-l">勝ち率</td><td class="ev0">○</td><td class="ev0">○</td><td class="ev1">◎</td><td class="ev1">◎</td></tr>
+<tr><td class="tlx-l">台粗利</td><td class="evx">△</td><td class="evx">△</td><td class="ev0">○</td><td class="ev1">◎</td></tr>
+<tr class="tlx-hl"><td class="tlx-l">シリーズ内順位</td><td>3位</td><td>4位</td><td>2位</td><td>1位</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>6-4. シリーズファン支持状況の変化</h3>
+<p>「戦国乙女3」は「粘り型」ながらRvが低く勝ち体験が弱く、「暁」「戦国乙女4」は遊技人数の多い「流入型」ながら滞在性能が低下していました。本機は<strong>「粘り型」の稼働構造を維持しながらRvを大幅に向上</strong>させ、戦国乙女3のファン（粘り型を好む層）とスマスロ新規ファンの双方を取り込む「ハイブリッド型」の支持構造を形成しています。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>指標</th><th>戦国乙女3</th><th>暁の関ヶ原</th><th>戦国乙女4</th><th>★戦国乙女5</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">15分以内割合（%）</td><td>8.3</td><td>10.4</td><td>7.5</td><td>5.3</td></tr>
+<tr><td class="tlx-l">60分以上割合（%）</td><td>61.4</td><td>45.2</td><td>52.8</td><td>64.9</td></tr>
+<tr><td class="tlx-l">遊技人数@台（人）</td><td>4.32</td><td>5.52</td><td>5.57</td><td>4.45</td></tr>
+<tr><td class="tlx-l">アウト@1人（枚）</td><td>3,360</td><td>2,740</td><td>3,520</td><td>5,140</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>第7章　総合評価と結論</h2>
+<h3>7-1. 総合スコアカード</h3>
+<p>5軸で評価した結果、本機の総合評価は<strong>5段階中5（★★★★★）</strong>です。利益率（16.4%）のみ中位ですが、高いRvがプレイヤー還元として機能している裏返しであり、稼働の質を損なうものではありません。</p>
+
+<div class="tlx-fig">
+<div class="tlx-fig-h">FIG.07 ── 総合スコアカード（5軸サマリー）</div>
+<div class="tlx-fig-t">総合評価 ★★★★★（5段階中5）</div>
+<div class="tlx-cards">
+ <div class="tlx-card"><div class="lab">市場ポジショニング</div><div class="met">「長時間×高Rv」実質1位</div><div class="star">★★★★★</div></div>
+ <div class="tlx-card"><div class="lab">プレイヤー支持構造</div><div class="met">60分以上64.9%／15分以内5.3%</div><div class="star">★★★★★</div></div>
+ <div class="tlx-card"><div class="lab">稼働性</div><div class="met">遊技時間134.4分／Rv 11,080</div><div class="star">★★★★★</div></div>
+ <div class="tlx-card"><div class="lab">収益性</div><div class="met">利益率16.4%／打込支持率436.8</div><div class="star">★★★★<b>★</b></div></div>
+ <div class="tlx-card"><div class="lab">中長期ポテンシャル</div><div class="met">類型A／3ヶ月後Rv約9,000</div><div class="star">★★★★<b>★</b></div></div>
+ <div class="tlx-card"><div class="lab">シリーズ評価</div><div class="met">シリーズ内1位／Rv +74%</div><div class="star">★★★★★</div></div>
+</div>
+<div class="tlx-total"><div class="t">総合評価</div><div class="s">★★★★★</div><div class="t">5段階中5</div></div>
+</div>
+
+<p>以下は評価軸別の内訳です。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>評価軸</th><th>指標</th><th>スコア</th><th>評価</th></tr></thead>
+<tbody>
+<tr class="tlx-cat"><td colspan="4">市場ポジショニング</td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">スマスロ全体Rvランキング</td><td>4位</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">「長時間×高Rv」両立</td><td>実質1位</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">中単価帯内競争力</td><td>1位</td><td><span class="star">★★★★★</span></td></tr>
+<tr class="tlx-cat"><td colspan="4">プレイヤー支持構造</td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">60分以上遊技者割合</td><td>64.9%</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">15分以内遊技者割合</td><td>5.3%</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">打込支持率</td><td>436.8</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr class="tlx-cat"><td colspan="4">稼働・収益性</td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">遊技時間</td><td>134.4分</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">Rv</td><td>11,080</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">利益率</td><td>16.4%</td><td><span class="star">★★★<b>★★</b></span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">打込支持率</td><td>436.8</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr class="tlx-cat"><td colspan="4">中長期ポテンシャル</td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">稼働推移類型</td><td>類型A</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">3ヶ月後Rv予測</td><td>約9,000</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">長期安定性</td><td>高</td><td><span class="star">★★★★<b>★</b></span></td></tr>
+<tr class="tlx-cat"><td colspan="4">戦国乙女シリーズ評価</td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">シリーズ内Rv順位</td><td>1位</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">シリーズ進化率（Rv）</td><td>+74%</td><td><span class="star">★★★★★</span></td></tr>
+<tr><td class="tlx-l"></td><td class="tlx-l">シリーズ最高傑作</td><td>該当</td><td><span class="star">★★★★★</span></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>7-2. 結論①：中単価帯市場における位置づけ</h3>
+<p><strong>「L戦国乙女5 L8」は、現在のスマスロ中単価帯市場において「最高水準ゾーン」に単独位置する機種です。</strong>「遊技時間134.4分×Rv 11,080」は全148機種の中で「真打吉宗」と並ぶ最上位カテゴリに属し、中単価帯でこの水準を達成した機種は本機が初めてです。比較対象機種群（「甲鉄城のカバネリ」「北斗転生の章2」「化物語」等）との差は単なる数値差ではなく、「プレイヤーが長時間遊技し、かつ強い勝ち体験を得る」という稼働の質的な差であり、再来訪動機・口コミ効果・新規顧客定着率で他機種を大幅に上回ると考えられます。現在の比較機種群（カバネリ7,728、北斗転生2 6,678、化物語4,539）との差は拡大しており、<strong>本機が中単価帯市場の新たな基準機となる可能性が高い</strong>と評価します。</p>
+
+<h3>7-3. 結論②：戦国乙女シリーズ史上の評価</h3>
+<p><strong>「L戦国乙女5 L8」は、戦国乙女シリーズ史上最高傑作です。</strong>「戦国乙女3」（2021年1月）は「粘り型」ながらRvが低く（2,763）勝ち体験の弱さが課題でした。「暁の関ヶ原」「戦国乙女4」はスマスロ移行期の過渡的機種で、遊技人数は多いものの滞在性能・Rvは標準に留まりました。本機は<strong>戦国乙女3の「粘り型」構造を継承しながら、Rvを+301%（2,763→11,080）まで引き上げる</strong>ことに成功しています。これはスマスロというプラットフォームの潜在力を、シリーズが初めて完全に発揮した結果と解釈でき、「長時間遊技」という伝統的な強みの復活に「勝ち体験の充実」という新たな価値が加わった、シリーズ史上最も完成度の高い作品と評価できます。</p>
+
+<h2>付録：モニタリング指標と判断基準</h2>
+<p>店舗運用での週次モニタリング指標です。<strong>シナリオC（急速二極化）の早期検知</strong>として、導入2週目に「遊技時間100分未満＋15分以内割合12%超」が成立した場合は即時に全面見直しを行ってください。</p>
+<div class="tlx-scroll">
+<table>
+<thead><tr><th>指標</th><th>維持目標</th><th>要注意ライン</th><th>対応アクション</th></tr></thead>
+<tbody>
+<tr><td class="tlx-l">遊技時間</td><td>110分以上</td><td>100分未満</td><td class="tlx-l">設定・配置の見直し検討</td></tr>
+<tr><td class="tlx-l">60分以上割合</td><td>60%以上</td><td>50%未満</td><td class="tlx-l">コア層向け施策強化</td></tr>
+<tr><td class="tlx-l">15分以内割合</td><td>8%未満</td><td>12%超</td><td class="tlx-l">ライト層向け案内改善</td></tr>
+<tr><td class="tlx-l">Rv</td><td>9,000以上</td><td>7,000未満</td><td class="tlx-l">台数削減・配置変更検討</td></tr>
+<tr><td class="tlx-l">遊技人数@台</td><td>4.0人以上</td><td>3.0人未満</td><td class="tlx-l">集客施策・告知強化</td></tr>
+<tr><td class="tlx-l">延べ遊技者割合</td><td>1.0%以上</td><td>0.5%未満</td><td class="tlx-l">新規顧客獲得施策強化</td></tr>
+</tbody>
+</table>
+</div>
+
+<p class="tlx-foot">分析データ出典：THINX-LAB.OLAP SIS - パチスロ「導入7日間」シート（2026年6月8日週）、「期間」シート（2026年4〜6月週次データ）。比較対象：スマスロ全148機種（導入7日間実績）、戦国乙女シリーズ全4作品。<br>注記：本レポートの分析は導入7日間の実績データに基づきます。中長期評価は比較機種の推移パターンを参照した予測であり、実際の稼働は設定・配置・市場環境等により変動します。<br>THINX Inc. データアナリティクス部門｜本レポートの無断転載・二次利用を禁じます。</p>
+</div>
+<!-- ===== ここまで貼り付け ===== -->
